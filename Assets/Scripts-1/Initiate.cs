@@ -6,7 +6,17 @@ public class Initiate : MonoBehaviour
 {
     public void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }else
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(gameObject);
     }
+}
+void start()
+{
 
 }
