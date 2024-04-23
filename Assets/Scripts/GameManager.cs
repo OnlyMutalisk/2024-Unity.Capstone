@@ -5,6 +5,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
@@ -14,6 +15,16 @@ public class GameManager : MonoBehaviour
 
     public static PlayerAction playerAction = PlayerAction.Move;
     public static TileProperty playerTileProperty = TileProperty.Ground;
+
+    public RectTransform backGround;
+    public static float tileSize_diameter;
+    public static float tileSize_diagonal;
+
+    private void Awake()
+    {
+        tileSize_diameter = backGround.sizeDelta.x / 100;
+        tileSize_diagonal = backGround.sizeDelta.y / 100;
+    }
 
     #region JSON SAVE & LOAD
 
