@@ -8,27 +8,24 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.Progress;
 
-public class GameManager : MonoBehaviour
+public static class GameManager
 {
+    public static float speed = 1f;
+
     public enum PlayerAction { Move, Attack, Skill };
     public enum TileProperty { Ground, Water, Forest, Fire };
 
     public static PlayerAction playerAction = PlayerAction.Move;
     public static TileProperty playerTileProperty = TileProperty.Ground;
 
-    public RectTransform backGround;
-    public static float tileSize_diameter;
-    public static float tileSize_diagonal;
-
-    private void Awake()
-    {
-        tileSize_diameter = backGround.sizeDelta.x / 100;
-        tileSize_diagonal = backGround.sizeDelta.y / 100;
-    }
-
     #region JSON SAVE & LOAD
 
-    public static string savedDataPath = Path.Combine(Application.persistentDataPath, "data.json");
+    public static string savedDataPath;
+
+    public static void Awake()
+    {
+        savedDataPath = Path.Combine(Application.persistentDataPath, "data.json");
+    }
 
     public static void SAVE()
     {
@@ -74,4 +71,4 @@ public class Data
     public GameManager.TileProperty playerTileProperty;
 }
 
-#endregion//
+#endregion
