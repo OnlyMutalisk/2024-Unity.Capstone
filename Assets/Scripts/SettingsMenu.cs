@@ -32,4 +32,10 @@ public class SettingsMenu : MonoBehaviour
             SFX.SetFloat("SFX", -80);
         }
     }
+
+    public void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
 }
