@@ -39,20 +39,6 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void Test()
-    {
-        for (int i = 15; i < 25; i++)
-        {
-            for (int j = 24; j < 33; j++)
-            {
-                GetTile(i, j).GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/Tile_Select");
-                Color a = GetTile(i, j).GetComponent<Image>().color;
-                a.a = 1f;
-                GetTile(i, j).GetComponent<Image>().color = a;
-            }
-        }
-    }
-
     /// <summary>
     /// <br>[i][j] 을 인덱스화 합니다.</br>
     /// </summary>

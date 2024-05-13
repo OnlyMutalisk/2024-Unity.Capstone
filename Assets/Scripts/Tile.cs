@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -11,6 +12,7 @@ public class Tile : MonoBehaviour
     private int index;
     private int i, j;
     public Vector3 pos;
+    public static int cost;
 
     public void Start()
     {
@@ -50,6 +52,24 @@ public class Tile : MonoBehaviour
     {
         Debug.Log(Grid.GetTile(i, j).name + " = [" + i + "][" + j + "]");
 
-        if (gameObject.GetComponent<Image>().sprite.name == "Tile_Select") { StartCoroutine(Player.CorMove(i, j)); }
+        if (gameObject.GetComponent<Image>().sprite.name == "Tile_Select")
+        {
+            // 비숍 이동 비용 계산
+            if (Math.Abs(Player.i - this.i) == Math.Abs(Player.j - this.j))
+            {
+                cost = Math.Abs(Player.i - i) * cost;
+            }
+
+            // 룩 이동 비용 계산
+            if ((Math.Abs(Player.i - this.i) > 0 && Math.Abs(Player.j - this.j) == 0) || (Math.Abs(Player.j - this.j) > 0 && Math.Abs(Player.i - this.i) == 0))
+            {
+
+                cost = (Math.Abs(Player.i - i) + Math.Abs(Player.j - j)) * cost;
+            }
+
+            Player.action -= cost;
+
+            StartCoroutine(Player.CorMove(i, j));
+        }
     }
 }

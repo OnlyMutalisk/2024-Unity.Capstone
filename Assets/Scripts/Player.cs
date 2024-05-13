@@ -6,15 +6,14 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    // 플레이어 초기 위치 (Transform 0, 0 기준으로 고정입니다.)
+    // 플레이어 초기 위치는 Transform 0, 0 기준으로 고정입니다.
     public static int i;
     public static int j;
-    public static int Actions;
 
     public Transform transform;
     public static Transform pos;
     public static bool isMove;
-
+    public static int action = GameManager.maxAction_Char;
     private void Awake()
     {
         pos = transform;
@@ -60,29 +59,4 @@ public class Player : MonoBehaviour
             isMove = false;
         }
     }
-
-    //public static IEnumerator CorMove(string xy, int count)
-    //{
-    //    float diameter = Grid.cellSize + Grid.spacing;
-    //    Vector3 target = pos.position;
-
-    //    switch (xy)
-    //    {
-    //        case "x":
-    //            i += count;
-    //            target.x += count * diameter;
-    //            break;
-
-    //        case "y":
-    //            j += count;
-    //            target.y += count * diameter;
-    //            break;
-    //    }
-
-    //    while (pos.position != target)
-    //    {
-    //        pos.position = Vector3.MoveTowards(pos.position, target, GameManager.speed);
-    //        yield return new WaitForSeconds(0.01f);
-    //    }
-    //}
 }

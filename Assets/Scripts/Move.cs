@@ -26,40 +26,8 @@ public class Move : MonoBehaviour
             tiles.Add(Grid.GetTile(Player.i - 1, Player.j).GetComponent<Image>());
             origins.Add(tiles[0].sprite);
             tiles[0].sprite = select;
-        }
-        else
-        {
-            isOn = false;
 
-            for (int i = 0; i < tiles.Count; i++)
-            {
-                tiles[i].sprite = origins[i];
-            }
-
-            tiles.Clear();
-            origins.Clear();
-        }
-    }
-
-    public void Rook()
-    {
-        if (isOn == false)
-        {
-            isOn = true;
-
-            for (int n = 1; n <= 3; n++)
-            {
-                tiles.Add(Grid.GetTile(Player.i - n, Player.j).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i + n, Player.j).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i, Player.j - n).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i, Player.j + n).GetComponent<Image>());
-            }
-
-            foreach (Image tile in tiles)
-            {
-                origins.Add(tile.sprite);
-                tile.sprite = select;
-            }
+            Tile.cost = GameManager.cost_Pawn;
         }
         else
         {
@@ -95,6 +63,8 @@ public class Move : MonoBehaviour
                 origins.Add(tile.sprite);
                 tile.sprite = select;
             }
+
+            Tile.cost = GameManager.cost_Knight;
         }
         else
         {
@@ -129,6 +99,8 @@ public class Move : MonoBehaviour
                 origins.Add(tile.sprite);
                 tile.sprite = select;
             }
+
+            Tile.cost = GameManager.cost_Bishop;
         }
         else
         {
@@ -144,7 +116,7 @@ public class Move : MonoBehaviour
         }
     }
 
-    public void Queen()
+    public void Rook()
     {
         if (isOn == false)
         {
@@ -152,17 +124,10 @@ public class Move : MonoBehaviour
 
             for (int n = 1; n <= 3; n++)
             {
-                // 룩
                 tiles.Add(Grid.GetTile(Player.i - n, Player.j).GetComponent<Image>());
                 tiles.Add(Grid.GetTile(Player.i + n, Player.j).GetComponent<Image>());
                 tiles.Add(Grid.GetTile(Player.i, Player.j - n).GetComponent<Image>());
                 tiles.Add(Grid.GetTile(Player.i, Player.j + n).GetComponent<Image>());
-
-                // 비숍
-                tiles.Add(Grid.GetTile(Player.i - n, Player.j - n).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i - n, Player.j + n).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i + n, Player.j - n).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i + n, Player.j + n).GetComponent<Image>());
             }
 
             foreach (Image tile in tiles)
@@ -170,6 +135,8 @@ public class Move : MonoBehaviour
                 origins.Add(tile.sprite);
                 tile.sprite = select;
             }
+
+            Tile.cost = GameManager.cost_Rook;
         }
         else
         {
