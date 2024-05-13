@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public Transform transform;
     public static Transform pos;
-    private static bool isMove;
+    public static bool isMove;
 
     private void Awake()
     {

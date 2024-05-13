@@ -109,4 +109,79 @@ public class Move : MonoBehaviour
             origins.Clear();
         }
     }
+
+    public void Bishop()
+    {
+        if (isOn == false)
+        {
+            isOn = true;
+
+            for (int n = 1; n <= 3; n++)
+            {
+                tiles.Add(Grid.GetTile(Player.i - n, Player.j - n).GetComponent<Image>());
+                tiles.Add(Grid.GetTile(Player.i - n, Player.j + n).GetComponent<Image>());
+                tiles.Add(Grid.GetTile(Player.i + n, Player.j - n).GetComponent<Image>());
+                tiles.Add(Grid.GetTile(Player.i + n, Player.j + n).GetComponent<Image>());
+            }
+
+            foreach (Image tile in tiles)
+            {
+                origins.Add(tile.sprite);
+                tile.sprite = select;
+            }
+        }
+        else
+        {
+            isOn = false;
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                tiles[i].sprite = origins[i];
+            }
+
+            tiles.Clear();
+            origins.Clear();
+        }
+    }
+
+    public void Queen()
+    {
+        if (isOn == false)
+        {
+            isOn = true;
+
+            for (int n = 1; n <= 3; n++)
+            {
+                // 룩
+                tiles.Add(Grid.GetTile(Player.i - n, Player.j).GetComponent<Image>());
+                tiles.Add(Grid.GetTile(Player.i + n, Player.j).GetComponent<Image>());
+                tiles.Add(Grid.GetTile(Player.i, Player.j - n).GetComponent<Image>());
+                tiles.Add(Grid.GetTile(Player.i, Player.j + n).GetComponent<Image>());
+
+                // 비숍
+                tiles.Add(Grid.GetTile(Player.i - n, Player.j - n).GetComponent<Image>());
+                tiles.Add(Grid.GetTile(Player.i - n, Player.j + n).GetComponent<Image>());
+                tiles.Add(Grid.GetTile(Player.i + n, Player.j - n).GetComponent<Image>());
+                tiles.Add(Grid.GetTile(Player.i + n, Player.j + n).GetComponent<Image>());
+            }
+
+            foreach (Image tile in tiles)
+            {
+                origins.Add(tile.sprite);
+                tile.sprite = select;
+            }
+        }
+        else
+        {
+            isOn = false;
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                tiles[i].sprite = origins[i];
+            }
+
+            tiles.Clear();
+            origins.Clear();
+        }
+    }
 }
