@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         int yCount = i - Player.i;
 
         Player.j += xCount;
-        target.x += -xCount * diameter;
+        target.x += xCount * diameter;
         Player.i += yCount;
         target.y += -yCount * diameter;
 
