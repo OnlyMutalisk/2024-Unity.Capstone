@@ -50,14 +50,6 @@ public class Tile : MonoBehaviour
     {
         Debug.Log(Grid.GetTile(i, j).name + " = [" + i + "][" + j + "]");
 
-        if (gameObject.GetComponent<Image>().sprite.name == "Tile_Select")
-        {
-            StartCoroutine(Player.CorMove(i, j));
-            Move.tile.sprite = Move.origin;
-            for (int i = 0; i < Move.tiles.Count; i++) {
-                Move.tiles[i].sprite = Move.origins[i];
-            }
-            Move.isOn = false;
-        }
+        if (gameObject.GetComponent<Image>().sprite.name == "Tile_Select") { StartCoroutine(Player.CorMove(i, j)); }
     }
 }

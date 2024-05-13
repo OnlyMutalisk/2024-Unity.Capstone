@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     public Transform transform;
     public static Transform pos;
+    private static bool isMove;
 
     private void Awake()
     {
@@ -30,21 +31,33 @@ public class Player : MonoBehaviour
     /// </summary>
     public static IEnumerator CorMove(int i, int j)
     {
-        Vector3 target = pos.position;
-        float diameter = Grid.cellSize + Grid.spacing;
-
-        int xCount = j - Player.j;
-        int yCount = i - Player.i;
-
-        Player.j += xCount;
-        target.x += xCount * diameter;
-        Player.i += yCount;
-        target.y += -yCount * diameter;
-
-        while (pos.position != target)
+        if (isMove == false)
         {
-            pos.position = Vector3.MoveTowards(pos.position, target, GameManager.speed);
-            yield return new WaitForSeconds(0.01f);
+            isMove = true;
+
+            Vector3 target = pos.position;
+            float diameter = Grid.cellSize + Grid.spacing;
+
+            int xCount = j - Player.j;
+            int yCount = i - Player.i;
+
+            Player.j += xCount;
+            target.x += xCount * diameter;
+            Player.i += yCount;
+            target.y += -yCount * diameter;
+
+            for (int n = 0; n < Move.tiles.Count; n++) { Move.tiles[n].sprite = Move.origins[n]; }
+            Move.tiles.Clear();
+            Move.origins.Clear();
+            Move.isOn = false;
+
+            while (pos.position != target)
+            {
+                pos.position = Vector3.MoveTowards(pos.position, target, GameManager.speed_Char);
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            isMove = false;
         }
     }
 

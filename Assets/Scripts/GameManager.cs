@@ -10,7 +10,8 @@ using static UnityEditor.Progress;
 
 public static class GameManager
 {
-    public static float speed = 1f;
+    // 캐릭터의 스텟을 조정합니다.
+    public static float speed_Char = 1f;
 
     public enum PlayerAction { Move, Attack, Skill };
     public enum TileProperty { Ground, Water, Forest, Fire };
