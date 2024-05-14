@@ -31,16 +31,4 @@ public class UI : MonoBehaviour
             // 플레이어 턴 종료, 적의 턴 시작
         }
     }
-
-    public void Attack()
-    {
-        foreach (var mob in Mob.Mobs)
-        {
-            // 공격범위 안이면 데미지 입힘
-            if (Math.Abs(mob.i - Player.i) + Math.Abs(mob.j - Player.j) <= GameManager.attackDistance_Char)
-            {
-                mob.HP -= GameManager.damage_Char;
-            }
-        }
-    }
 }

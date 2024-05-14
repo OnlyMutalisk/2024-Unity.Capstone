@@ -17,10 +17,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         pos = transform;
-    }
-
-    private void Start()
-    {
         i = (Grid.i / 2) + 1;
         j = (Grid.j / 2) + 1;
     }
@@ -45,10 +41,10 @@ public class Player : MonoBehaviour
             Player.i += yCount;
             target.y += -yCount * diameter;
 
-            for (int n = 0; n < Move.tiles.Count; n++) { Move.tiles[n].sprite = Move.origins[n]; }
-            Move.tiles.Clear();
-            Move.origins.Clear();
-            Move.isOn = false;
+            for (int n = 0; n < Tile.tiles.Count; n++) { Tile.tiles[n].sprite = Tile.origins[n]; }
+            Tile.tiles.Clear();
+            Tile.origins.Clear();
+            Tile.isTileOn = false;
 
             while (pos.position != target)
             {

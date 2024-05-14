@@ -7,9 +7,6 @@ using static UnityEngine.UI.Image;
 
 public class Move : MonoBehaviour
 {
-    public static bool isOn = false;
-    public static List<Image> tiles = new List<Image>();
-    public static List<Sprite> origins = new List<Sprite>();
     private Sprite select;
 
     private void Start()
@@ -19,48 +16,52 @@ public class Move : MonoBehaviour
 
     public void Pawn()
     {
-        if (isOn == false)
-        {
-            isOn = true;
+        GameManager.playerAction = GameManager.PlayerAction.Move;
 
-            tiles.Add(Grid.GetTile(Player.i - 1, Player.j).GetComponent<Image>());
-            origins.Add(tiles[0].sprite);
-            tiles[0].sprite = select;
+        if (Tile.isTileOn == false)
+        {
+            Tile.isTileOn = true;
+
+            Tile.tiles.Add(Grid.GetTile(Player.i - 1, Player.j).GetComponent<Image>());
+            Tile.origins.Add(Tile.tiles[0].sprite);
+            Tile.tiles[0].sprite = select;
 
             Tile.cost = GameManager.cost_Pawn;
         }
         else
         {
-            isOn = false;
+            Tile.isTileOn = false;
 
-            for (int i = 0; i < tiles.Count; i++)
+            for (int i = 0; i < Tile.tiles.Count; i++)
             {
-                tiles[i].sprite = origins[i];
+                Tile.tiles[i].sprite = Tile.origins[i];
             }
 
-            tiles.Clear();
-            origins.Clear();
+            Tile.tiles.Clear();
+            Tile.origins.Clear();
         }
     }
 
     public void Knight()
     {
-        if (isOn == false)
+        GameManager.playerAction = GameManager.PlayerAction.Move;
+
+        if (Tile.isTileOn == false)
         {
-            isOn = true;
+            Tile.isTileOn = true;
 
-            tiles.Add(Grid.GetTile(Player.i - 2, Player.j - 1).GetComponent<Image>());
-            tiles.Add(Grid.GetTile(Player.i - 2, Player.j + 1).GetComponent<Image>());
-            tiles.Add(Grid.GetTile(Player.i + 2, Player.j - 1).GetComponent<Image>());
-            tiles.Add(Grid.GetTile(Player.i + 2, Player.j + 1).GetComponent<Image>());
-            tiles.Add(Grid.GetTile(Player.i - 1, Player.j - 2).GetComponent<Image>());
-            tiles.Add(Grid.GetTile(Player.i - 1, Player.j + 2).GetComponent<Image>());
-            tiles.Add(Grid.GetTile(Player.i + 1, Player.j - 2).GetComponent<Image>());
-            tiles.Add(Grid.GetTile(Player.i + 1, Player.j + 2).GetComponent<Image>());
+            Tile.tiles.Add(Grid.GetTile(Player.i - 2, Player.j - 1).GetComponent<Image>());
+            Tile.tiles.Add(Grid.GetTile(Player.i - 2, Player.j + 1).GetComponent<Image>());
+            Tile.tiles.Add(Grid.GetTile(Player.i + 2, Player.j - 1).GetComponent<Image>());
+            Tile.tiles.Add(Grid.GetTile(Player.i + 2, Player.j + 1).GetComponent<Image>());
+            Tile.tiles.Add(Grid.GetTile(Player.i - 1, Player.j - 2).GetComponent<Image>());
+            Tile.tiles.Add(Grid.GetTile(Player.i - 1, Player.j + 2).GetComponent<Image>());
+            Tile.tiles.Add(Grid.GetTile(Player.i + 1, Player.j - 2).GetComponent<Image>());
+            Tile.tiles.Add(Grid.GetTile(Player.i + 1, Player.j + 2).GetComponent<Image>());
 
-            foreach (Image tile in tiles)
+            foreach (Image tile in Tile.tiles)
             {
-                origins.Add(tile.sprite);
+                Tile.origins.Add(tile.sprite);
                 tile.sprite = select;
             }
 
@@ -68,35 +69,37 @@ public class Move : MonoBehaviour
         }
         else
         {
-            isOn = false;
+            Tile.isTileOn = false;
 
-            for (int i = 0; i < tiles.Count; i++)
+            for (int i = 0; i < Tile.tiles.Count; i++)
             {
-                tiles[i].sprite = origins[i];
+                Tile.tiles[i].sprite = Tile.origins[i];
             }
 
-            tiles.Clear();
-            origins.Clear();
+            Tile.tiles.Clear();
+            Tile.origins.Clear();
         }
     }
 
     public void Bishop()
     {
-        if (isOn == false)
+        GameManager.playerAction = GameManager.PlayerAction.Move;
+        
+        if (Tile.isTileOn == false)
         {
-            isOn = true;
+            Tile.isTileOn = true;
 
             for (int n = 1; n <= 3; n++)
             {
-                tiles.Add(Grid.GetTile(Player.i - n, Player.j - n).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i - n, Player.j + n).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i + n, Player.j - n).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i + n, Player.j + n).GetComponent<Image>());
+                Tile.tiles.Add(Grid.GetTile(Player.i - n, Player.j - n).GetComponent<Image>());
+                Tile.tiles.Add(Grid.GetTile(Player.i - n, Player.j + n).GetComponent<Image>());
+                Tile.tiles.Add(Grid.GetTile(Player.i + n, Player.j - n).GetComponent<Image>());
+                Tile.tiles.Add(Grid.GetTile(Player.i + n, Player.j + n).GetComponent<Image>());
             }
 
-            foreach (Image tile in tiles)
+            foreach (Image tile in Tile.tiles)
             {
-                origins.Add(tile.sprite);
+                Tile.origins.Add(tile.sprite);
                 tile.sprite = select;
             }
 
@@ -104,35 +107,37 @@ public class Move : MonoBehaviour
         }
         else
         {
-            isOn = false;
+            Tile.isTileOn = false;
 
-            for (int i = 0; i < tiles.Count; i++)
+            for (int i = 0; i < Tile.tiles.Count; i++)
             {
-                tiles[i].sprite = origins[i];
+                Tile.tiles[i].sprite = Tile.origins[i];
             }
 
-            tiles.Clear();
-            origins.Clear();
+            Tile.tiles.Clear();
+            Tile.origins.Clear();
         }
     }
 
     public void Rook()
     {
-        if (isOn == false)
+        GameManager.playerAction = GameManager.PlayerAction.Move;
+        
+        if (Tile.isTileOn == false)
         {
-            isOn = true;
+            Tile.isTileOn = true;
 
             for (int n = 1; n <= 3; n++)
             {
-                tiles.Add(Grid.GetTile(Player.i - n, Player.j).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i + n, Player.j).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i, Player.j - n).GetComponent<Image>());
-                tiles.Add(Grid.GetTile(Player.i, Player.j + n).GetComponent<Image>());
+                Tile.tiles.Add(Grid.GetTile(Player.i - n, Player.j).GetComponent<Image>());
+                Tile.tiles.Add(Grid.GetTile(Player.i + n, Player.j).GetComponent<Image>());
+                Tile.tiles.Add(Grid.GetTile(Player.i, Player.j - n).GetComponent<Image>());
+                Tile.tiles.Add(Grid.GetTile(Player.i, Player.j + n).GetComponent<Image>());
             }
 
-            foreach (Image tile in tiles)
+            foreach (Image tile in Tile.tiles)
             {
-                origins.Add(tile.sprite);
+                Tile.origins.Add(tile.sprite);
                 tile.sprite = select;
             }
 
@@ -140,15 +145,15 @@ public class Move : MonoBehaviour
         }
         else
         {
-            isOn = false;
+            Tile.isTileOn = false;
 
-            for (int i = 0; i < tiles.Count; i++)
+            for (int i = 0; i < Tile.tiles.Count; i++)
             {
-                tiles[i].sprite = origins[i];
+                Tile.tiles[i].sprite = Tile.origins[i];
             }
 
-            tiles.Clear();
-            origins.Clear();
+            Tile.tiles.Clear();
+            Tile.origins.Clear();
         }
     }
 }

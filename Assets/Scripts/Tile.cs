@@ -13,6 +13,9 @@ public class Tile : MonoBehaviour
     private int i, j;
     public Vector3 pos;
     public static int cost;
+    public static List<Image> tiles = new List<Image>();
+    public static List<Sprite> origins = new List<Sprite>();
+    public static bool isTileOn = false;
 
     public void Start()
     {
@@ -29,16 +32,13 @@ public class Tile : MonoBehaviour
         pos.y = gameObject.GetComponent<RectTransform>().rect.position.y;
     }
 
-    public void CheckAction()
+    /// <summary>
+    /// <br>타일이 Select 상태라면, 이동합니다.</br>
+    /// </summary>
+    public void OnClick()
     {
-        if (GameManager.playerAction == GameManager.PlayerAction.Move)
-        {
-            // Player.Move();
-        }
-        if (GameManager.playerAction == GameManager.PlayerAction.Attack)
-        {
-            // Player.Attack();
-        }
+        if (GameManager.playerAction == GameManager.PlayerAction.Move) { Move(); }
+        if (GameManager.playerAction == GameManager.PlayerAction.Attack) { Attack(); }
         if (GameManager.playerAction == GameManager.PlayerAction.Skill)
         {
             // Player.Skill();
@@ -46,9 +46,9 @@ public class Tile : MonoBehaviour
     }
 
     /// <summary>
-    /// <br>타일이 Select 상태라면, 이동합니다.</br>
+    /// <br>Tile_Select 타일 터치 시, 해당 타일로 플레이어를 이동시킵니다.</br>
     /// </summary>
-    public void OnClick()
+    private void Move()
     {
         Debug.Log(Grid.GetTile(i, j).name + " = [" + i + "][" + j + "]");
 
@@ -70,6 +70,30 @@ public class Tile : MonoBehaviour
             Player.action -= cost;
 
             StartCoroutine(Player.CorMove(i, j));
+        }
+    }
+
+    /// <summary>
+    /// Tile_Select_Attack 타일 터치 시, 공격 범위 내 적 유닛에게 데미지를 입힙니다.
+    /// </summary>
+    public void Attack()
+    {
+        if (gameObject.GetComponent<Image>().sprite.name == "Tile_Select_Attack")
+        {
+            foreach (var mob in Mob.Mobs)
+            {
+                // 터치한 타일에 적이 존재한다면 공격
+                if (mob.i == this.i && mob.j == this.j)
+                {
+                    Player.action -= GameManager.cost_Attack;
+                    mob.HP -= GameManager.damage_Char;
+
+                    for (int n = 0; n < Tile.tiles.Count; n++) { Tile.tiles[n].sprite = Tile.origins[n]; }
+                    Tile.tiles.Clear();
+                    Tile.origins.Clear();
+                    Tile.isTileOn = false;
+                }
+            }
         }
     }
 }
