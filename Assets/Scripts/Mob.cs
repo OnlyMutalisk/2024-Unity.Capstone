@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Mob : MonoBehaviour
 {
-    protected virtual float HP { get; set; }
-    protected virtual int i { get; set; }
-    protected virtual int j { get; set; }
+    public Slider HP_slider;
+    public static List<Mob> Mobs;
+    public virtual float HP { get; set; }
+    public virtual int i { get; set; }
+    public virtual int j { get; set; }
+
+    private void Start() { Mobs.Add(this); }
+
 
 }

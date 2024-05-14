@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -33,6 +34,13 @@ public class UI : MonoBehaviour
 
     public void Attack()
     {
-        // 적의 체력 깎기
+        foreach (var mob in Mob.Mobs)
+        {
+            // 공격범위 안이면 데미지 입힘
+            if (Math.Abs(mob.i - Player.i) + Math.Abs(mob.j - Player.j) <= GameManager.attackDistance_Char)
+            {
+                mob.HP -= GameManager.damage_Char;
+            }
+        }
     }
 }
