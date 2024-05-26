@@ -8,6 +8,7 @@ public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer BGM;
     public AudioMixer SFX;
+    public GameObject Popup;
 
     public void setBGM(float Volume)
     {
@@ -33,9 +34,13 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
+    public void CloseMenu()
+    {
+     Popup.SetActive(false);
+    }
+
     public void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
-
 }

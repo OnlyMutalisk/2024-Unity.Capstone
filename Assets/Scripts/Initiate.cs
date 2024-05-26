@@ -7,9 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class Initiate : MonoBehaviour
 {
-    public void update()
+    public GameObject Popup;
+    void Awake()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Invoke("LoadScene", 0); // 바로 다음 씬으로 넘어가기
+    }
+    void LoadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //다음씬 넘어가기
     }
 }
 

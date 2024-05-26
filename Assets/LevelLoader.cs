@@ -6,28 +6,11 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
-
+    public GameObject Cover;
     public void start()
     {
         transition.SetTrigger("Fadein");
+        Cover.SetActive(false);   //덮는 object 비활성화
     }
 
-    public void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            LoadNextLevel();
-        }
-    }
-    public void LoadNextLevel()
-    {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
-    }
-
-    IEnumerator LoadLevel(int levelIndex)
-        {
-        transition.SetTrigger("Fadeout");
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
 }
