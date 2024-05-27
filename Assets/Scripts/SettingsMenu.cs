@@ -8,7 +8,7 @@ public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer BGM;
     public AudioMixer SFX;
-    public GameObject Popup;
+    public static GameObject Popup;
 
     public void setBGM(float Volume)
     {
@@ -34,13 +34,15 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
-    public void CloseMenu()
-    {
-     Popup.SetActive(false);
-    }
-
     public void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void CloseMenu()
+    {
+        Popup = GameObject.Find("SettingsPage");
+        Popup.SetActive(false);
+
     }
 }

@@ -8,11 +8,11 @@ public class MainMenu : MonoBehaviour{
     public Animator transition;
     public GameObject Cover;
 
-    void start()
+    public void start()
     {
         GameObject Popup;
-        Popup = GameObject.FindWithTag("Settings");
-        Popup.SetActive(false);
+        Popup = GameObject.Find("Settings");
+        Popup.transform.GetChild(0).gameObject.SetActive(false);
     }
 
 
@@ -45,6 +45,8 @@ public class MainMenu : MonoBehaviour{
 
     public void OpenSettings()
     {
-        //Popup.SetActive(true);
+        GameObject Popup;
+        Popup = GameObject.Find("Settings");
+        Popup.transform.GetChild(0).gameObject.SetActive(true);
     }
 }

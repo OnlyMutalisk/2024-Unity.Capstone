@@ -309,6 +309,10 @@ PrefabInstance:
       propertyPath: Cover
       value: 
       objectReference: {fileID: 53529795}
+    - target: {fileID: 2910696654460370627, guid: 8b973bb06ad258f45ae2a7c9c48f6834, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4226626183781879237, guid: 8b973bb06ad258f45ae2a7c9c48f6834, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -1113,7 +1117,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 1669976707}
   Cover: {fileID: 53529795}
-  Popup: {fileID: 0}
 --- !u!114 &1462442535
 MonoBehaviour:
   m_ObjectHideFlags: 0
