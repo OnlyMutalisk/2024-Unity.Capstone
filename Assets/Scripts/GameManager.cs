@@ -13,9 +13,10 @@ public static class GameManager
 {
     // 캐릭터의 스텟을 조정합니다.
     public static float speed_Char = 1f;
-    public static int maxAction_Char = 10; // 초기 및 최대 행동력
+    public static int action_Char = 10;
     public static float damage_Char = 1;
     public static int attackDistance_Char = 1;
+    public static int Life_Char = 10;
 
     // 캐릭터 행동력 비용입니다.
     public static int cost_Pawn = 1;
@@ -27,6 +28,11 @@ public static class GameManager
 
     // 몬스터의 스텟을 조정합니다.
     public static float HP_Pawn = 10;
+    public static int damage_Pawn = 1;
+    public static int action_Pawn = 10;
+    public static int range_Pawn = 1;
+    public static int attackCost_Pawn = 5;
+    public static int moveCost_Pawn = 2;
 
     public enum PlayerAction { Move, Attack, Skill };
     public enum TileProperty { Ground, Water, Forest, Fire };
