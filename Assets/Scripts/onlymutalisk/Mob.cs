@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -21,6 +22,7 @@ public class Mob : MonoBehaviour
     public virtual int damage { get; set; }
     public virtual int attackCost { get; set; }
     public virtual int moveCost { get; set; }
+    public virtual string moveType { get; set; }
     private GameObject life;
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
 
@@ -63,9 +65,51 @@ public class Mob : MonoBehaviour
             // 체비쇼프 거리 1 내의 랜덤한 타일로 이동
             action -= moveCost;
             System.Random rand = new System.Random();
-            int[] options = { -1, 0, 1 };
-            int move_i = i + options[rand.Next(options.Length)];
-            int move_j = j + options[rand.Next(options.Length)];
+
+            int move_i;
+            int move_j;
+
+            switch (moveType)
+            {
+                case "Pawn":
+                    int[] options_Pawn_i = { -1, 0, 1 };
+                    int[] options_Pawn_j;
+                    int Pawn_i = options_Pawn_i[rand.Next(options_Pawn_i.Length)];
+
+                    if (Math.Abs(Pawn_i) == 0) { options_Pawn_j = new int[] { -1, 1 }; }
+                    else { options_Pawn_j = new int[] { 0 }; }
+                    int Pawn_j = options_Pawn_j[rand.Next(options_Pawn_j.Length)];
+
+                    move_i = i + Pawn_i;
+                    move_j = j + Pawn_j;
+                    break;
+
+                case "Knight":
+                    int[] options_Knight_i = { -2, -1, 1, 2 };
+                    int[] options_Knight_j;
+                    int Knight_i = options_Knight_i[rand.Next(options_Knight_i.Length)];
+
+                    if (Math.Abs(Knight_i) == 1) { options_Knight_j = new int[] { -2, 2 }; }
+                    else{ options_Knight_j = new int[] { -1, 1 }; }
+                    int Knight_j = options_Knight_j[rand.Next(options_Knight_j.Length)];
+
+                    move_i = i + Knight_i;
+                    move_j = j + Knight_j;
+                    break;
+
+                case "Bishop":
+                    int[] options_Bishop = { -1, 1};
+
+                    move_i = i + options_Bishop[rand.Next(options_Bishop.Length)];
+                    move_j = j + options_Bishop[rand.Next(options_Bishop.Length)];
+                    break;
+
+                default:
+                    move_i = 0;
+                    move_j = 0;
+                    break;
+            }
+
 
             yield return StartCoroutine(CorMove(move_i, move_j));
         }

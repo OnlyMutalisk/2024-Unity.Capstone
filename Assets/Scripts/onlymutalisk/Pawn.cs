@@ -13,6 +13,7 @@ public class Pawn : Mob
     public override int range { get; set; } = GameManager.range_Pawn;
     public override int attackCost { get; set; } = GameManager.attackCost_Pawn;
     public override int moveCost { get; set; } = GameManager.moveCost_Pawn;
+    public override string moveType { get; set; } = "Pawn";
 
     // Update is called once per frame
     void Update()
