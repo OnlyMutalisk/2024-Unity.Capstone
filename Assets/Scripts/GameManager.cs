@@ -16,6 +16,7 @@ public static class GameManager
     public static int action_Char = 10;
     public static float damage_Char = 1;
     public static int attackDistance_Char = 1;
+    public static int skillDistance_Char = 3;
     public static int Life_Char = 10;
 
     // 캐릭터 행동력 비용입니다.
@@ -25,6 +26,7 @@ public static class GameManager
     public static int cost_Rook = 2;
     public static int cost_Queen = 3;
     public static int cost_Attack = 5;
+    public static int cost_Skill = 10;
 
     // 몬스터의 스텟을 조정합니다.
     public static float HP_Pawn = 10;

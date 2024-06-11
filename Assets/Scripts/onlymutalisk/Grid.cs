@@ -27,9 +27,9 @@ public class Grid : MonoBehaviour
     // 타일 임시 초기화
     public void Start()
     {
-        for (int i = 15; i < 25; i++)
+        for (int i = 10; i < 30; i++)
         {
-            for (int j = 24; j < 33; j++)
+            for (int j = 19; j < 38; j++)
             {
                 GetTile(i, j).GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/Tile_Normal");
                 Color a = GetTile(i, j).GetComponent<Image>().color;

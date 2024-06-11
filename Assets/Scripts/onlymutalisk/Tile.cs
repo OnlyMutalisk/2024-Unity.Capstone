@@ -6,11 +6,13 @@ using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Tile : MonoBehaviour
 {
     private int index;
     private int i, j;
+    public GameObject meteor;
     public Vector3 pos;
     public static int cost;
     public static List<Image> tiles = new List<Image>();
@@ -39,6 +41,7 @@ public class Tile : MonoBehaviour
     {
         if (GameManager.playerAction == GameManager.PlayerAction.Move) { Move(); }
         if (GameManager.playerAction == GameManager.PlayerAction.Attack) { Attack(); }
+        if (GameManager.playerAction == GameManager.PlayerAction.Skill) { Skill(); }
         if (GameManager.playerAction == GameManager.PlayerAction.Skill)
         {
             // Player.Skill();
@@ -95,5 +98,47 @@ public class Tile : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Tile_Select_Skill 타일 터치 시, 스킬 범위 내 적 유닛에게 데미지를 입힙니다.
+    /// </summary>
+    public void Skill()
+    {
+        if (gameObject.GetComponent<Image>().sprite.name == "Tile_Select_Skill")
+        {
+            foreach (var mob in Mob.Mobs)
+            {
+                // 터치한 타일에 적이 존재한다면 공격
+                if (mob.i == this.i && mob.j == this.j)
+                {
+                    StartCoroutine(CorMeteor());
+
+                    Player.action -= GameManager.cost_Skill;
+                    mob.HP -= GameManager.damage_Char;
+
+                    for (int n = 0; n < Tile.tiles.Count; n++) { Tile.tiles[n].sprite = Tile.origins[n]; }
+                    Tile.tiles.Clear();
+                    Tile.origins.Clear();
+                    Tile.isTileOn = false;
+                }
+            }
+        }
+    }
+
+    public IEnumerator CorMeteor()
+    {
+        Vector3 meteorPos = transform.position;
+        meteorPos.x += 3 * Grid.cellSize;
+        meteorPos.y += 3 * Grid.cellSize;
+        GameObject meteor = Instantiate(this.meteor, meteorPos, Quaternion.identity);
+
+        while (Vector3.Distance(meteor.transform.position, transform.position) > 0.1f)
+        {
+            meteor.transform.position = Vector3.MoveTowards(meteor.transform.position, transform.position, 300 * Time.deltaTime);
+            yield return null;
+        }
+
+        Destroy(meteor);
     }
 }

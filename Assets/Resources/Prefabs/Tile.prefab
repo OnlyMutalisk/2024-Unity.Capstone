@@ -145,4 +145,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcae49d3e198575499e0237c52fe1834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meteor: {fileID: 2960573888821080661, guid: ce9d8a50c270f8447ac89a0fc9342e44, type: 3}
   pos: {x: 0, y: 0, z: 0}
