@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
     private int i, j;
     public GameObject meteor;
     public Vector3 pos;
+    public bool isWall;
     public static int cost;
     public static List<Image> tiles = new List<Image>();
     public static List<Sprite> origins = new List<Sprite>();
@@ -66,7 +67,6 @@ public class Tile : MonoBehaviour
             // 룩 이동 비용 계산
             if ((Math.Abs(Player.i - this.i) > 0 && Math.Abs(Player.j - this.j) == 0) || (Math.Abs(Player.j - this.j) > 0 && Math.Abs(Player.i - this.i) == 0))
             {
-
                 cost = (Math.Abs(Player.i - i) + Math.Abs(Player.j - j)) * cost;
             }
 
