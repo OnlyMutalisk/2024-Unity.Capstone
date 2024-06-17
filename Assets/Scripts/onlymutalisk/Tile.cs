@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour
     private int i, j;
     public GameObject meteor;
     public Vector3 pos;
-    public bool isWall;
+    public bool isWall = false;
     public static int cost;
     public static List<Image> tiles = new List<Image>();
     public static List<Sprite> origins = new List<Sprite>();

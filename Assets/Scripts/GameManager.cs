@@ -35,6 +35,7 @@ public static class GameManager
     public static int range_Pawn = 1;
     public static int attackCost_Pawn = 5;
     public static int moveCost_Pawn = 2;
+    public static int visionRange_Pawn = 3;
 
     public enum PlayerAction { Move, Attack, Skill };
     public enum TileProperty { Ground, Water, Forest, Fire };

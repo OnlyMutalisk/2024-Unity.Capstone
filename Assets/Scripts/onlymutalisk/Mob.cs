@@ -14,6 +14,7 @@ public class Mob : MonoBehaviour
     public UnityEngine.UI.Slider HP_slider;
     public static List<Mob> Mobs = new List<Mob>();
     public virtual float HP { get; set; }
+    public virtual float HP_max { get; set; }
     public virtual int i { get; set; }
     public virtual int j { get; set; }
     public virtual int maxAction { get; set; }
@@ -22,10 +23,12 @@ public class Mob : MonoBehaviour
     public virtual int damage { get; set; }
     public virtual int attackCost { get; set; }
     public virtual int moveCost { get; set; }
+    public virtual int visionRange { get; set; }
     public virtual string moveType { get; set; }
+    public GameObject vision;
     private GameObject life;
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
-
+    private bool isSleep = true;
 
     private void Start()
     {
@@ -34,15 +37,12 @@ public class Mob : MonoBehaviour
         int count = life.transform.childCount;
         for (int i = 0; i < count; i++) { hearts.Add(life.transform.GetChild(i).gameObject.GetComponent<UnityEngine.UI.Image>()); }
 
-        // 맵의 중심으로 위치를 정렬합니다.
-        gameObject.transform.position = new Vector3(0, 0, 0);
-        i = (Grid.i / 2) + 1;
-        j = (Grid.j / 2) + 1;
-        Mobs.Add(this);
-        StartCoroutine(CorMove(Player.i, Player.j));
+        // Vision 사이즈를 조절한 후 SetActive(false) 합니다.
+        float offset = Grid.cellSize * (visionRange * 2 + 1) + Grid.spacing * (visionRange * 2);
+        vision.GetComponent<RectTransform>().sizeDelta = new Vector2(offset, offset);
+        vision.SetActive(false);
 
-        // 시작 위치로 이동합니다.
-        // StartCoroutine(CorMove(i, j));
+        Mobs.Add(this);
     }
 
     /// <summary>
@@ -52,7 +52,10 @@ public class Mob : MonoBehaviour
     {
         action = maxAction;
 
-        while (action > 0)
+        // 시야범위 이내, 혹은 최대 체력이 아니면 활동 시작
+        if (Mathf.Max(Mathf.Abs(i - Player.i), Mathf.Abs(j - Player.j)) <= visionRange | HP != HP_max) { isSleep = false; }
+
+        while (action > 0 && isSleep == false)
         {
             // 공격범위 안이면 공격 후 현재 문 탈출, 체비쇼프 거리
             if (Mathf.Max(Mathf.Abs(i - Player.i), Mathf.Abs(j - Player.j)) <= range)
@@ -90,7 +93,7 @@ public class Mob : MonoBehaviour
                     int Knight_i = options_Knight_i[rand.Next(options_Knight_i.Length)];
 
                     if (Math.Abs(Knight_i) == 1) { options_Knight_j = new int[] { -2, 2 }; }
-                    else{ options_Knight_j = new int[] { -1, 1 }; }
+                    else { options_Knight_j = new int[] { -1, 1 }; }
                     int Knight_j = options_Knight_j[rand.Next(options_Knight_j.Length)];
 
                     move_i = i + Knight_i;
@@ -98,7 +101,7 @@ public class Mob : MonoBehaviour
                     break;
 
                 case "Bishop":
-                    int[] options_Bishop = { -1, 1};
+                    int[] options_Bishop = { -1, 1 };
 
                     move_i = i + options_Bishop[rand.Next(options_Bishop.Length)];
                     move_j = j + options_Bishop[rand.Next(options_Bishop.Length)];
@@ -109,7 +112,6 @@ public class Mob : MonoBehaviour
                     move_j = 0;
                     break;
             }
-
 
             yield return StartCoroutine(CorMove(move_i, move_j));
         }

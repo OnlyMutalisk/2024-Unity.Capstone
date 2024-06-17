@@ -7,14 +7,23 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-    public string xlsxPath = "C:\\Users\\Onlym\\Downloads\\test.xlsx";
+    public GameObject canvas; // 하이라키 오브젝트 연결
+    public GameObject user; // 하이라키 오브젝트 연결
+    public GameObject pawn; // 프리팹
+    public GameObject knight; // 프리팹
+    public GameObject bishop; // 프리팹
     private Dictionary<string, string> ColorToTile = new Dictionary<string, string>();
-    private Dictionary<string, string> TextToTile = new Dictionary<string, string>();
+    private Dictionary<string, GameObject> TextToUnit = new Dictionary<string, GameObject>();
 
     private void Start()
     {
         ColorToTile.Add("FFA162D0", "Tile_Empty");
         ColorToTile.Add("FFFDE7FB", "Tile_Normal");
+
+        TextToUnit.Add("U", user);
+        TextToUnit.Add("P", pawn);
+        TextToUnit.Add("N", knight);
+        TextToUnit.Add("B", bishop);
 
         LoadMap("Map.xlsx");
     }
@@ -58,13 +67,23 @@ public class Map : MonoBehaviour
                             img.color = new UnityEngine.Color(255, 255, 255, 0.031f);
                             tile.GetComponent<Tile>().isWall = true;
                         }
+
+                        // 타일 위치에 몬스터 생성
+                        if (cellValue != "" && cellValue != "U")
+                        {
+                            GameObject mob = Instantiate(TextToUnit[cellValue], new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
+                            Mob script = mob.GetComponent<Mob>();
+                            script.i = (Grid.i / 2) + 1;
+                            script.j = (Grid.j / 2) + 1;
+                            StartCoroutine(script.CorMove(row - 1, col - 1));
+                        }
+
+                        // 타일 위치로 유저 이동
+                        if (cellValue == "U") { StartCoroutine(Player.CorMove(row - 1, col - 1)); }
                     }
                 }
             }
         }
-        else
-        {
-            Debug.LogError(xlsxPath + " 경로에 파일이 존재하지 않습니다.");
-        }
+        else { Debug.LogError(filePath + " 경로에 파일이 존재하지 않습니다."); }
     }
 }
