@@ -16,10 +16,4 @@ public class Pawn : Mob
     public override int moveCost { get; set; } = GameManager.moveCost_Pawn;
     public override int visionRange { get; set; } = GameManager.visionRange_Pawn;
     public override string moveType { get; set; } = "Pawn";
-
-    // Update is called once per frame
-    void Update()
-    {
-        HP_slider.value = HP / GameManager.HP_Pawn;
-    }
 }

@@ -25,10 +25,11 @@ public class Mob : MonoBehaviour
     public virtual int moveCost { get; set; }
     public virtual int visionRange { get; set; }
     public virtual string moveType { get; set; }
+    public bool isSleep = true;
     public GameObject vision;
     private GameObject life;
+    public GameObject Zzz;
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
-    private bool isSleep = true;
 
     private void Start()
     {
@@ -43,6 +44,15 @@ public class Mob : MonoBehaviour
         vision.SetActive(false);
 
         Mobs.Add(this);
+    }
+
+    private void Update()
+    {
+        // 체력 바를 갱신합니다.
+        HP_slider.value = HP / HP_max;
+
+        // 몬스터가 깨어나면, Zzz 애니메이션을 비활성화 합니다.
+        if (isSleep == false) { Zzz.SetActive(false); }
     }
 
     /// <summary>

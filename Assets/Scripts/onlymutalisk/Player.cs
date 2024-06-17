@@ -55,6 +55,15 @@ public class Player : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
 
+            // 플레이어가 몬스터의 시야범위 이내로 이동하면 몬스터를 깨움
+            foreach (var mob in Mob.Mobs)
+            {
+                if (Mathf.Max(Mathf.Abs(mob.i - Player.i), Mathf.Abs(mob.j - Player.j)) <= mob.visionRange)
+                {
+                    mob.isSleep = false;
+                }
+            }
+
             isMove = false;
         }
     }

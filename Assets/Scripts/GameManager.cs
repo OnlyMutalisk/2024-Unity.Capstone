@@ -28,14 +28,32 @@ public static class GameManager
     public static int cost_Attack = 5;
     public static int cost_Skill = 10;
 
-    // 몬스터의 스텟을 조정합니다.
+    // Pawn 의 스텟을 조정합니다.
     public static float HP_Pawn = 10;
     public static int damage_Pawn = 1;
     public static int action_Pawn = 10;
     public static int range_Pawn = 1;
     public static int attackCost_Pawn = 5;
     public static int moveCost_Pawn = 2;
-    public static int visionRange_Pawn = 3;
+    public static int visionRange_Pawn = 2;
+
+    // Knight 의 스텟을 조정합니다.
+    public static float HP_Knight = 10;
+    public static int damage_Knight = 1;
+    public static int action_Knight = 10;
+    public static int range_Knight = 2;
+    public static int attackCost_Knight = 5;
+    public static int moveCost_Knight = 2;
+    public static int visionRange_Knight = 3;
+
+    // Bishop 의 스텟을 조정합니다.
+    public static float HP_Bishop = 10;
+    public static int damage_Bishop = 1;
+    public static int action_Bishop = 10;
+    public static int range_Bishop = 1;
+    public static int attackCost_Bishop = 5;
+    public static int moveCost_Bishop = 2;
+    public static int visionRange_Bishop = 2;
 
     public enum PlayerAction { Move, Attack, Skill };
     public enum TileProperty { Ground, Water, Forest, Fire };
