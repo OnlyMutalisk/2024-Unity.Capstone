@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
@@ -11,7 +12,12 @@ using static UnityEngine.GraphicsBuffer;
 public class Tile : MonoBehaviour
 {
     private int index;
-    private int i, j;
+    public int i, j;
+    public int F; // 목적지까지의 경로 총 비용
+    public int G; // 시작점 to 경유지 비용
+    public int H; // 경유지 to 목적지 비용
+    public int parentsCount; // 모든 부모 경로 타일 수
+    public Tile parentsTile; // 부모 경로 타일
     public GameObject meteor;
     public Vector3 pos;
     public bool isWall = false;
@@ -140,5 +146,46 @@ public class Tile : MonoBehaviour
         }
 
         Destroy(meteor);
+    }
+
+    /// <summary>
+    /// <br>Contains 메서드에서 i 값과 j 값을 기준으로 판단하도록 Equals 를 재정의합니다.</br>
+    /// </summary>
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType()) { return false; }
+        else
+        {
+            Tile other = (Tile)obj;
+            return i == other.i && j == other.j;
+        }
+    }
+
+    /// <summary>
+    /// <br>Equals 를 재정의 할 때, 해시 코드도 재정의 해야합니다.</br>
+    /// <br>이는 해시 기반 컬렉션에서도 올바르게 탐색할 수 있도록 합니다.</br>
+    /// </summary>
+    public override int GetHashCode()
+    {
+        return (i, j).GetHashCode();
+    }
+
+    /// <summary>
+    /// <br>타일의 이미지를 전역 리스트에 추가합니다.</br>
+    /// <br>두 번째 파라미터로 true 를 넣으면 조건에 상관없이 리스트에 추가합니다.</br>
+    /// </summary>
+    public static void AddTileImages(GameObject tile, bool checkMob = false)
+    {
+        if (checkMob == false)
+        {
+            if (tile.GetComponent<Tile>().isWall == false)
+            {
+                tiles.Add(tile.GetComponent<Image>());
+            }
+        }
+        else
+        {
+            tiles.Add(tile.GetComponent<Image>());
+        }
     }
 }

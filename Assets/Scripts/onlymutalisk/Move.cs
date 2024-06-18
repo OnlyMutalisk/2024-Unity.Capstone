@@ -22,7 +22,7 @@ public class Move : MonoBehaviour
         {
             Tile.isTileOn = true;
 
-            Tile.tiles.Add(Grid.GetTile(Player.i - 1, Player.j).GetComponent<Image>());
+            Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j));
             Tile.origins.Add(Tile.tiles[0].sprite);
             Tile.tiles[0].sprite = select;
 
@@ -50,14 +50,14 @@ public class Move : MonoBehaviour
         {
             Tile.isTileOn = true;
 
-            Tile.tiles.Add(Grid.GetTile(Player.i - 2, Player.j - 1).GetComponent<Image>());
-            Tile.tiles.Add(Grid.GetTile(Player.i - 2, Player.j + 1).GetComponent<Image>());
-            Tile.tiles.Add(Grid.GetTile(Player.i + 2, Player.j - 1).GetComponent<Image>());
-            Tile.tiles.Add(Grid.GetTile(Player.i + 2, Player.j + 1).GetComponent<Image>());
-            Tile.tiles.Add(Grid.GetTile(Player.i - 1, Player.j - 2).GetComponent<Image>());
-            Tile.tiles.Add(Grid.GetTile(Player.i - 1, Player.j + 2).GetComponent<Image>());
-            Tile.tiles.Add(Grid.GetTile(Player.i + 1, Player.j - 2).GetComponent<Image>());
-            Tile.tiles.Add(Grid.GetTile(Player.i + 1, Player.j + 2).GetComponent<Image>());
+            Tile.AddTileImages(Grid.GetTile(Player.i - 2, Player.j - 1));
+            Tile.AddTileImages(Grid.GetTile(Player.i - 2, Player.j + 1));
+            Tile.AddTileImages(Grid.GetTile(Player.i + 2, Player.j - 1));
+            Tile.AddTileImages(Grid.GetTile(Player.i + 2, Player.j + 1));
+            Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j - 2));
+            Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j + 2));
+            Tile.AddTileImages(Grid.GetTile(Player.i + 1, Player.j - 2));
+            Tile.AddTileImages(Grid.GetTile(Player.i + 1, Player.j + 2));
 
             foreach (Image tile in Tile.tiles)
             {
@@ -84,17 +84,34 @@ public class Move : MonoBehaviour
     public void Bishop()
     {
         GameManager.playerAction = GameManager.PlayerAction.Move;
+        int range = 3;
         
         if (Tile.isTileOn == false)
         {
             Tile.isTileOn = true;
 
-            for (int n = 1; n <= 3; n++)
+            for (int n = 1; n <= range; n++)
             {
-                Tile.tiles.Add(Grid.GetTile(Player.i - n, Player.j - n).GetComponent<Image>());
-                Tile.tiles.Add(Grid.GetTile(Player.i - n, Player.j + n).GetComponent<Image>());
-                Tile.tiles.Add(Grid.GetTile(Player.i + n, Player.j - n).GetComponent<Image>());
-                Tile.tiles.Add(Grid.GetTile(Player.i + n, Player.j + n).GetComponent<Image>());
+                Tile.AddTileImages(Grid.GetTile(Player.i - n, Player.j - n));
+                if (A_Star.CheckTile(Player.i - n, Player.j - n) == false) { break; }
+            }
+
+            for (int n = 1; n <= range; n++)
+            {
+                Tile.AddTileImages(Grid.GetTile(Player.i - n, Player.j + n));
+                if (A_Star.CheckTile(Player.i - n, Player.j + n) == false) { break; }
+            }
+
+            for (int n = 1; n <= range; n++)
+            {
+                Tile.AddTileImages(Grid.GetTile(Player.i + n, Player.j - n));
+                if (A_Star.CheckTile(Player.i + n, Player.j - n) == false) { break; }
+            }
+
+            for (int n = 1; n <= range; n++)
+            {
+                Tile.AddTileImages(Grid.GetTile(Player.i + n, Player.j + n));
+                if (A_Star.CheckTile(Player.i + n, Player.j + n) == false) { break; }
             }
 
             foreach (Image tile in Tile.tiles)
@@ -122,17 +139,34 @@ public class Move : MonoBehaviour
     public void Rook()
     {
         GameManager.playerAction = GameManager.PlayerAction.Move;
+        int range = 3;
         
         if (Tile.isTileOn == false)
         {
             Tile.isTileOn = true;
 
-            for (int n = 1; n <= 3; n++)
+            for (int n = 1; n <= range; n++)
             {
-                Tile.tiles.Add(Grid.GetTile(Player.i - n, Player.j).GetComponent<Image>());
-                Tile.tiles.Add(Grid.GetTile(Player.i + n, Player.j).GetComponent<Image>());
-                Tile.tiles.Add(Grid.GetTile(Player.i, Player.j - n).GetComponent<Image>());
-                Tile.tiles.Add(Grid.GetTile(Player.i, Player.j + n).GetComponent<Image>());
+                Tile.AddTileImages(Grid.GetTile(Player.i - n, Player.j));
+                if (A_Star.CheckTile(Player.i - n, Player.j) == false) { break; }
+            }
+
+            for (int n = 1; n <= range; n++)
+            {
+                Tile.AddTileImages(Grid.GetTile(Player.i + n, Player.j));
+                if (A_Star.CheckTile(Player.i + n, Player.j) == false) { break; }
+            }
+
+            for (int n = 1; n <= range; n++)
+            {
+                Tile.AddTileImages(Grid.GetTile(Player.i, Player.j - n));
+                if (A_Star.CheckTile(Player.i, Player.j - n) == false) { break; }
+            }
+
+            for (int n = 1; n <= range; n++)
+            {
+                Tile.AddTileImages(Grid.GetTile(Player.i, Player.j + n));
+                if (A_Star.CheckTile(Player.i, Player.j + n) == false) { break; }
             }
 
             foreach (Image tile in Tile.tiles)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -32,6 +33,8 @@ public class Player : MonoBehaviour
         if (isMove == false)
         {
             isMove = true;
+            A_Star.SwitchWall(Player.i, Player.j);
+            A_Star.SwitchWall(i, j);
 
             Vector3 target = pos.position;
             float diameter = Grid.cellSize + Grid.spacing;

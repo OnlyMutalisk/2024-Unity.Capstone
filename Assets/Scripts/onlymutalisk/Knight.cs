@@ -15,5 +15,5 @@ public class Knight : Mob
     public override int attackCost { get; set; } = GameManager.attackCost_Knight;
     public override int moveCost { get; set; } = GameManager.moveCost_Knight;
     public override int visionRange { get; set; } = GameManager.visionRange_Knight;
-    public override string moveType { get; set; } = "Knight";
+    public override RangeType rangeType { get; set; } = RangeType.Knight;
 }

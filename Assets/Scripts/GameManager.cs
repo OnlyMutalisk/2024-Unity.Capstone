@@ -41,7 +41,7 @@ public static class GameManager
     public static float HP_Knight = 10;
     public static int damage_Knight = 1;
     public static int action_Knight = 10;
-    public static int range_Knight = 2;
+    public static int range_Knight = 1;
     public static int attackCost_Knight = 5;
     public static int moveCost_Knight = 2;
     public static int visionRange_Knight = 3;
@@ -54,6 +54,11 @@ public static class GameManager
     public static int attackCost_Bishop = 5;
     public static int moveCost_Bishop = 2;
     public static int visionRange_Bishop = 2;
+
+    // Message 관리
+    public static string msg_turn = "It's the opponent's turn...";
+    public static string msg_loading = "Loading Map....";
+    public static float delay_loading = 5f;
 
     public enum PlayerAction { Move, Attack, Skill };
     public enum TileProperty { Ground, Water, Forest, Fire };

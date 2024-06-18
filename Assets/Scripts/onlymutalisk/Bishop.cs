@@ -15,5 +15,5 @@ public class Bishop : Mob
     public override int attackCost { get; set; } = GameManager.attackCost_Bishop;
     public override int moveCost { get; set; } = GameManager.moveCost_Bishop;
     public override int visionRange { get; set; } = GameManager.visionRange_Bishop;
-    public override string moveType { get; set; } = "Bishop";
+    public override RangeType rangeType { get; set; } = RangeType.Bishop;
 }

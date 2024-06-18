@@ -15,5 +15,5 @@ public class Pawn : Mob
     public override int attackCost { get; set; } = GameManager.attackCost_Pawn;
     public override int moveCost { get; set; } = GameManager.moveCost_Pawn;
     public override int visionRange { get; set; } = GameManager.visionRange_Pawn;
-    public override string moveType { get; set; } = "Pawn";
+    public override RangeType rangeType { get; set; } = RangeType.Pawn;
 }
