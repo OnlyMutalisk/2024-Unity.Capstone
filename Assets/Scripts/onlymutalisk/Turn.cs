@@ -13,6 +13,11 @@ public class Turn : MonoBehaviour
     public static bool isMyTurn = true;
     private bool isStart = true;
 
+    private void Awake()
+    {
+        isMyTurn = true;
+    }
+
     private void Update()
     {
         if (isStart == true) { isStart = false; StartCoroutine(UnitLoad()); }

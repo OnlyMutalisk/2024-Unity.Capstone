@@ -2,13 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEditor.PlayerSettings;
 using Image = UnityEngine.UI.Image;
 
 public class Mob : MonoBehaviour
@@ -35,6 +31,11 @@ public class Mob : MonoBehaviour
     public GameObject Zzz;
     public GameObject WakeUp;
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
+
+    private void Awake()
+    {
+        Mobs = new List<Mob>();
+    }
 
     private void Start()
     {
