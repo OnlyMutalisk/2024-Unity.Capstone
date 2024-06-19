@@ -1,19 +1,25 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class Tile : MonoBehaviour
 {
     private int index;
-    private int i, j;
+    private GameObject msg_top;
+    private TextMeshProUGUI tmp;
+    public int i, j;
+    public int F; // 목적지까지의 경로 총 비용
+    public int G; // 시작점 to 경유지 비용
+    public int H; // 경유지 to 목적지 비용
+    public int parentsCount; // 모든 부모 경로 타일 수
+    public Tile parentsTile; // 부모 경로 타일
     public GameObject meteor;
     public Vector3 pos;
+    public bool isWall = false;
     public static int cost;
     public static List<Image> tiles = new List<Image>();
     public static List<Sprite> origins = new List<Sprite>();
@@ -32,6 +38,10 @@ public class Tile : MonoBehaviour
         // 월드 좌표 저장
         pos.x = gameObject.GetComponent<RectTransform>().rect.position.x;
         pos.y = gameObject.GetComponent<RectTransform>().rect.position.y;
+
+        // Message_Top 연결
+        msg_top = Message_Move.FindChildObject(GameObject.Find("UI"), "Message_Top");
+        tmp = msg_top.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
     /// <summary>
@@ -66,14 +76,28 @@ public class Tile : MonoBehaviour
             // 룩 이동 비용 계산
             if ((Math.Abs(Player.i - this.i) > 0 && Math.Abs(Player.j - this.j) == 0) || (Math.Abs(Player.j - this.j) > 0 && Math.Abs(Player.i - this.i) == 0))
             {
-
                 cost = (Math.Abs(Player.i - i) + Math.Abs(Player.j - j)) * cost;
             }
 
-            Player.action -= cost;
+            if (Player.action >= cost)
+            {
+                Player.action -= cost;
 
-            StartCoroutine(Player.CorMove(i, j));
+                StartCoroutine(Player.CorMove(i, j));
+            }
+            else
+            {
+                StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+            }
         }
+    }
+
+    private IEnumerator OnMsgTop(string msg, float seconds)
+    {
+        msg_top.SetActive(true);
+        tmp.text = msg;
+        yield return new WaitForSeconds(seconds);
+        msg_top.SetActive(false);
     }
 
     /// <summary>
@@ -88,13 +112,22 @@ public class Tile : MonoBehaviour
                 // 터치한 타일에 적이 존재한다면 공격
                 if (mob.i == this.i && mob.j == this.j)
                 {
-                    Player.action -= GameManager.cost_Attack;
-                    mob.HP -= GameManager.damage_Char;
-
                     for (int n = 0; n < Tile.tiles.Count; n++) { Tile.tiles[n].sprite = Tile.origins[n]; }
                     Tile.tiles.Clear();
                     Tile.origins.Clear();
                     Tile.isTileOn = false;
+
+                    if (Player.action >= GameManager.cost_Attack)
+                    {
+                        Player.action -= GameManager.cost_Attack;
+                        mob.HP -= CalcDamage(GameManager.attackDamage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
+                        if (mob.HP <= 0) { KillMob(mob); }
+                        break;
+                    }
+                    else
+                    {
+                        StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+                    }
                 }
             }
         }
@@ -112,15 +145,24 @@ public class Tile : MonoBehaviour
                 // 터치한 타일에 적이 존재한다면 공격
                 if (mob.i == this.i && mob.j == this.j)
                 {
-                    StartCoroutine(CorMeteor());
-
-                    Player.action -= GameManager.cost_Skill;
-                    mob.HP -= GameManager.damage_Char;
-
                     for (int n = 0; n < Tile.tiles.Count; n++) { Tile.tiles[n].sprite = Tile.origins[n]; }
                     Tile.tiles.Clear();
                     Tile.origins.Clear();
                     Tile.isTileOn = false;
+
+                    if (Player.action >= GameManager.cost_Skill)
+                    {
+                        StartCoroutine(CorMeteor());
+                        Player.action -= GameManager.cost_Skill;
+                        mob.HP -= GameManager.skillDamage_Char;
+                        mob.isSleep = false;
+                        if (mob.HP <= 0) { KillMob(mob); }
+                        break;
+                    }
+                    else
+                    {
+                        StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+                    }
                 }
             }
         }
@@ -140,5 +182,78 @@ public class Tile : MonoBehaviour
         }
 
         Destroy(meteor);
+    }
+
+    /// <summary>
+    /// <br>Contains 메서드에서 i 값과 j 값을 기준으로 판단하도록 Equals 를 재정의합니다.</br>
+    /// </summary>
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType()) { return false; }
+        else
+        {
+            Tile other = (Tile)obj;
+            return i == other.i && j == other.j;
+        }
+    }
+
+    /// <summary>
+    /// <br>Equals 를 재정의 할 때, 해시 코드도 재정의 해야합니다.</br>
+    /// <br>이는 해시 기반 컬렉션에서도 올바르게 탐색할 수 있도록 합니다.</br>
+    /// </summary>
+    public override int GetHashCode()
+    {
+        return (i, j).GetHashCode();
+    }
+
+    /// <summary>
+    /// <br>타일의 이미지를 전역 리스트에 추가합니다.</br>
+    /// <br>두 번째 파라미터로 true 를 넣으면 조건에 상관없이 리스트에 추가합니다.</br>
+    /// </summary>
+    public static void AddTileImages(GameObject tile, bool checkMob = false)
+    {
+        if (checkMob == false)
+        {
+            if (tile.GetComponent<Tile>().isWall == false)
+            {
+                tiles.Add(tile.GetComponent<Image>());
+            }
+        }
+        else
+        {
+            tiles.Add(tile.GetComponent<Image>());
+        }
+    }
+
+    /// <summary>
+    /// 타일 속성에 따라 데미지에 가중치를 부여합니다.
+    /// </summary>
+    public static float CalcDamage(float damage, GameObject attacker, GameObject target)
+    {
+        Tile attackerTile = attacker.GetComponent<Tile>();
+        Tile targetTile = target.GetComponent<Tile>();
+
+        string property_attacker = attackerTile.gameObject.GetComponent<Image>().sprite.name;
+        string property_target = targetTile.gameObject.GetComponent<Image>().sprite.name;
+
+        foreach (KeyValuePair<string, string> property in GameManager.propertyCounterMatch)
+        {
+            if (property_attacker == property.Key && property_target == property.Value)
+            {
+                damage *= GameManager.propertyBonus;
+            }
+        }
+
+        return damage;
+    }
+
+    /// <summary>
+    /// 몬스터를 제거합니다.
+    /// </summary>
+    private void KillMob(Mob mob)
+    {
+        Grid.GetTile(mob.i, mob.j).GetComponent<Tile>().isWall = false;
+        Mob.Mobs.Remove(mob);
+        Destroy(mob.gameObject);
     }
 }

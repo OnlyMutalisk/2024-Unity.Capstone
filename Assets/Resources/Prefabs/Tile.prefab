@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5118191251568958878}
   - component: {fileID: 1685431605900022400}
   - component: {fileID: 6820227608974958023}
+  - component: {fileID: 407689297612083140}
   m_Layer: 5
   m_Name: Tile
   m_TagString: Untagged
@@ -145,5 +146,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcae49d3e198575499e0237c52fe1834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  i: 0
+  j: 0
+  F: 0
+  G: 0
+  H: 0
+  parentsCount: 0
+  parentsTile: {fileID: 0}
   meteor: {fileID: 2960573888821080661, guid: ce9d8a50c270f8447ac89a0fc9342e44, type: 3}
   pos: {x: 0, y: 0, z: 0}
+  isWall: 0
+--- !u!114 &407689297612083140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6332973517853222602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ff7c3ce244d114685dda4b3a5c13cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

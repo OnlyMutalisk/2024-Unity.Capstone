@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GameManager;
 
@@ -15,7 +16,6 @@ public class UI : MonoBehaviour
     private void Update()
     {
         UpdateAction();
-        UpdateLife();
     }
 
     /// <summary>
@@ -31,10 +31,5 @@ public class UI : MonoBehaviour
         else if (Player.action < GameManager.action_Char * 0.75) { Action_Image.sprite = Resources.Load<Sprite>("Images/Action_3"); }
         else if (Player.action < GameManager.action_Char * 1) { Action_Image.sprite = Resources.Load<Sprite>("Images/Action_4"); }
         else { Action_Image.sprite = Resources.Load<Sprite>("Images/Action_5"); }
-    }
-
-    private void UpdateLife()
-    {
-        
     }
 }

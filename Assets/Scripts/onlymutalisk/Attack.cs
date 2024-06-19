@@ -26,10 +26,10 @@ public class Attack : MonoBehaviour
 
             for (int n = 1; n <= GameManager.attackDistance_Char; n++)
             {
-                Tile.tiles.Add(Grid.GetTile(Player.i - n, Player.j).GetComponent<Image>());
-                Tile.tiles.Add(Grid.GetTile(Player.i + n, Player.j).GetComponent<Image>());
-                Tile.tiles.Add(Grid.GetTile(Player.i, Player.j - n).GetComponent<Image>());
-                Tile.tiles.Add(Grid.GetTile(Player.i, Player.j + n).GetComponent<Image>());
+                Tile.AddTileImages(Grid.GetTile(Player.i - n, Player.j), A_Star.CheckMob(Player.i - n, Player.j));
+                Tile.AddTileImages(Grid.GetTile(Player.i + n, Player.j), A_Star.CheckMob(Player.i + n, Player.j));
+                Tile.AddTileImages(Grid.GetTile(Player.i, Player.j - n), A_Star.CheckMob(Player.i, Player.j - n));
+                Tile.AddTileImages(Grid.GetTile(Player.i, Player.j + n), A_Star.CheckMob(Player.i, Player.j + n));
             }
 
             foreach (Image tile in Tile.tiles)

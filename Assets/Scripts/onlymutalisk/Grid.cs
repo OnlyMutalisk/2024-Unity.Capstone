@@ -24,21 +24,6 @@ public class Grid : MonoBehaviour
         j = (int)((canv.GetComponent<RectTransform>().rect.width + spacing) / (cellSize + spacing));
     }
 
-    // 타일 임시 초기화
-    public void Start()
-    {
-        for (int i = 10; i < 30; i++)
-        {
-            for (int j = 19; j < 38; j++)
-            {
-                GetTile(i, j).GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/Tile_Normal");
-                Color a = GetTile(i, j).GetComponent<Image>().color;
-                a.a = 1f;
-                GetTile(i, j).GetComponent<Image>().color = a;
-            }
-        }
-    }
-
     /// <summary>
     /// <br>[i][j] 을 인덱스화 합니다.</br>
     /// </summary>

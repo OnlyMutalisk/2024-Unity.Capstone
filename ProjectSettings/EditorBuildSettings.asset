@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/onlymutalisk/Main.unity
+    guid: 36ed2357f4f980346bfa1237c2804da8
+  - enabled: 1
+    path: Assets/Scenes/onlymutalisk/Game.unity
+    guid: 4c9f164f7c211ab46b65b922d58f1b94
+  - enabled: 1
     path: Assets/Scenes/Initiate.unity
     guid: 0a5da02da4329194b9b77db013ddd8d3
   - enabled: 1
