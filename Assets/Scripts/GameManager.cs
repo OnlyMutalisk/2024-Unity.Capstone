@@ -11,6 +11,10 @@ using static UnityEditor.Progress;
 
 public static class GameManager
 {
+    public enum PlayerAction { Move, Attack, Skill };
+    public static PlayerAction playerAction = PlayerAction.Move;
+    public static Dictionary<string, string> tileProperty = new Dictionary<string, string>();
+
     // 캐릭터의 스텟을 조정합니다.
     public static float speed_Char = 1f;
     public static int action_Char = 10;
@@ -24,7 +28,6 @@ public static class GameManager
     public static int cost_Knight = 2;
     public static int cost_Bishop = 2;
     public static int cost_Rook = 2;
-    public static int cost_Queen = 3;
     public static int cost_Attack = 5;
     public static int cost_Skill = 10;
 
@@ -55,15 +58,30 @@ public static class GameManager
     public static int moveCost_Bishop = 2;
     public static int visionRange_Bishop = 2;
 
-    // Message 관리
+    // Message_Top
     public static string msg_turn = "It's the opponent's turn...";
     public static string msg_loading = "Loading Map....";
     public static float delay_loading = 5f;
 
-    public enum PlayerAction { Move, Attack, Skill };
-    public enum TileProperty { Ground, Water, Forest, Fire };
-    public static PlayerAction playerAction = PlayerAction.Move;
-    public static TileProperty playerTileProperty = TileProperty.Ground;
+    // Message_Move
+    public static string msg_Pawn = "타일 당 소요 행동력 : " + cost_Pawn;
+    public static string msg_Knight = "타일 당 소요 행동력 : " + cost_Knight;
+    public static string msg_Bishop = "타일 당 소요 행동력 : " + cost_Bishop;
+    public static string msg_Rook = "타일 당 소요 행동력 : " + cost_Rook;
+    public static string msg_Attack = "공격 소요 행동력 : " + cost_Attack;
+    public static string msg_Skill = "스킬 소요 행동력 : " + cost_Skill;
+
+    static GameManager()
+    {
+        tileProperty.Add("Tile_Empty", "빈 타일");
+        tileProperty.Add("Tile_Normal", "일반 타일");
+        tileProperty.Add("Tile_Forest", "숲 타일 (물 타일 추가 피해 +50%)");
+        tileProperty.Add("Tile_Water", "물 타일 (땅 타일 추가 피해 +50%)");
+        tileProperty.Add("Tile_Ground", "땅 타일 (숲 타일 추가 피해 +50%)");
+        tileProperty.Add("Tile_Select", "이동 가능한 타일");
+        tileProperty.Add("Tile_Select_Attack", "공격 범위 내 타일");
+        tileProperty.Add("Tile_Select_Skill", "스킬 범위 내 타일");
+    }
 
     #region JSON SAVE & LOAD
 
@@ -80,7 +98,6 @@ public static class GameManager
         {
             // 데이터 틀에 현재 데이터들을 담습니다.
             playerAction = GameManager.playerAction,
-            playerTileProperty = GameManager.playerTileProperty
         };
 
         // 데이터를 JSON 으로 직렬화합니다.
@@ -100,13 +117,11 @@ public static class GameManager
 
         // 현재 데이터로 덮어씁니다.
         playerAction = data.playerAction;
-        playerTileProperty = data.playerTileProperty;
     }
 
     public static void RESET()
     {
         playerAction = 0;
-        playerTileProperty = 0;
     }
 
 }
@@ -115,7 +130,6 @@ public static class GameManager
 public class Data
 {
     public GameManager.PlayerAction playerAction;
-    public GameManager.TileProperty playerTileProperty;
 }
 
 #endregion
