@@ -84,7 +84,7 @@ public class Move : MonoBehaviour
     public void Bishop()
     {
         GameManager.playerAction = GameManager.PlayerAction.Move;
-        int range = 3;
+        int range = Player.action / GameManager.cost_Bishop;
         
         if (Tile.isTileOn == false)
         {
@@ -139,8 +139,8 @@ public class Move : MonoBehaviour
     public void Rook()
     {
         GameManager.playerAction = GameManager.PlayerAction.Move;
-        int range = 3;
-        
+        int range = Player.action / GameManager.cost_Rook;
+
         if (Tile.isTileOn == false)
         {
             Tile.isTileOn = true;

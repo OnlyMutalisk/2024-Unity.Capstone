@@ -107,7 +107,7 @@ public class Message_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     /// <summary>
     /// 이름을 통해 자식 오브젝트를 탐색합니다.
     /// </summary>
-    private GameObject FindChildObject(GameObject gameObject, string name)
+    public static GameObject FindChildObject(GameObject gameObject, string name)
     {
         Transform parent = gameObject.transform;
 

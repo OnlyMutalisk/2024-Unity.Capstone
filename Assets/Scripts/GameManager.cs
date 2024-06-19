@@ -21,6 +21,7 @@ public static class GameManager
     public static float speed_Mob = 1.5f;
     public static float delay_loading = 3f;
     public static float delay_mobMove = 0.2f;
+    public static float delay_msgTopAction = 1f;
 
     // 캐릭터의 스텟을 조정합니다.
     public static int action_Char = 10;
@@ -40,33 +41,34 @@ public static class GameManager
     // Pawn 의 스텟을 조정합니다.
     public static float HP_Pawn = 10;
     public static int damage_Pawn = 1;
-    public static int action_Pawn = 10;
+    public static int action_Pawn = 3;
     public static int range_Pawn = 1;
-    public static int attackCost_Pawn = 5;
-    public static int moveCost_Pawn = 2;
+    public static int attackCost_Pawn = 1;
+    public static int moveCost_Pawn = 1;
     public static int visionRange_Pawn = 2;
 
     // Knight 의 스텟을 조정합니다.
     public static float HP_Knight = 10;
     public static int damage_Knight = 1;
-    public static int action_Knight = 10;
+    public static int action_Knight = 2;
     public static int range_Knight = 1;
-    public static int attackCost_Knight = 5;
-    public static int moveCost_Knight = 2;
+    public static int attackCost_Knight = 1;
+    public static int moveCost_Knight = 1;
     public static int visionRange_Knight = 3;
 
     // Bishop 의 스텟을 조정합니다.
     public static float HP_Bishop = 10;
     public static int damage_Bishop = 1;
-    public static int action_Bishop = 10;
+    public static int action_Bishop = 3;
     public static int range_Bishop = 1;
-    public static int attackCost_Bishop = 5;
-    public static int moveCost_Bishop = 2;
+    public static int attackCost_Bishop = 1;
+    public static int moveCost_Bishop = 1;
     public static int visionRange_Bishop = 2;
 
     // Message_Top
-    public static string msg_turn = "It's the opponent's turn...";
-    public static string msg_loading = "Loading Map....";
+    public static string msg_turn = "상대방의 턴 입니다...";
+    public static string msg_loading = "맵 로딩 중 입니다...";
+    public static string msg_action = "행동력이 부족합니다. 다른 행동을 하거나, 턴을 종료해주세요.";
 
     // Message_Move
     public static string msg_Pawn = "타일 당 소요 행동력 : " + cost_Pawn;
@@ -88,9 +90,9 @@ public static class GameManager
 
         tileProperty.Add("Tile_Empty", "빈 타일");
         tileProperty.Add("Tile_Normal", "일반 타일");
-        tileProperty.Add("Tile_Forest", "숲 (물 타일 추가 피해 x2)");
-        tileProperty.Add("Tile_Water", "물 (땅 타일 추가 피해 x2)");
-        tileProperty.Add("Tile_Ground", "땅 (숲 타일 추가 피해 x2)");
+        tileProperty.Add("Tile_Forest", "숲\n(물 타일 데미지 보너스 x2)");
+        tileProperty.Add("Tile_Water", "물\n(땅 타일 데미지 보너스 x2)");
+        tileProperty.Add("Tile_Ground", "땅\n(숲 타일 데미지 보너스 x2)");
         tileProperty.Add("Tile_Select", "이동 가능한 타일");
         tileProperty.Add("Tile_Select_Attack", "공격 범위 내 타일");
         tileProperty.Add("Tile_Select_Skill", "스킬 범위 내 타일");

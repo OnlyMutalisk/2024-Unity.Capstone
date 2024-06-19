@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEditor.PlayerSettings;
+using Image = UnityEngine.UI.Image;
 
 public class Mob : MonoBehaviour
 {
@@ -28,6 +30,8 @@ public class Mob : MonoBehaviour
     public bool isSleep = true;
     public GameObject vision;
     private GameObject life;
+    public Image Action_Image;
+    public TextMeshProUGUI Action_Text;
     public GameObject Zzz;
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
 
@@ -53,6 +57,8 @@ public class Mob : MonoBehaviour
 
         // 몬스터가 깨어나면, Zzz 애니메이션을 비활성화 합니다.
         if (isSleep == false) { Zzz.SetActive(false); }
+
+        UpdateAction();
     }
 
     /// <summary>
@@ -60,14 +66,12 @@ public class Mob : MonoBehaviour
     /// </summary>
     public IEnumerator CorPlay()
     {
-        action = maxAction;
-
         // 시야범위 이내, 혹은 최대 체력이 아니면 활동 시작
         if (Mathf.Max(Mathf.Abs(i - Player.i), Mathf.Abs(j - Player.j)) <= visionRange | HP != HP_max) { isSleep = false; }
 
         List<Tile> path = A_Star.PathFind(Grid.GetTile(i, j).GetComponent<Tile>(), rangeType);
 
-        while (action > Mathf.Min(moveCost, attackCost) && isSleep == false)
+        while (action >= Mathf.Min(moveCost, attackCost) && isSleep == false)
         {
             // 공격범위 안이면 공격 후 현재 문 탈출, 체비쇼프 거리
             if (Mathf.Max(Mathf.Abs(i - Player.i), Mathf.Abs(j - Player.j)) <= range)
@@ -89,6 +93,8 @@ public class Mob : MonoBehaviour
             }
             else { break; }
         }
+
+        action = maxAction;
     }
 
     public IEnumerator CorAttack()
@@ -147,5 +153,20 @@ public class Mob : MonoBehaviour
                 if (lifeCopy == 0) { break; }
             }
         }
+    }
+
+    /// <summary>
+    /// <br>행동력에 따라 스프라이트를 변경합니다.</br>
+    /// </summary>
+    private void UpdateAction()
+    {
+        Action_Text.text = action.ToString();
+
+        if (action <= 0) { Action_Image.sprite = Resources.Load<Sprite>("Images/Action_0"); }
+        else if (action < maxAction * 0.25) { Action_Image.sprite = Resources.Load<Sprite>("Images/Action_1"); }
+        else if (action < maxAction * 0.5) { Action_Image.sprite = Resources.Load<Sprite>("Images/Action_2"); }
+        else if (action < maxAction * 0.75) { Action_Image.sprite = Resources.Load<Sprite>("Images/Action_3"); }
+        else if (action < maxAction * 1) { Action_Image.sprite = Resources.Load<Sprite>("Images/Action_4"); }
+        else { Action_Image.sprite = Resources.Load<Sprite>("Images/Action_5"); }
     }
 }

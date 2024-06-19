@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -12,6 +13,8 @@ using static UnityEngine.GraphicsBuffer;
 public class Tile : MonoBehaviour
 {
     private int index;
+    private GameObject msg_top;
+    private TextMeshProUGUI tmp;
     public int i, j;
     public int F; // 목적지까지의 경로 총 비용
     public int G; // 시작점 to 경유지 비용
@@ -39,6 +42,10 @@ public class Tile : MonoBehaviour
         // 월드 좌표 저장
         pos.x = gameObject.GetComponent<RectTransform>().rect.position.x;
         pos.y = gameObject.GetComponent<RectTransform>().rect.position.y;
+
+        // Message_Top 연결
+        msg_top = Message_Move.FindChildObject(GameObject.Find("UI"), "Message_Top");
+        tmp = msg_top.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
     /// <summary>
@@ -76,10 +83,25 @@ public class Tile : MonoBehaviour
                 cost = (Math.Abs(Player.i - i) + Math.Abs(Player.j - j)) * cost;
             }
 
-            Player.action -= cost;
+            if (Player.action >= cost)
+            {
+                Player.action -= cost;
 
-            StartCoroutine(Player.CorMove(i, j));
+                StartCoroutine(Player.CorMove(i, j));
+            }
+            else
+            {
+                StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+            }
         }
+    }
+
+    private IEnumerator OnMsgTop(string msg, float seconds)
+    {
+        msg_top.SetActive(true);
+        tmp.text = msg;
+        yield return new WaitForSeconds(seconds);
+        msg_top.SetActive(false);
     }
 
     /// <summary>
@@ -99,8 +121,15 @@ public class Tile : MonoBehaviour
                     Tile.origins.Clear();
                     Tile.isTileOn = false;
 
-                    Player.action -= GameManager.cost_Attack;
-                    mob.HP -= CalcDamage(GameManager.damage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
+                    if (Player.action >= GameManager.cost_Attack)
+                    {
+                        Player.action -= GameManager.cost_Attack;
+                        mob.HP -= CalcDamage(GameManager.damage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
+                    }
+                    else
+                    {
+                        StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+                    }
                 }
             }
         }
@@ -118,15 +147,21 @@ public class Tile : MonoBehaviour
                 // 터치한 타일에 적이 존재한다면 공격
                 if (mob.i == this.i && mob.j == this.j)
                 {
-                    StartCoroutine(CorMeteor());
-
-                    Player.action -= GameManager.cost_Skill;
-                    mob.HP -= GameManager.damage_Char;
-
                     for (int n = 0; n < Tile.tiles.Count; n++) { Tile.tiles[n].sprite = Tile.origins[n]; }
                     Tile.tiles.Clear();
                     Tile.origins.Clear();
                     Tile.isTileOn = false;
+
+                    if (Player.action >= GameManager.cost_Skill)
+                    {
+                        StartCoroutine(CorMeteor());
+                        Player.action -= GameManager.cost_Skill;
+                        mob.HP -= GameManager.damage_Char;
+                    }
+                    else
+                    {
+                        StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+                    }
                 }
             }
         }
