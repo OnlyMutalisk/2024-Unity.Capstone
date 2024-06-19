@@ -14,11 +14,17 @@ public static class GameManager
     public enum PlayerAction { Move, Attack, Skill };
     public static PlayerAction playerAction = PlayerAction.Move;
     public static Dictionary<string, string> tileProperty = new Dictionary<string, string>();
+    public static Dictionary<string, string> propertyCounterMatch = new Dictionary<string, string>();
+
+    // 딜레이 및 속도를 관리합니다.
+    public static float speed_Char = 2f;
+    public static float speed_Mob = 1.5f;
+    public static float delay_loading = 3f;
+    public static float delay_mobMove = 0.2f;
 
     // 캐릭터의 스텟을 조정합니다.
-    public static float speed_Char = 1f;
     public static int action_Char = 10;
-    public static float damage_Char = 1;
+    public static float damage_Char = 5;
     public static int attackDistance_Char = 1;
     public static int skillDistance_Char = 3;
     public static int Life_Char = 10;
@@ -61,7 +67,6 @@ public static class GameManager
     // Message_Top
     public static string msg_turn = "It's the opponent's turn...";
     public static string msg_loading = "Loading Map....";
-    public static float delay_loading = 5f;
 
     // Message_Move
     public static string msg_Pawn = "타일 당 소요 행동력 : " + cost_Pawn;
@@ -71,13 +76,21 @@ public static class GameManager
     public static string msg_Attack = "공격 소요 행동력 : " + cost_Attack;
     public static string msg_Skill = "스킬 소요 행동력 : " + cost_Skill;
 
+    // 타일 상성 보너스 데미지 상수 입니다.
+    public static float propertyBonus = 2f;
+
     static GameManager()
     {
+        // 여기에 타일 상성을 추가합니다. 전자가 상성 우위입니다.
+        propertyCounterMatch.Add("Tile_Forest", "Tile_Water");
+        propertyCounterMatch.Add("Tile_Water", "Tile_Ground");
+        propertyCounterMatch.Add("Tile_Ground", "Tile_Forest");
+
         tileProperty.Add("Tile_Empty", "빈 타일");
         tileProperty.Add("Tile_Normal", "일반 타일");
-        tileProperty.Add("Tile_Forest", "숲 타일 (물 타일 추가 피해 +50%)");
-        tileProperty.Add("Tile_Water", "물 타일 (땅 타일 추가 피해 +50%)");
-        tileProperty.Add("Tile_Ground", "땅 타일 (숲 타일 추가 피해 +50%)");
+        tileProperty.Add("Tile_Forest", "숲 (물 타일 추가 피해 x2)");
+        tileProperty.Add("Tile_Water", "물 (땅 타일 추가 피해 x2)");
+        tileProperty.Add("Tile_Ground", "땅 (숲 타일 추가 피해 x2)");
         tileProperty.Add("Tile_Select", "이동 가능한 타일");
         tileProperty.Add("Tile_Select_Attack", "공격 범위 내 타일");
         tileProperty.Add("Tile_Select_Skill", "스킬 범위 내 타일");

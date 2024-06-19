@@ -67,7 +67,7 @@ public class Mob : MonoBehaviour
 
         List<Tile> path = A_Star.PathFind(Grid.GetTile(i, j).GetComponent<Tile>(), rangeType);
 
-        while (action > 0 && isSleep == false)
+        while (action > Mathf.Min(moveCost, attackCost) && isSleep == false)
         {
             // 공격범위 안이면 공격 후 현재 문 탈출, 체비쇼프 거리
             if (Mathf.Max(Mathf.Abs(i - Player.i), Mathf.Abs(j - Player.j)) <= range)
@@ -85,6 +85,7 @@ public class Mob : MonoBehaviour
                 int j = path[0].j;
                 path.Remove(path[0]);
                 yield return StartCoroutine(CorMove(i, j));
+                yield return new WaitForSeconds(GameManager.delay_mobMove);
             }
             else { break; }
         }
@@ -95,8 +96,8 @@ public class Mob : MonoBehaviour
         int origin_i = i;
         int origin_j = j;
 
+        Player.Life -= (int)Tile.CalcDamage(damage, Grid.GetTile(i, j), Grid.GetTile(Player.i, Player.j));
         yield return StartCoroutine(CorMove(Player.i, Player.j));
-        Player.Life -= damage;
         DrawLife();
         yield return StartCoroutine(CorMove(origin_i, origin_j));
     }
@@ -119,7 +120,7 @@ public class Mob : MonoBehaviour
 
         while (gameObject.transform.position != target)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, GameManager.speed_Char);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, GameManager.speed_Mob);
             yield return new WaitForSeconds(0.01f);
         }
     }

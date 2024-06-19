@@ -19,6 +19,9 @@ public class Map : MonoBehaviour
     {
         ColorToTile.Add("FFA162D0", "Tile_Empty");
         ColorToTile.Add("FFFDE7FB", "Tile_Normal");
+        ColorToTile.Add("FF6ED749", "Tile_Forest");
+        ColorToTile.Add("FF3FCDFF", "Tile_Water");
+        ColorToTile.Add("FF744A0C", "Tile_Ground");
 
         TextToUnit.Add("U", user);
         TextToUnit.Add("P", pawn);
@@ -44,6 +47,17 @@ public class Map : MonoBehaviour
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                 int rows = Grid.i + 1;
                 int columns = Grid.j + 1;
+
+                for (int row = 2; row <= rows; row++)
+                {
+                    for (int col = 2; col <= columns; col++)
+                    {
+                        ExcelRange cell = worksheet.Cells[row, col];
+                        var cellValue = cell.Text;
+                        var cellColor = cell.Style.Fill.BackgroundColor;
+                        Debug.Log($"Cell ({row - 1}, {col - 1}) Value: {cellValue}, Color: {cellColor.Rgb}");
+                    }
+                }
 
                 for (int row = 2; row <= rows; row++)
                 {

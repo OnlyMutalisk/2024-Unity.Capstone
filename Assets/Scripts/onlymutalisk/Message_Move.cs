@@ -93,8 +93,6 @@ public class Message_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             SetMsgPosition(gameObject, 0, 30);
             msg_move.SetActive(true);
         }
-
-        Debug.Log("Button Pressed");
     }
 
     /// <summary>
@@ -104,7 +102,6 @@ public class Message_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         if (visionTemp != null) { visionTemp.SetActive(false); }
         msg_move.SetActive(false);
-        Debug.Log("Button Released");
     }
 
     /// <summary>

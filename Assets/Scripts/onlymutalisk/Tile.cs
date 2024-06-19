@@ -94,13 +94,13 @@ public class Tile : MonoBehaviour
                 // 터치한 타일에 적이 존재한다면 공격
                 if (mob.i == this.i && mob.j == this.j)
                 {
-                    Player.action -= GameManager.cost_Attack;
-                    mob.HP -= GameManager.damage_Char;
-
                     for (int n = 0; n < Tile.tiles.Count; n++) { Tile.tiles[n].sprite = Tile.origins[n]; }
                     Tile.tiles.Clear();
                     Tile.origins.Clear();
                     Tile.isTileOn = false;
+
+                    Player.action -= GameManager.cost_Attack;
+                    mob.HP -= CalcDamage(GameManager.damage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
                 }
             }
         }
@@ -188,4 +188,31 @@ public class Tile : MonoBehaviour
             tiles.Add(tile.GetComponent<Image>());
         }
     }
+
+    /// <summary>
+    /// 타일 속성에 따라 데미지에 가중치를 부여합니다.
+    /// </summary>
+    public static float CalcDamage(float damage, GameObject attacker, GameObject target)
+    {
+        Tile attackerTile = attacker.GetComponent<Tile>();
+        Tile targetTile = target.GetComponent<Tile>();
+
+        string property_attacker = attackerTile.gameObject.GetComponent<Image>().sprite.name;
+        string property_target = targetTile.gameObject.GetComponent<Image>().sprite.name;
+
+        foreach (KeyValuePair<string, string> property in GameManager.propertyCounterMatch)
+        {
+            if (property_attacker == property.Key && property_target == property.Value)
+            {
+                damage *= GameManager.propertyBonus;
+            }
+        }
+
+        return damage;
+    }
+
+    // 타일 상성을 관리합니다. 전자가 상성 우위입니다.
+    public static float forest_water = 2f;
+    public static float water_ground = 2f;
+    public static float ground_forest = 2f;
 }
