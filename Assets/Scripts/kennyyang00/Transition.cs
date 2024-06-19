@@ -2,12 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class Transition : MonoBehaviour
 {
     public Animator transition;
     public GameObject Cover;
+    public TMP_Text ChapterNum;
+    public TMP_Text ChapterDesc;
 
+    void Awake()
+    {
+        int CurrentChapter = 1;    // 이 1 대신에 GameManager에서 저장된 chapter값 불러옴
+        ChapterNum.SetText("Chapter " + CurrentChapter.ToString());
+        if (CurrentChapter == 1)
+        {
+            ChapterDesc.SetText("This is Chapter 1 Desc");
+        }
+    }
     void Update()
     {
         if(Input.GetMouseButtonDown(0))
@@ -30,4 +43,7 @@ public class Transition : MonoBehaviour
         yield return new WaitForSeconds(1);  //애니메이션 진행시간
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+
+
 }
