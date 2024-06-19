@@ -124,7 +124,9 @@ public class Tile : MonoBehaviour
                     if (Player.action >= GameManager.cost_Attack)
                     {
                         Player.action -= GameManager.cost_Attack;
-                        mob.HP -= CalcDamage(GameManager.damage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
+                        mob.HP -= CalcDamage(GameManager.attackDamage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
+                        if (mob.HP <= 0) { KillMob(mob); }
+                        break;
                     }
                     else
                     {
@@ -156,7 +158,10 @@ public class Tile : MonoBehaviour
                     {
                         StartCoroutine(CorMeteor());
                         Player.action -= GameManager.cost_Skill;
-                        mob.HP -= GameManager.damage_Char;
+                        mob.HP -= GameManager.skillDamage_Char;
+                        mob.isSleep = false;
+                        if (mob.HP <= 0) { KillMob(mob); }
+                        break;
                     }
                     else
                     {
@@ -246,8 +251,13 @@ public class Tile : MonoBehaviour
         return damage;
     }
 
-    // 타일 상성을 관리합니다. 전자가 상성 우위입니다.
-    public static float forest_water = 2f;
-    public static float water_ground = 2f;
-    public static float ground_forest = 2f;
+    /// <summary>
+    /// 몬스터를 제거합니다.
+    /// </summary>
+    private void KillMob(Mob mob)
+    {
+        Grid.GetTile(mob.i, mob.j).GetComponent<Tile>().isWall = false;
+        Mob.Mobs.Remove(mob);
+        Destroy(mob.gameObject);
+    }
 }

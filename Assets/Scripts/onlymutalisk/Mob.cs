@@ -33,6 +33,7 @@ public class Mob : MonoBehaviour
     public Image Action_Image;
     public TextMeshProUGUI Action_Text;
     public GameObject Zzz;
+    public GameObject WakeUp;
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
 
     private void Start()
@@ -55,8 +56,8 @@ public class Mob : MonoBehaviour
         // 체력 바를 갱신합니다.
         HP_slider.value = HP / HP_max;
 
-        // 몬스터가 깨어나면, Zzz 애니메이션을 비활성화 합니다.
-        if (isSleep == false) { Zzz.SetActive(false); }
+        // 몬스터가 깨어나면, Zzz 애니메이션을 비활성화 하고 WakeUp 애니메이션을 활성화합니다.
+        if (isSleep == false) { Zzz.SetActive(false); WakeUp.SetActive(true); }
 
         UpdateAction();
     }

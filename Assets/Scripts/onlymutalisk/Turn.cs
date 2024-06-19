@@ -7,6 +7,8 @@ public class Turn : MonoBehaviour
 {
     public GameObject msg_top;
     public TextMeshProUGUI tmp;
+    public GameObject lose;
+    public GameObject win;
     public GameObject[] controller;
     public static bool isMyTurn = true;
     private bool isStart = true;
@@ -15,6 +17,18 @@ public class Turn : MonoBehaviour
     {
         if (isStart == true) { isStart = false; StartCoroutine(UnitLoad()); }
         if (Player.action <= 0) { Player.action = Player.maxAction; StartCoroutine(EnemyTurn()); }
+        if (Player.Life <= 0) { Lose(); }
+        if (Mob.Mobs.Count == 0) { Win(); }
+    }
+
+    private void Win()
+    {
+        win.SetActive(true);
+    }
+
+    private void Lose()
+    {
+        lose.SetActive(true);
     }
 
     public IEnumerator UnitLoad()
