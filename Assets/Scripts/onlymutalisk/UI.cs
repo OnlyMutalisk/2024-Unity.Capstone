@@ -12,9 +12,14 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI Action_Text;
     public Image Action_Image;
     public GameObject Message;
+    public GameObject win;
+    public GameObject lose;
 
     private void Update()
     {
+        if (Mob.Mobs.Count > 0) { win.SetActive(false); }
+        if (Player.Life > 0) { lose.SetActive(false); }
+
         UpdateAction();
     }
 
