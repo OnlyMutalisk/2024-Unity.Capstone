@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Packages/EPPlus.7.1.3/EPPlusLogo.png.meta
-guid: e70518fa22d07c349bf0ad29f11d61b9
-========
-guid: ad4416ae4481fe6469eea5e97fcf6c6e
->>>>>>>> dfb0528f53216a2282dcc40e8eb748350407cac3:Assets/Resources/Images/Button.png.meta
+guid: 259c47e4687349549981a5d6b8ebff02
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
