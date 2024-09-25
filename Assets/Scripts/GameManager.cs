@@ -14,6 +14,12 @@ public static class GameManager
     public static Dictionary<string, string> tileProperty = new Dictionary<string, string>();
     public static Dictionary<string, string> propertyCounterMatch = new Dictionary<string, string>();
 
+    // 전장의 안개 (Fog) 를 관리합니다. (밝음 0 ~ 1 어두움)
+    public static int visionRange = 2;
+    public static float Gamma_unvisited = 1f;
+    public static float Gamma_vision = 0f;
+    public static float Gamma_visited = 0.8f;
+
     // 딜레이 및 속도를 관리합니다.
     public static float speed_Char = 2f;
     public static float speed_Mob = 1.5f;
