@@ -16,13 +16,14 @@ public class Player : MonoBehaviour
     public static bool isMove;
     public static int maxAction;
     public static int action;
-    public static int Life;
+    public static int life;
+    public static int shield = 0;
 
     private void Awake()
     {
         maxAction = GameManager.action_Char;
         action = GameManager.action_Char;
-        Life = GameManager.Life_Char;
+        life = GameManager.Life_Char;
 
         pos = transform;
         i = (Grid.i / 2) + 1;

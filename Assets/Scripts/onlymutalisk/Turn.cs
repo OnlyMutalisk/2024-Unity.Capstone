@@ -22,7 +22,7 @@ public class Turn : MonoBehaviour
     {
         if (isStart == true) { isStart = false; StartCoroutine(UnitLoad()); }
         if (Player.action <= 0) { Player.action = Player.maxAction; StartCoroutine(EnemyTurn()); }
-        if (Player.Life <= 0) { Lose(); }
+        if (Player.life <= 0) { Lose(); }
         if (Mob.Mobs.Count == 0) { Win(); }
     }
 

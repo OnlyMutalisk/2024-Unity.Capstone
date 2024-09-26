@@ -26,23 +26,34 @@ public class Mob : MonoBehaviour
     public bool isSleep = true;
     public GameObject vision;
     private GameObject life;
+    private GameObject shield;
     public Image Action_Image;
     public TextMeshProUGUI Action_Text;
     public GameObject Zzz;
     public GameObject WakeUp;
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
+    private List<UnityEngine.UI.Image> shields = new List<UnityEngine.UI.Image>();
+    private static List<UnityEngine.UI.Image> s_hearts = new List<UnityEngine.UI.Image>();
+    private static List<UnityEngine.UI.Image> s_shields = new List<UnityEngine.UI.Image>();
 
     private void Awake()
     {
         Mobs = new List<Mob>();
+        s_hearts = hearts;
+        s_shields = shields;
     }
 
     private void Start()
     {
         // Life UI 를 가져옵니다.
         life = GameObject.Find("Life");
-        int count = life.transform.childCount;
-        for (int i = 0; i < count; i++) { hearts.Add(life.transform.GetChild(i).gameObject.GetComponent<UnityEngine.UI.Image>()); }
+        int heartCount = life.transform.childCount;
+        for (int i = 0; i < heartCount; i++) { hearts.Add(life.transform.GetChild(i).gameObject.GetComponent<UnityEngine.UI.Image>()); }
+
+        // Shield UI 를 가져옵니다.
+        shield = GameObject.Find("Shield");
+        int shieldCount = shield.transform.childCount;
+        for (int i = 0; i < shieldCount; i++) { shields.Add(shield.transform.GetChild(i).gameObject.GetComponent<UnityEngine.UI.Image>()); }
 
         // Vision 사이즈를 조절한 후 SetActive(false) 합니다.
         float offset = Grid.cellSize * (visionRange * 2 + 1) + Grid.spacing * (visionRange * 2);
@@ -104,7 +115,20 @@ public class Mob : MonoBehaviour
         int origin_i = i;
         int origin_j = j;
 
-        Player.Life -= (int)Tile.CalcDamage(damage, Grid.GetTile(i, j), Grid.GetTile(Player.i, Player.j));
+        int calcDamage = (int)Tile.CalcDamage(damage, Grid.GetTile(i, j), Grid.GetTile(Player.i, Player.j));
+
+        // 실드를 우선 감소시키고 체력을 감소시킵니다.
+        if (Player.shield >= calcDamage)
+        {
+            Player.shield -= calcDamage;
+        }
+        else
+        {
+            calcDamage -= Player.shield;
+            Player.shield = 0;
+            Player.life -= calcDamage;
+        }
+
         yield return StartCoroutine(CorMove(Player.i, Player.j));
         DrawLife();
         yield return StartCoroutine(CorMove(origin_i, origin_j));
@@ -133,14 +157,17 @@ public class Mob : MonoBehaviour
         }
     }
 
-    private void DrawLife()
+    public static void DrawLife()
     {
-        int lifeCopy = Player.Life;
+        // 체력을 그립니다.
+        int lifeCopy = Player.life;
 
-        foreach (var heart in hearts) { heart.sprite = Resources.Load<Sprite>("Images/Heart_Empty"); }
+        foreach (var heart in s_hearts) { heart.sprite = Resources.Load<Sprite>("Images/Heart_Empty"); }
 
-        foreach (var heart in hearts)
+        foreach (var heart in s_hearts)
         {
+            if (lifeCopy == 0) { break; }
+
             if (heart.sprite.name == "Heart_Empty")
             {
                 heart.sprite = Resources.Load<Sprite>("Images/Heart_Half");
@@ -153,6 +180,30 @@ public class Mob : MonoBehaviour
                 heart.sprite = Resources.Load<Sprite>("Images/Heart");
                 lifeCopy--;
                 if (lifeCopy == 0) { break; }
+            }
+        }
+
+        // 실드를 그립니다.
+        int shieldCopy = Player.shield;
+
+        foreach (var shield in s_shields) { shield.sprite = Resources.Load<Sprite>("Images/Shield_Empty"); }
+
+        foreach (var shield in s_shields)
+        {
+            if (shieldCopy == 0) { break; }
+
+            if (shield.sprite.name == "Shield_Empty")
+            {
+                shield.sprite = Resources.Load<Sprite>("Images/Heart_Half");
+                shieldCopy--;
+                if (shieldCopy == 0) { break; }
+            }
+
+            if (shield.sprite.name == "Heart_Half")
+            {
+                shield.sprite = Resources.Load<Sprite>("Images/Heart");
+                shieldCopy--;
+                if (shieldCopy == 0) { break; }
             }
         }
     }

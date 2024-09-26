@@ -53,6 +53,17 @@ public class Item : MonoBehaviour
     /// </summary>
     public void Use()
     {
+        switch (sprite.name)
+        {
+            case "Item_Shield":
+                Shield();
+                break;
+        }
+    }
 
+    private void Shield()
+    {
+        Player.shield += 4;
+        Mob.DrawLife();
     }
 }
