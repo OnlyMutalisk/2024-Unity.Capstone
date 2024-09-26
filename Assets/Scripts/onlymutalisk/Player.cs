@@ -71,6 +71,8 @@ public class Player : MonoBehaviour
                 }
             }
 
+            Item.CheckGetItem();
+
             isMove = false;
         }
     }

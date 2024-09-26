@@ -9,9 +9,10 @@ public class Map : MonoBehaviour
 {
     public GameObject canvas; // 하이라키 오브젝트 연결
     public GameObject user; // 하이라키 오브젝트 연결
-    public GameObject pawn; // 프리팹
-    public GameObject knight; // 프리팹
-    public GameObject bishop; // 프리팹
+    public GameObject enemy_pawn; // 프리팹
+    public GameObject enemy_knight; // 프리팹
+    public GameObject enemy_bishop; // 프리팹
+    public GameObject item_shield; // 프리팹
     private Dictionary<string, string> ColorToTile = new Dictionary<string, string>();
     private Dictionary<string, GameObject> TextToUnit = new Dictionary<string, GameObject>();
 
@@ -24,9 +25,10 @@ public class Map : MonoBehaviour
         ColorToTile.Add("FF744A0C", "Tile_Ground");
 
         TextToUnit.Add("U", user);
-        TextToUnit.Add("P", pawn);
-        TextToUnit.Add("N", knight);
-        TextToUnit.Add("B", bishop);
+        TextToUnit.Add("E_P", enemy_pawn);
+        TextToUnit.Add("E_N", enemy_knight);
+        TextToUnit.Add("E_B", enemy_bishop);
+        TextToUnit.Add("I_S", item_shield);
 
         LoadMap("Map.xlsx");
     }
@@ -82,8 +84,11 @@ public class Map : MonoBehaviour
                             tile.GetComponent<Tile>().isWall = true;
                         }
 
+                        // 타일 위치로 유저 이동
+                        if (cellValue == "U") { StartCoroutine(Player.CorMove(row - 1, col - 1)); }
+
                         // 타일 위치에 몬스터 생성
-                        if (cellValue != "" && cellValue != "U")
+                        if (cellValue.StartsWith("E"))
                         {
                             GameObject mob = Instantiate(TextToUnit[cellValue], new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
                             Mob script = mob.GetComponent<Mob>();
@@ -92,8 +97,16 @@ public class Map : MonoBehaviour
                             StartCoroutine(script.CorMove(row - 1, col - 1));
                         }
 
-                        // 타일 위치로 유저 이동
-                        if (cellValue == "U") { StartCoroutine(Player.CorMove(row - 1, col - 1)); }
+                        // 타일 위치로 아이템 이동
+                        if (cellValue.StartsWith("I"))
+                        {
+                            GameObject item = Instantiate(TextToUnit[cellValue], new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
+                            Item script = item.GetComponent<Item>();
+                            Item.Items.Add(script);
+                            script.i = (Grid.i / 2) + 1;
+                            script.j = (Grid.j / 2) + 1;
+                            StartCoroutine(script.CorMove(row - 1, col - 1));
+                        }
                     }
                 }
             }
