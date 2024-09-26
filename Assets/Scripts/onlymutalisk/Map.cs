@@ -102,6 +102,7 @@ public class Map : MonoBehaviour
                         {
                             GameObject item = Instantiate(TextToUnit[cellValue], new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
                             Item script = item.GetComponent<Item>();
+                            script.sprite = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
                             Item.Items.Add(script);
                             script.i = (Grid.i / 2) + 1;
                             script.j = (Grid.j / 2) + 1;

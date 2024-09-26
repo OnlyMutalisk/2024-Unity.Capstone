@@ -7,6 +7,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public static List<Item> Items = new List<Item>();
+    public Sprite sprite; // 인스턴스화 시 할당됨
     public int i;
     public int j;
 
@@ -39,7 +40,7 @@ public class Item : MonoBehaviour
         {
             if (Player.i == item.i && Player.j == item.j)
             {
-                Inventory.InvItems.Add(item);
+                Inventory.GetItem(item);
                 Items.Remove(item);
                 Destroy(item.gameObject);
                 break;
@@ -50,7 +51,7 @@ public class Item : MonoBehaviour
     /// <summary>
     /// 아이템을 사용합니다.
     /// </summary>
-    public void UseItem()
+    public void Use()
     {
 
     }
