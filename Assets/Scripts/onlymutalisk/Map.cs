@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using OfficeOpenXml;
@@ -13,6 +14,7 @@ public class Map : MonoBehaviour
     public GameObject enemy_knight; // 프리팹
     public GameObject enemy_bishop; // 프리팹
     public GameObject item_shield; // 프리팹
+    public static int index;
     private Dictionary<string, string> ColorToTile = new Dictionary<string, string>();
     private Dictionary<string, GameObject> TextToUnit = new Dictionary<string, GameObject>();
 
@@ -30,13 +32,13 @@ public class Map : MonoBehaviour
         TextToUnit.Add("E_B", enemy_bishop);
         TextToUnit.Add("I_S", item_shield);
 
-        LoadMap("Map.xlsx");
+        LoadMap("Map.xlsx", index);
     }
 
     /// <summary>
     /// Resources 폴더의 xlsx 파일을 읽어, 맵을 로드합니다.
     /// </summary>
-    private void LoadMap(string fileName)
+    private void LoadMap(string fileName, int index)
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
 
@@ -46,7 +48,7 @@ public class Map : MonoBehaviour
 
             using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[index];
                 int rows = Grid.i + 1;
                 int columns = Grid.j + 1;
 
