@@ -9,7 +9,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Tiled
   - Water
   - UI
   - Cover
@@ -42,6 +42,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Map
-    uniqueID: 3436209817
+  - name: BackGround
+    uniqueID: 1629861269
+    locked: 0
+  - name: Canvas
+    uniqueID: 1378851757
+    locked: 0
+  - name: Entity
+    uniqueID: 3044689579
+    locked: 0
+  - name: ForeGround
+    uniqueID: 3444767227
+    locked: 0
+  - name: UI
+    uniqueID: 2946417607
     locked: 0

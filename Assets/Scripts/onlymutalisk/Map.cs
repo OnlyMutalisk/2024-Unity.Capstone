@@ -76,13 +76,13 @@ public class Map : MonoBehaviour
                         // 16진수 컬러 값에 따라 타일의 감마, 스프라이트 교체
                         GameObject tile = Grid.GetTile(row - 1, col - 1);
                         Image img = tile.GetComponent<Image>();
-                        img.color = new UnityEngine.Color(255, 255, 255, 1);
+                        img.color = new UnityEngine.Color(255, 255, 255, GameManager.Gamma_Tile);
                         img.sprite = Resources.Load<Sprite>("Images/" + ColorToTile[cellColor.Rgb]);
 
                         // Tile_Empty 처리
                         if (ColorToTile[cellColor.Rgb] == "Tile_Empty")
                         {
-                            img.color = new UnityEngine.Color(255, 255, 255, 0.031f);
+                            img.color = new UnityEngine.Color(255, 255, 255, GameManager.Gamma_Tile_Empty);
                             tile.GetComponent<Tile>().isWall = true;
                         }
 
