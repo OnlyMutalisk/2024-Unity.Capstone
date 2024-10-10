@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: e95fb1eb7b41af141a2c3cd4e82afd3b
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: cc34d0f3dc257a442819830b408c5322, type: 3}
+  missingFiles:
+  - ../../Tilesets/Tileset-Terrain-new grass - transparency.png
+  errors:
+  - 'Missing texture asset: ../../Tilesets/Tileset-Terrain-new grass - transparency.png'
+  warnings: []
+  missingSortingLayers: []
+  missingLayers: []
+  missingTags: []
+  importerVersion: 13
+  pixelsPerUnit: 100
+  edgesPerEllipse: 32
+  numberOfObjectsImported: 2
+  useSpriteAtlas: 1
+  atlasWidth: 2048
+  atlasHeight: 2048
