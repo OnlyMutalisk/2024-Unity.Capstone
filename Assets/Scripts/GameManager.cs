@@ -21,7 +21,7 @@ public static class GameManager
     public static float Gamma_visited = 0.8f;
 
     // 타일의 감마를 조절합니다.
-    public static float Gamma_Tile = 0.2f;
+    public static float Gamma_Tile = 1f;
     public static float Gamma_Tile_Empty = 0.031f;
 
     // 딜레이 및 속도를 관리합니다.

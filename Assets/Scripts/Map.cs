@@ -4,6 +4,7 @@ using System.IO;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 
 public class Map : MonoBehaviour

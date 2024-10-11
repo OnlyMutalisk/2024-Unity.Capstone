@@ -1,13 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.UI.Image;
 
+public enum MoveStyle : int
+{
+    Default,
+    Pawn,
+    Knight,
+    Bishop,
+    Rook,
+    None
+}
+
 public class Move : MonoBehaviour
 {
     private Sprite select;
+    private MoveStyle lastMove = MoveStyle.Default;
 
     private void Start()
     {
@@ -21,6 +33,7 @@ public class Move : MonoBehaviour
         if (Tile.isTileOn == false)
         {
             Tile.isTileOn = true;
+            lastMove = MoveStyle.Pawn;
 
             Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j));
             Tile.origins.Add(Tile.tiles[0].sprite);
@@ -39,6 +52,8 @@ public class Move : MonoBehaviour
 
             Tile.tiles.Clear();
             Tile.origins.Clear();
+
+            if (lastMove != MoveStyle.Default && lastMove != MoveStyle.Pawn) { Pawn(); }
         }
     }
 
@@ -49,6 +64,7 @@ public class Move : MonoBehaviour
         if (Tile.isTileOn == false)
         {
             Tile.isTileOn = true;
+            lastMove = MoveStyle.Knight;
 
             Tile.AddTileImages(Grid.GetTile(Player.i - 2, Player.j - 1));
             Tile.AddTileImages(Grid.GetTile(Player.i - 2, Player.j + 1));
@@ -78,6 +94,8 @@ public class Move : MonoBehaviour
 
             Tile.tiles.Clear();
             Tile.origins.Clear();
+
+            if (lastMove != MoveStyle.Default && lastMove != MoveStyle.Knight) { Knight(); }
         }
     }
 
@@ -89,6 +107,7 @@ public class Move : MonoBehaviour
         if (Tile.isTileOn == false)
         {
             Tile.isTileOn = true;
+            lastMove = MoveStyle.Bishop;
 
             for (int n = 1; n <= range; n++)
             {
@@ -133,6 +152,8 @@ public class Move : MonoBehaviour
 
             Tile.tiles.Clear();
             Tile.origins.Clear();
+
+            if (lastMove != MoveStyle.Default && lastMove != MoveStyle.Bishop) { Bishop(); }
         }
     }
 
@@ -144,6 +165,7 @@ public class Move : MonoBehaviour
         if (Tile.isTileOn == false)
         {
             Tile.isTileOn = true;
+            lastMove = MoveStyle.Rook;
 
             for (int n = 1; n <= range; n++)
             {
@@ -188,6 +210,8 @@ public class Move : MonoBehaviour
 
             Tile.tiles.Clear();
             Tile.origins.Clear();
+
+            if (lastMove != MoveStyle.Default && lastMove != MoveStyle.Rook) { Rook(); }
         }
     }
 }
