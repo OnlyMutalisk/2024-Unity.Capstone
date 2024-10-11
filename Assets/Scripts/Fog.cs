@@ -77,23 +77,24 @@ public class Fog : MonoBehaviour
         {
             for (int j = -visionRange; j <= visionRange; j++)
             {
-                try
+                // 타일이 맵 안쪽일 경우에만 리스트에 담습니다.
+                if (Player.i + i <= Grid.i && Player.j + j <= Grid.j == true)
                 {
                     visitedfogs.Add(Grid.GetTile(Player.i + i, Player.j + j).transform.GetChild(0).GetComponent<SpriteRenderer>());
                 }
-                // 타일이 맵을 벗어난 경우입니다.
-                catch (System.Exception)
-                {
-                    throw;
-                }
             }
         }
-        
+
         // 시야범위의 모퉁이를 다듬습니다.
-        visitedfogs.Remove(Grid.GetTile(Player.i + visionRange, Player.j + visionRange).transform.GetChild(0).GetComponent<SpriteRenderer>());
-        visitedfogs.Remove(Grid.GetTile(Player.i + visionRange, Player.j - visionRange).transform.GetChild(0).GetComponent<SpriteRenderer>());
-        visitedfogs.Remove(Grid.GetTile(Player.i - visionRange, Player.j + visionRange).transform.GetChild(0).GetComponent<SpriteRenderer>());
-        visitedfogs.Remove(Grid.GetTile(Player.i - visionRange, Player.j - visionRange).transform.GetChild(0).GetComponent<SpriteRenderer>());
+        if (Player.i + visionRange <= Grid.i && Player.j + visionRange <= Grid.j)
+            visitedfogs.Remove(Grid.GetTile(Player.i + visionRange, Player.j + visionRange).transform.GetChild(0).GetComponent<SpriteRenderer>());
+        if (Player.i + visionRange <= Grid.i && Player.j - visionRange <= Grid.j)
+            visitedfogs.Remove(Grid.GetTile(Player.i + visionRange, Player.j - visionRange).transform.GetChild(0).GetComponent<SpriteRenderer>());
+        if (Player.i - visionRange <= Grid.i && Player.j + visionRange <= Grid.j)
+            visitedfogs.Remove(Grid.GetTile(Player.i - visionRange, Player.j + visionRange).transform.GetChild(0).GetComponent<SpriteRenderer>());
+        if (Player.i - visionRange <= Grid.i && Player.j - visionRange <= Grid.j)
+            visitedfogs.Remove(Grid.GetTile(Player.i - visionRange, Player.j - visionRange).transform.GetChild(0).GetComponent<SpriteRenderer>());
+
 
         // 리스트의 fog (시야 내의 fog) 감마를 밝게 합니다.
         foreach (SpriteRenderer fog in visitedfogs)

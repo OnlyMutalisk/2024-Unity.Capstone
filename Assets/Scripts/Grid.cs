@@ -14,7 +14,7 @@ public class Grid : MonoBehaviour
 
     // 행의 개수 i, 열의 개수 j
     public static int i, j;
-        
+
     private void Awake()
     {
         Grid.obj = gameObject;
@@ -51,6 +51,15 @@ public class Grid : MonoBehaviour
     /// </summary>
     public static GameObject GetTile(int i, int j)
     {
-        return obj.transform.GetChild(ConvertArrayToIndex(i, j)).gameObject;
+        try
+        {
+            return obj.transform.GetChild(ConvertArrayToIndex(i, j)).gameObject;
+
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
     }
 }

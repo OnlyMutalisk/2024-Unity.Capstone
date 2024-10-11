@@ -54,6 +54,9 @@ TagManager:
   - name: ForeGround
     uniqueID: 3444767227
     locked: 0
+  - name: Fog
+    uniqueID: 348333061
+    locked: 0
   - name: UI
     uniqueID: 2946417607
     locked: 0
