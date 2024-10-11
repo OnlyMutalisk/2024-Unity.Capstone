@@ -6,8 +6,6 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 
-/RafaelMatos
-/[Aa]ssets/ETC
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
