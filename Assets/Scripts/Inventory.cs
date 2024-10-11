@@ -7,14 +7,18 @@ using Image = UnityEngine.UI.Image;
 public class Inventory : MonoBehaviour
 {
     public GameObject inv;
+    public Sprite emptySprite;
     public Image[] slots;
     public static Image[] s_slots;
     public static List<Item> InvItems = new List<Item>();
+    public static int lastSelectedSlot;
+    public static Sprite s_emptySprite;
     private static int maxItem;
 
     public void Start()
     {
         s_slots = slots;
+        s_emptySprite = emptySprite;
     }
 
     public static void GetItem(Item item)
@@ -35,7 +39,7 @@ public class Inventory : MonoBehaviour
 
     public void UseItem(int index)
     {
-        if (index < InvItems.Count)
+        if (index < InvItems.Count && index == lastSelectedSlot)
         {
             Item item = InvItems[index];
             item.Use();
@@ -43,6 +47,8 @@ public class Inventory : MonoBehaviour
 
             UpdateSlot();
         }
+
+        lastSelectedSlot = index;
     }
 
     /// <summary>
@@ -58,7 +64,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                s_slots[i].sprite = null;
+                s_slots[i].sprite = s_emptySprite;
             }
         }
     }
@@ -66,5 +72,6 @@ public class Inventory : MonoBehaviour
     public void InvOnOff()
     {
         inv.SetActive(!inv.active);
+        lastSelectedSlot = -1;
     }
 }
