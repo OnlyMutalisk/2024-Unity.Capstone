@@ -41,7 +41,8 @@ public class Tile : MonoBehaviour
 
         // Message_Top 연결
         msg_top = Message_Move.FindChildObject(GameObject.Find("UI"), "Message_Top");
-        tmp = msg_top.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+
+        tmp = msg_top.transform.Find("Location").Find("Panel").Find("Text").GetComponent<TextMeshProUGUI>();
     }
 
     /// <summary>
@@ -94,10 +95,13 @@ public class Tile : MonoBehaviour
 
     private IEnumerator OnMsgTop(string msg, float seconds)
     {
-        msg_top.SetActive(true);
-        tmp.text = msg;
-        yield return new WaitForSeconds(seconds);
-        msg_top.SetActive(false);
+        if (msg_top.active == false)
+        {
+            msg_top.SetActive(true);
+            tmp.text = msg;
+            yield return new WaitForSeconds(seconds);
+            msg_top.SetActive(false);
+        }
     }
 
     /// <summary>
