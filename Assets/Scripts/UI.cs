@@ -11,7 +11,12 @@ public class UI : MonoBehaviour
 {
     public TextMeshProUGUI Action_Text;
     public Image Action_Image;
-    public GameObject Message;
+    public GameObject Loading;
+
+    private void Start()
+    {
+        Loading.SetActive(true);
+    }
 
     private void Update()
     {
