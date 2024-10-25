@@ -194,14 +194,14 @@ public class Mob : MonoBehaviour
 
             if (shield.sprite.name == "Shield_Empty")
             {
-                shield.sprite = Resources.Load<Sprite>("Images/Heart_Half");
+                shield.sprite = Resources.Load<Sprite>("Images/Shield_Half");
                 shieldCopy--;
                 if (shieldCopy == 0) { break; }
             }
 
-            if (shield.sprite.name == "Heart_Half")
+            if (shield.sprite.name == "Shield_Half")
             {
-                shield.sprite = Resources.Load<Sprite>("Images/Heart");
+                shield.sprite = Resources.Load<Sprite>("Images/Shield");
                 shieldCopy--;
                 if (shieldCopy == 0) { break; }
             }
