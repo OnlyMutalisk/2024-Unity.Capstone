@@ -35,7 +35,9 @@ public class Move : MonoBehaviour
             Tile.isTileOn = true;
             lastMove = MoveStyle.Pawn;
 
-            Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j));
+            if (A_Star.CheckTile(Player.i - 1, Player.j) == true)
+                Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j));
+
             Tile.origins.Add(Tile.tiles[0].sprite);
             Tile.tiles[0].sprite = select;
 
@@ -66,14 +68,22 @@ public class Move : MonoBehaviour
             Tile.isTileOn = true;
             lastMove = MoveStyle.Knight;
 
-            Tile.AddTileImages(Grid.GetTile(Player.i - 2, Player.j - 1));
-            Tile.AddTileImages(Grid.GetTile(Player.i - 2, Player.j + 1));
-            Tile.AddTileImages(Grid.GetTile(Player.i + 2, Player.j - 1));
-            Tile.AddTileImages(Grid.GetTile(Player.i + 2, Player.j + 1));
-            Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j - 2));
-            Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j + 2));
-            Tile.AddTileImages(Grid.GetTile(Player.i + 1, Player.j - 2));
-            Tile.AddTileImages(Grid.GetTile(Player.i + 1, Player.j + 2));
+            if (A_Star.CheckTile(Player.i - 2, Player.j - 1) == true)
+                Tile.AddTileImages(Grid.GetTile(Player.i - 2, Player.j - 1));
+            if (A_Star.CheckTile(Player.i - 2, Player.j + 1) == true)
+                Tile.AddTileImages(Grid.GetTile(Player.i - 2, Player.j + 1));
+            if (A_Star.CheckTile(Player.i + 2, Player.j - 1) == true)
+                Tile.AddTileImages(Grid.GetTile(Player.i + 2, Player.j - 1));
+            if (A_Star.CheckTile(Player.i + 2, Player.j + 1) == true)
+                Tile.AddTileImages(Grid.GetTile(Player.i + 2, Player.j + 1));
+            if (A_Star.CheckTile(Player.i - 1, Player.j - 2) == true)
+                Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j - 2));
+            if (A_Star.CheckTile(Player.i - 1, Player.j + 2) == true)
+                Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j + 2));
+            if (A_Star.CheckTile(Player.i + 1, Player.j - 2) == true)
+                Tile.AddTileImages(Grid.GetTile(Player.i + 1, Player.j - 2));
+            if (A_Star.CheckTile(Player.i + 1, Player.j + 2) == true)
+                Tile.AddTileImages(Grid.GetTile(Player.i + 1, Player.j + 2));
 
             foreach (Image tile in Tile.tiles)
             {
@@ -103,7 +113,7 @@ public class Move : MonoBehaviour
     {
         GameManager.playerAction = GameManager.PlayerAction.Move;
         int range = Player.action / GameManager.cost_Bishop;
-        
+
         if (Tile.isTileOn == false)
         {
             Tile.isTileOn = true;

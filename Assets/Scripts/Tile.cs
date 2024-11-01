@@ -42,7 +42,7 @@ public class Tile : MonoBehaviour
         // Message_Top 연결
         msg_top = Message_Move.FindChildObject(GameObject.Find("UI"), "Message_Top");
 
-        tmp = msg_top.transform.Find("Location").Find("Panel").Find("Text").GetComponent<TextMeshProUGUI>();
+        tmp = msg_top.transform.Find("Location").Find("Text").GetComponent<TextMeshProUGUI>();
     }
 
     /// <summary>

@@ -11,6 +11,7 @@ public class Mob : MonoBehaviour
 {
     public UnityEngine.UI.Slider HP_slider;
     public static List<Mob> Mobs = new List<Mob>();
+    public static bool mobCounting = false;
     public virtual float HP { get; set; }
     public virtual float HP_max { get; set; }
     public virtual int i { get; set; }
@@ -61,6 +62,7 @@ public class Mob : MonoBehaviour
         vision.SetActive(false);
 
         Mobs.Add(this);
+        mobCounting = true;
     }
 
     private void Update()

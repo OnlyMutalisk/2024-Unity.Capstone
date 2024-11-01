@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
     public static List<Item> InvItems = new List<Item>();
     public static int lastSelectedSlot;
     public static Sprite s_emptySprite;
-    private static int maxItem;
+    private static int maxItem = 8;
 
     public void Start()
     {

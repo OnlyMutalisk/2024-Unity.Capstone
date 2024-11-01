@@ -59,9 +59,23 @@ public class Item : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 최대 실드량 보다 적다면, 실드를 회복합니다.
+    /// </summary>
     private void Shield()
     {
-        Player.shield += 4;
+        for (int i = 0; i < GameManager.recovery_shield; i++)
+        {
+            if (Player.shield < GameManager.shield_Char)
+            {
+                Player.shield++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
         Mob.DrawLife();
     }
 }

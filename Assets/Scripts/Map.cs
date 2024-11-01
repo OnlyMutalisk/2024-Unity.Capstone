@@ -15,6 +15,7 @@ public class Map : MonoBehaviour
     public GameObject enemy_knight; // 프리팹
     public GameObject enemy_bishop; // 프리팹
     public GameObject item_shield; // 프리팹
+    public GameObject tiled; // 프리팹
     public static int index;
     private Dictionary<string, string> ColorToTile = new Dictionary<string, string>();
     private Dictionary<string, GameObject> TextToUnit = new Dictionary<string, GameObject>();
@@ -37,13 +38,22 @@ public class Map : MonoBehaviour
     }
 
     /// <summary>
-    /// Resources 폴더의 xlsx 파일을 읽어, 맵을 로드합니다.
+    /// Map 을 로드합니다.
     /// </summary>
     private void LoadMap(string fileName, int index)
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
 
         if (File.Exists(filePath))
+        {
+            // 로컬 함수 입니다.
+            LoadExcel();
+            LoadTiled();
+        }
+        else { Debug.LogError(filePath + " 경로에 파일이 존재하지 않습니다."); }
+
+        // Resources 폴더의 xlsx 파일을 읽어와 Entity 를 로드합니다.
+        void LoadExcel()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
@@ -115,6 +125,21 @@ public class Map : MonoBehaviour
                 }
             }
         }
-        else { Debug.LogError(filePath + " 경로에 파일이 존재하지 않습니다."); }
+
+        // index 에 해당하는 타일맵을 활성화 합니다.
+        void LoadTiled()
+        {
+            for (int i = 0; i < tiled.transform.childCount; i++)
+            {
+                if (i == index)
+                {
+                    tiled.transform.GetChild(i).gameObject.SetActive(true);
+                }
+                else
+                {
+                    tiled.transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
     }
 }

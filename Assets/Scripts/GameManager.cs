@@ -38,6 +38,7 @@ public static class GameManager
     public static int attackDistance_Char = 1;
     public static int skillDistance_Char = 3;
     public static int Life_Char = 10;
+    public static int shield_Char = 4;
 
     // 캐릭터 행동력 비용입니다.
     public static int cost_Pawn = 1;
@@ -73,6 +74,9 @@ public static class GameManager
     public static int attackCost_Bishop = 1;
     public static int moveCost_Bishop = 1;
     public static int visionRange_Bishop = 2;
+
+    // Item_Shield 의 효과를 조정합니다.
+    public static int recovery_shield = 4;
 
     // Message_Top
     public static string msg_turn = "상대방의 턴 입니다...";
