@@ -126,6 +126,7 @@ public class Mob : MonoBehaviour
         }
         else
         {
+            Player.anim.SetBool("isHurt", true);
             calcDamage -= Player.shield;
             Player.shield = 0;
             Player.life -= calcDamage;

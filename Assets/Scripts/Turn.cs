@@ -33,6 +33,7 @@ public class Turn : MonoBehaviour
 
     private void Lose()
     {
+        Player.anim.SetBool("isDeath", true);
         lose.SetActive(true);
     }
 

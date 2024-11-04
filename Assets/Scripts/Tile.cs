@@ -116,6 +116,7 @@ public class Tile : MonoBehaviour
                 // 터치한 타일에 적이 존재한다면 공격
                 if (mob.i == this.i && mob.j == this.j)
                 {
+                    Player.anim.SetBool("isSwing1", true);
                     for (int n = 0; n < Tile.tiles.Count; n++) { Tile.tiles[n].sprite = Tile.origins[n]; }
                     Tile.tiles.Clear();
                     Tile.origins.Clear();

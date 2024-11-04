@@ -14,9 +14,11 @@ public class Player : MonoBehaviour
     public static int action;
     public static int life;
     public static int shield = 0;
+    public static Animator anim;
 
-    private void Awake()
+    private void Start()
     {
+        anim = GetComponent<Animator>();
         maxAction = GameManager.action_Char;
         action = GameManager.action_Char;
         life = GameManager.Life_Char;
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
     {
         if (isMove == false)
         {
+            Player.anim.SetBool("isRun", true);
             isMove = true;
             A_Star.SwitchWall(Player.i, Player.j);
             A_Star.SwitchWall(i, j);
@@ -70,6 +73,7 @@ public class Player : MonoBehaviour
 
             Item.CheckGetItem();
 
+            Player.anim.SetBool("isRun", false);
             isMove = false;
         }
     }
