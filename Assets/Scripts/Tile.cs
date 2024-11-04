@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -261,6 +262,30 @@ public class Tile : MonoBehaviour
         Grid.GetTile(mob.i, mob.j).GetComponent<Tile>().isWall = false;
         Mob.Mobs.Remove(mob);
         mob.anim.SetBool("isDeath", true);
+        StartCoroutine(CorMobDestroy(mob));
+    }
+
+    /// <summary>
+    /// 몬스터를 GameManager.delay_mobDestroy 동안 흐려지기 한 뒤 Destroy 합니다.
+    /// </summary>
+    private IEnumerator CorMobDestroy(Mob mob)
+    {
+        SpriteRenderer spr = mob.gameObject.transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        Color initialColor = spr.color;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < GameManager.delay_mobDestroy)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(initialColor.a, 0, elapsedTime / GameManager.delay_mobDestroy);
+
+            Color newColor = spr.color;
+            newColor.a = alpha;
+            spr.color = newColor;
+
+            yield return null;
+        }
+
         Destroy(mob.gameObject);
     }
 }

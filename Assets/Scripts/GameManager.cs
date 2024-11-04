@@ -30,6 +30,7 @@ public static class GameManager
     public static float delay_loading = 3f;
     public static float delay_mobMove = 0.2f;
     public static float delay_msgTopAction = 2f;
+    public static float delay_mobDestroy = 3f;
 
     // 캐릭터의 스텟을 조정합니다.
     public static int action_Char = 10;

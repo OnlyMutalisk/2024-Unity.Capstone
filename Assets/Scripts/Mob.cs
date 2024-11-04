@@ -73,7 +73,7 @@ public class Mob : MonoBehaviour
     private void Update()
     {
         // 체력 바를 갱신합니다.
-        HP_slider.value = HP / HP_max;
+        if (HP_slider.value > HP / HP_max) HP_slider.value -= (HP_max * 0.07f) * Time.deltaTime;
 
         // 몬스터가 깨어나면, Zzz 애니메이션을 비활성화 하고 WakeUp 애니메이션을 활성화합니다.
         if (isSleep == false) { Zzz.SetActive(false); WakeUp.SetActive(true); }
