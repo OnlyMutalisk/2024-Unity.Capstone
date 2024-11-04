@@ -9,13 +9,13 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-    public GameObject canvas; // 하이라키 오브젝트 연결
-    public GameObject user; // 하이라키 오브젝트 연결
-    public GameObject enemy_pawn; // 프리팹
-    public GameObject enemy_knight; // 프리팹
-    public GameObject enemy_bishop; // 프리팹
-    public GameObject item_shield; // 프리팹
-    public GameObject tiled; // 프리팹
+    public GameObject canvas;
+    public GameObject user;
+    public GameObject[] enemy_pawn;
+    public GameObject[] enemy_knight;
+    public GameObject[] enemy_bishop;
+    public GameObject item_shield;
+    public GameObject tiled;
     public static int index;
     private Dictionary<string, string> ColorToTile = new Dictionary<string, string>();
     private Dictionary<string, GameObject> TextToUnit = new Dictionary<string, GameObject>();
@@ -29,9 +29,9 @@ public class Map : MonoBehaviour
         ColorToTile.Add("FF744A0C", "Tile_Ground");
 
         TextToUnit.Add("U", user);
-        TextToUnit.Add("E_P", enemy_pawn);
-        TextToUnit.Add("E_N", enemy_knight);
-        TextToUnit.Add("E_B", enemy_bishop);
+        TextToUnit.Add("E_P", enemy_pawn[index]);
+        TextToUnit.Add("E_N", enemy_knight[index]);
+        TextToUnit.Add("E_B", enemy_bishop[index]);
         TextToUnit.Add("I_S", item_shield);
 
         LoadMap("Map.xlsx", index);

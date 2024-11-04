@@ -126,6 +126,7 @@ public class Tile : MonoBehaviour
                     {
                         Player.action -= GameManager.cost_Attack;
                         mob.HP -= CalcDamage(GameManager.attackDamage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
+                        mob.anim.SetBool("isHurt", true);
                         if (mob.HP <= 0) { KillMob(mob); }
                         break;
                     }
@@ -259,6 +260,7 @@ public class Tile : MonoBehaviour
     {
         Grid.GetTile(mob.i, mob.j).GetComponent<Tile>().isWall = false;
         Mob.Mobs.Remove(mob);
+        mob.anim.SetBool("isDeath", true);
         Destroy(mob.gameObject);
     }
 }

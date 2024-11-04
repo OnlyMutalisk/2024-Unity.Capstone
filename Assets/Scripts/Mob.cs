@@ -32,6 +32,7 @@ public class Mob : MonoBehaviour
     public TextMeshProUGUI Action_Text;
     public GameObject Zzz;
     public GameObject WakeUp;
+    public Animator anim;
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
     private List<UnityEngine.UI.Image> shields = new List<UnityEngine.UI.Image>();
     private static List<UnityEngine.UI.Image> s_hearts = new List<UnityEngine.UI.Image>();
@@ -61,6 +62,10 @@ public class Mob : MonoBehaviour
         vision.GetComponent<RectTransform>().sizeDelta = new Vector2(offset, offset);
         vision.SetActive(false);
 
+        // Animator 를 바인딩 합니다.
+        Transform sprite = transform.Find("Sprite");
+        anim = sprite.GetComponent<Animator>();
+
         Mobs.Add(this);
         mobCounting = true;
     }
@@ -81,8 +86,11 @@ public class Mob : MonoBehaviour
     /// </summary>
     public IEnumerator CorPlay()
     {
+        if (anim != null) anim.SetBool("isMove", true);
+
         // 시야범위 이내, 혹은 최대 체력이 아니면 활동 시작
         if (Mathf.Max(Mathf.Abs(i - Player.i), Mathf.Abs(j - Player.j)) <= visionRange | HP != HP_max) { isSleep = false; }
+        //if (anim != null) anim.SetBool("isMove", true);
 
         List<Tile> path = A_Star.PathFind(Grid.GetTile(i, j).GetComponent<Tile>(), rangeType);
 
@@ -91,8 +99,10 @@ public class Mob : MonoBehaviour
             // 공격범위 안이면 공격 후 현재 문 탈출, 체비쇼프 거리
             if (Mathf.Max(Mathf.Abs(i - Player.i), Mathf.Abs(j - Player.j)) <= range)
             {
+                if (anim != null) anim.SetBool("isAttack", true);
                 action -= attackCost;
                 yield return StartCoroutine(CorAttack());
+                if (anim != null) anim.SetBool("isAttack", false);
                 continue;
             }
 
@@ -109,24 +119,26 @@ public class Mob : MonoBehaviour
             else { break; }
         }
 
+        if (anim != null) anim.SetBool("isMove", false);
         action = maxAction;
     }
 
     public IEnumerator CorAttack()
     {
+
         int origin_i = i;
         int origin_j = j;
 
         int calcDamage = (int)Tile.CalcDamage(damage, Grid.GetTile(i, j), Grid.GetTile(Player.i, Player.j));
 
         // 실드를 우선 감소시키고 체력을 감소시킵니다.
+        Player.anim.SetBool("isHurt", true);
         if (Player.shield >= calcDamage)
         {
             Player.shield -= calcDamage;
         }
         else
         {
-            Player.anim.SetBool("isHurt", true);
             calcDamage -= Player.shield;
             Player.shield = 0;
             Player.life -= calcDamage;
