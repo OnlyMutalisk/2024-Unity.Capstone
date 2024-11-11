@@ -56,6 +56,7 @@ public class Map : MonoBehaviour
         void LoadExcel()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            Item.Items.Clear();
 
             using (var package = new ExcelPackage(new FileInfo(filePath)))
             {

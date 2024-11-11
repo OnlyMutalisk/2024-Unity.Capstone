@@ -28,6 +28,7 @@ public class Turn : MonoBehaviour
 
     private void Win()
     {
+        Stages.isOn[Map.index + 1] = true;
         win.SetActive(true);
     }
 
