@@ -62,7 +62,7 @@ public static class GameManager
     public static float HP_Knight = 10;
     public static int damage_Knight = 1;
     public static int action_Knight = 2;
-    public static int range_Knight = 1;
+    public static int range_Knight = 2;
     public static int attackCost_Knight = 1;
     public static int moveCost_Knight = 1;
     public static int visionRange_Knight = 3;

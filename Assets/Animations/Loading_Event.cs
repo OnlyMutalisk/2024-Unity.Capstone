@@ -8,4 +8,9 @@ public class Loading_Event : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public void StopAnimation()
+    {
+        transform.Find("Animation").gameObject.SetActive(false);
+    }
 }
