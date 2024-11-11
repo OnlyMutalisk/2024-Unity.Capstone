@@ -38,8 +38,14 @@ public class Move : MonoBehaviour
             if (A_Star.CheckTile(Player.i - 1, Player.j) == true)
                 Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j));
 
-            Tile.origins.Add(Tile.tiles[0].sprite);
-            Tile.tiles[0].sprite = select;
+            // Tile.origins.Add(Tile.tiles[0].sprite);
+            // Tile.tiles[0].sprite = select;
+
+            foreach (Image tile in Tile.tiles)
+            {
+                Tile.origins.Add(tile.sprite);
+                tile.sprite = select;
+            }
 
             Tile.cost = GameManager.cost_Pawn;
         }
