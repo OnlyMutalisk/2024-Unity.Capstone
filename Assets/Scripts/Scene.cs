@@ -11,8 +11,23 @@ public class Scene : MonoBehaviour
         Map.index = index;
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadMain()
     {
-        SceneManager.LoadScene(sceneName);
+        if (Tile.isTileOn == true) OffTile();
+
+        SceneManager.LoadScene("Main");
+
+        void OffTile()
+        {
+            Tile.isTileOn = false;
+
+            for (int i = 0; i < Tile.tiles.Count; i++)
+            {
+                Tile.tiles[i].sprite = Tile.origins[i];
+            }
+
+            Tile.tiles.Clear();
+            Tile.origins.Clear();
+        }
     }
 }

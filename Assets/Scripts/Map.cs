@@ -74,54 +74,71 @@ public class Map : MonoBehaviour
                     }
                 }
 
-                for (int row = 2; row <= rows; row++)
+                int row_debug = 0;
+                int column_debug = 0;
+                int index_debug = index;
+
+                try
                 {
-                    for (int col = 2; col <= columns; col++)
+                    for (int row = 2; row <= rows; row++)
                     {
-                        ExcelRange cell = worksheet.Cells[row, col];
-                        var cellValue = cell.Text;
-                        var cellColor = cell.Style.Fill.BackgroundColor;
-
-                        Debug.Log($"Cell ({row - 1}, {col - 1}) Value: {cellValue}, Color: {cellColor.Rgb}");
-
-                        // 16진수 컬러 값에 따라 타일의 감마, 스프라이트 교체
-                        GameObject tile = Grid.GetTile(row - 1, col - 1);
-                        Image img = tile.GetComponent<Image>();
-                        img.color = new UnityEngine.Color(255, 255, 255, GameManager.Gamma_Tile);
-                        img.sprite = Resources.Load<Sprite>("Images/" + ColorToTile[cellColor.Rgb]);
-
-                        // Tile_Empty 처리
-                        if (ColorToTile[cellColor.Rgb] == "Tile_Empty")
+                        for (int col = 2; col <= columns; col++)
                         {
-                            img.color = new UnityEngine.Color(255, 255, 255, GameManager.Gamma_Tile_Empty);
-                            tile.GetComponent<Tile>().isWall = true;
-                        }
+                            row_debug = row;
+                            column_debug = columns;
 
-                        // 타일 위치로 유저 이동
-                        if (cellValue == "U") { StartCoroutine(Player.CorMove(row - 1, col - 1)); }
+                            ExcelRange cell = worksheet.Cells[row, col];
+                            var cellValue = cell.Text;
+                            var cellColor = cell.Style.Fill.BackgroundColor;
 
-                        // 타일 위치에 몬스터 생성
-                        if (cellValue.StartsWith("E"))
-                        {
-                            GameObject mob = Instantiate(TextToUnit[cellValue], new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
-                            Mob script = mob.GetComponent<Mob>();
-                            script.i = (Grid.i / 2) + 1;
-                            script.j = (Grid.j / 2) + 1;
-                            StartCoroutine(script.CorMove(row - 1, col - 1));
-                        }
+                            Debug.Log($"Cell ({row - 1}, {col - 1}) Value: {cellValue}, Color: {cellColor.Rgb}");
 
-                        // 타일 위치로 아이템 이동
-                        if (cellValue.StartsWith("I"))
-                        {
-                            GameObject item = Instantiate(TextToUnit[cellValue], new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
-                            Item script = item.GetComponent<Item>();
-                            script.sprite = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
-                            Item.Items.Add(script);
-                            script.i = (Grid.i / 2) + 1;
-                            script.j = (Grid.j / 2) + 1;
-                            StartCoroutine(script.CorMove(row - 1, col - 1));
+                            // 16진수 컬러 값에 따라 타일의 감마, 스프라이트 교체
+                            GameObject tile = Grid.GetTile(row - 1, col - 1);
+                            Image img = tile.GetComponent<Image>();
+                            img.color = new UnityEngine.Color(255, 255, 255, GameManager.Gamma_Tile);
+                            img.sprite = Resources.Load<Sprite>("Images/" + ColorToTile[cellColor.Rgb]);
+
+                            // Tile_Empty 처리
+                            if (ColorToTile[cellColor.Rgb] == "Tile_Empty")
+                            {
+                                img.color = new UnityEngine.Color(255, 255, 255, GameManager.Gamma_Tile_Empty);
+                                tile.GetComponent<Tile>().isWall = true;
+                            }
+
+                            // 타일 위치로 유저 이동
+                            if (cellValue == "U") { StartCoroutine(Player.CorMove(row - 1, col - 1)); }
+
+                            // 타일 위치에 몬스터 생성
+                            if (cellValue.StartsWith("E"))
+                            {
+                                GameObject mob = Instantiate(TextToUnit[cellValue], new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
+                                Mob script = mob.GetComponent<Mob>();
+                                script.i = (Grid.i / 2) + 1;
+                                script.j = (Grid.j / 2) + 1;
+                                StartCoroutine(script.CorMove(row - 1, col - 1));
+                            }
+
+                            // 타일 위치로 아이템 이동
+                            if (cellValue.StartsWith("I"))
+                            {
+                                GameObject item = Instantiate(TextToUnit[cellValue], new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
+                                Item script = item.GetComponent<Item>();
+                                script.sprite = item.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+                                Item.Items.Add(script);
+                                script.i = (Grid.i / 2) + 1;
+                                script.j = (Grid.j / 2) + 1;
+                                StartCoroutine(script.CorMove(row - 1, col - 1));
+                            }
                         }
                     }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e.Message);
+                    Debug.Log(row_debug.ToString());
+                    Debug.Log(column_debug.ToString());
+                    Debug.Log(index_debug.ToString());
                 }
             }
         }

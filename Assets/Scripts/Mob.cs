@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +42,7 @@ public class Mob : MonoBehaviour
     private void Awake()
     {
         Mobs = new List<Mob>();
+        mobCounting = false;
         s_hearts = hearts;
         s_shields = shields;
     }
