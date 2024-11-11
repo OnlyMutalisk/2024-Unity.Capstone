@@ -7,23 +7,27 @@ public class Turn : MonoBehaviour
 {
     public GameObject msg_top;
     public TextMeshProUGUI tmp;
+    public TextMeshProUGUI turn;
     public GameObject lose;
     public GameObject win;
     public GameObject[] controller;
     public static bool isMyTurn = true;
     private bool isStart = true;
+    private int turns = 10;
 
     private void Awake()
     {
         isMyTurn = true;
+        turns = GameManager.turns[Map.index];
     }
 
     private void Update()
     {
         if (isStart == true) { isStart = false; StartCoroutine(UnitLoad()); }
         if (Player.action <= 0) { Player.action = Player.maxAction; StartCoroutine(EnemyTurn()); }
-        if (Player.life <= 0) { Lose(); }
+        if (Player.life <= 0 || turns == 0) { Lose(); }
         if (Mob.Mobs.Count == 0 && Mob.mobCounting == true) { Win(); }
+        turn.text = turns.ToString();
     }
 
     private void Win()
@@ -51,6 +55,7 @@ public class Turn : MonoBehaviour
         ControlOnOff(false);
         tmp.text = GameManager.msg_turn;
         isMyTurn = false;
+        turns--;
 
         foreach (var mob in Mob.Mobs)
         {

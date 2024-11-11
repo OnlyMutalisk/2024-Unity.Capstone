@@ -14,6 +14,17 @@ public static class GameManager
     public static Dictionary<string, string> tileProperty = new Dictionary<string, string>();
     public static Dictionary<string, string> propertyCounterMatch = new Dictionary<string, string>();
 
+    // 각 맵의 턴 제한 입니다.
+    public static int[] turns = new int[]
+    {
+        10, // map0
+        11, // map1
+        12, // map2
+        13, // map3
+        14, // map4
+        15, // map5
+    };
+
     // 전장의 안개 (Fog) 를 관리합니다. (밝음 0 ~ 1 어두움)
     public static int visionRange = 2;
     public static float Gamma_unvisited = 1f;
