@@ -127,8 +127,9 @@ public class Tile : MonoBehaviour
                     {
                         Player.action -= GameManager.cost_Attack;
                         mob.HP -= CalcDamage(GameManager.attackDamage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
-                        mob.anim.SetBool("isHurt", true);
+                        
                         if (mob.HP <= 0) { KillMob(mob); }
+                        else mob.anim.SetBool("isHurt", true);
                         break;
                     }
                     else

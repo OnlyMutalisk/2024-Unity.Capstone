@@ -88,8 +88,6 @@ public class Mob : MonoBehaviour
     /// </summary>
     public IEnumerator CorPlay()
     {
-        if (anim != null) anim.SetBool("isMove", true);
-
         // 시야범위 이내, 혹은 최대 체력이 아니면 활동 시작
         if (Mathf.Max(Mathf.Abs(i - Player.i), Mathf.Abs(j - Player.j)) <= visionRange | HP != HP_max) { isSleep = false; }
         //if (anim != null) anim.SetBool("isMove", true);
@@ -101,10 +99,8 @@ public class Mob : MonoBehaviour
             // 공격범위 안이면 공격 후 현재 문 탈출, 체비쇼프 거리
             if (Mathf.Max(Mathf.Abs(i - Player.i), Mathf.Abs(j - Player.j)) <= range)
             {
-                if (anim != null) anim.SetBool("isAttack", true);
                 action -= attackCost;
                 yield return StartCoroutine(CorAttack());
-                if (anim != null) anim.SetBool("isAttack", false);
                 continue;
             }
 
@@ -121,17 +117,20 @@ public class Mob : MonoBehaviour
             else { break; }
         }
 
-        if (anim != null) anim.SetBool("isMove", false);
         action = maxAction;
     }
 
     public IEnumerator CorAttack()
     {
+        if (anim != null) anim.SetBool("isAttack", true);
 
         int origin_i = i;
         int origin_j = j;
 
         int calcDamage = (int)Tile.CalcDamage(damage, Grid.GetTile(i, j), Grid.GetTile(Player.i, Player.j));
+
+        // 공격 애니메이션 길이 만큼 지연시킵니다.
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
         // 실드를 우선 감소시키고 체력을 감소시킵니다.
         Player.anim.SetBool("isHurt", true);
@@ -146,13 +145,15 @@ public class Mob : MonoBehaviour
             Player.life -= calcDamage;
         }
 
-        yield return StartCoroutine(CorMove(Player.i, Player.j));
         DrawLife();
-        yield return StartCoroutine(CorMove(origin_i, origin_j));
+
+        if (anim != null) anim.SetBool("isAttack", false);
     }
 
     public IEnumerator CorMove(int i, int j)
     {
+        if (anim != null) anim.SetBool("isMove", true);
+
         A_Star.SwitchWall(this.i, this.j);
         A_Star.SwitchWall(i, j);
 
@@ -172,6 +173,8 @@ public class Mob : MonoBehaviour
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, GameManager.speed_Mob);
             yield return new WaitForSeconds(0.01f);
         }
+
+        if (anim != null) anim.SetBool("isMove", false);
     }
 
     public static void DrawLife()
