@@ -24,7 +24,7 @@ public class A_Star : MonoBehaviour
     public static List<Tile> PathFind(Tile startTile, RangeType rangeType, int distance = 1)
     {
         // 유저를 공격할 수 있는 공격범위 내 타일을 타겟으로 지정
-        List<Tile> neighbortiles = GetNeighbortiles(Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), distance, RangeType.Chebyshev);
+        List<Tile> neighbortiles = GetNeighbortiles(Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), distance, RangeType.Manhattan);
 
         // 각 타겟으로의 최소 경로들을 저장
         List<List<Tile>> pathList = new List<List<Tile>>();
@@ -246,7 +246,7 @@ public class A_Star : MonoBehaviour
     /// <summary>
     /// <br>두 타일간의 거리를 반환합니다.</br>
     /// </summary>
-    private static int GetDistance(Tile a, Tile b, RangeType rangeType)
+    public static int GetDistance(Tile a, Tile b, RangeType rangeType)
     {
         switch (rangeType)
         {
