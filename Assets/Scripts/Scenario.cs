@@ -45,7 +45,6 @@ public class Scenario : MonoBehaviour
                 turn.SetActive(false);
                 inventory.SetActive(false);
                 vision.SetActive(false);
-                skill.SetActive(false);
                 knight.SetActive(false);
                 bishop.SetActive(false);
                 rook.SetActive(false);
@@ -99,7 +98,6 @@ public class Scenario : MonoBehaviour
             case 1:
                 inventory.SetActive(false);
                 vision.SetActive(false);
-                skill.SetActive(false);
                 bishop.SetActive(false);
                 rook.SetActive(false);
                 OnMsg("적을 찾아 무찌르세요 !", 999f);
@@ -129,10 +127,26 @@ public class Scenario : MonoBehaviour
 
                 // 적 조우 시 STOP
                 while (A_Star.GetDistance(Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), Grid.GetTile(Mob.Mobs[0].i, Mob.Mobs[0].j).GetComponent<Tile>(), RangeType.Manhattan) > 4) yield return new WaitForSeconds(0.5f);
-                OnMsg("조심하세요 이번 적은 Knight 처럼 움직이며\n원거리 공격을 사용합니다.", 10f);
+                OnMsg("조심하세요 ! 적이 Knight 처럼 움직이며\n원거리 공격을 사용합니다.", 10f);
                 OffMark();
                 pos = message_top.transform.position;
                 message_top.transform.position = new Vector2(pos.x, pos.y + 25);
+
+                break;
+            case 2:
+                inventory.SetActive(false);
+                OnMsg("적들이 깨지않게 조심히 움직여야 합니다.\nVision 을 켜 적의 시야를 확인하세요.", 999f);
+                OnMark(vision, 999f);
+
+                // Vision 킬 때 까지 STOP
+                while (Mob.Mobs[0].gameObject.transform.Find("Vision").gameObject.active == false) yield return new WaitForSeconds(0.1f);
+                OnMsg("비숍으로 이동하는편이\n좋을 것 같습니다.", 999f);
+                OnMark(bishop, 999f);
+
+                // 다음 아무 행동까지 STOP
+                while (Player.action == Player.maxAction) yield return new WaitForSeconds(0.1f);
+                OnMsg("모든 적을 섬멸하세요.", 3f);
+                OffMark();
 
                 break;
         }

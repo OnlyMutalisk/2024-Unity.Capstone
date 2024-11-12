@@ -29,17 +29,18 @@ public class Move : MonoBehaviour
     public void Pawn()
     {
         GameManager.playerAction = GameManager.PlayerAction.Move;
+        int range = Player.action / GameManager.cost_Pawn;
 
         if (Tile.isTileOn == false)
         {
             Tile.isTileOn = true;
             lastMove = MoveStyle.Pawn;
 
-            if (A_Star.CheckTile(Player.i - 1, Player.j) == true)
-                Tile.AddTileImages(Grid.GetTile(Player.i - 1, Player.j));
-
-            // Tile.origins.Add(Tile.tiles[0].sprite);
-            // Tile.tiles[0].sprite = select;
+            for (int n = 1; n <= range; n++)
+            {
+                Tile.AddTileImages(Grid.GetTile(Player.i - n, Player.j));
+                if (A_Star.CheckTile(Player.i - n, Player.j) == false) { break; }
+            }
 
             foreach (Image tile in Tile.tiles)
             {
