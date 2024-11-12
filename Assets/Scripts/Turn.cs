@@ -53,6 +53,20 @@ public class Turn : MonoBehaviour
     public IEnumerator EnemyTurn()
     {
         ControlOnOff(false);
+        if (Tile.isTileOn == true) OffTile();
+        void OffTile()
+        {
+            Tile.isTileOn = false;
+
+            for (int i = 0; i < Tile.tiles.Count; i++)
+            {
+                Tile.tiles[i].sprite = Tile.origins[i];
+            }
+
+            Tile.tiles.Clear();
+            Tile.origins.Clear();
+        }
+
         tmp.text = GameManager.msg_turn;
         isMyTurn = false;
         turns--;

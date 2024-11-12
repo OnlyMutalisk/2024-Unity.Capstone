@@ -18,7 +18,7 @@ public static class GameManager
     public static int[] turns = new int[]
     {
         9999, // map0
-        11, // map1
+        10, // map1
         12, // map2
         13, // map3
         14, // map4
