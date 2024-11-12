@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 7463948619363856720}
   - component: {fileID: 7220553215414970433}
   - component: {fileID: 7199013516701256762}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,8 +294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.48406905, g: 0.8252825, b: 0.9245283, a: 0.5294118}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.48235294, g: 0.9254902, b: 0.4845425, a: 0.5294118}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
