@@ -17,7 +17,7 @@ public static class GameManager
     // 각 맵의 턴 제한 입니다.
     public static int[] turns = new int[]
     {
-        10, // map0
+        9999, // map0
         11, // map1
         12, // map2
         13, // map3

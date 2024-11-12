@@ -1,0 +1,69 @@
+fileFormatVersion: 2
+guid: 35a71f87139c96e49a29973acf0b581c
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 1fa25d03934ea624a82bf2fcee6f0873, type: 3}
+  missingFiles: []
+  errors:
+  - Errors detected in tileset '../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap
+    Editor/Tilesets/Atlas-Props-sheet1.tsx'. Check the tileset inspector for more
+    details. Your map may be broken until these are fixed.
+  - Errors detected in tileset '../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap
+    Editor/Tilesets/Atlas-Props-sheet2.tsx'. Check the tileset inspector for more
+    details. Your map may be broken until these are fixed.
+  - Could not find tile 19019. Make sure the tilesets were successfully imported.
+  - Could not find tile 19026. Make sure the tilesets were successfully imported.
+  - Could not find tile 19027. Make sure the tilesets were successfully imported.
+  - Could not find tile 19063. Make sure the tilesets were successfully imported.
+  - Could not find tile 19070. Make sure the tilesets were successfully imported.
+  - Could not find tile 19071. Make sure the tilesets were successfully imported.
+  - Could not find tile 19107. Make sure the tilesets were successfully imported.
+  - Could not find tile 19151. Make sure the tilesets were successfully imported.
+  - Could not find tile 19291. Make sure the tilesets were successfully imported.
+  - Could not find tile 19993. Make sure the tilesets were successfully imported.
+  - Could not find tile 19994. Make sure the tilesets were successfully imported.
+  - Could not find tile 19330. Make sure the tilesets were successfully imported.
+  - Could not find tile 19331. Make sure the tilesets were successfully imported.
+  - Could not find tile 19334. Make sure the tilesets were successfully imported.
+  - Could not find tile 19437. Make sure the tilesets were successfully imported.
+  - Could not find tile 20037. Make sure the tilesets were successfully imported.
+  - Could not find tile 20038. Make sure the tilesets were successfully imported.
+  - Could not find tile 19442. Make sure the tilesets were successfully imported.
+  - Could not find tile 20081. Make sure the tilesets were successfully imported.
+  - Could not find tile 20082. Make sure the tilesets were successfully imported.
+  - Could not find tile 20125. Make sure the tilesets were successfully imported.
+  - Could not find tile 20126. Make sure the tilesets were successfully imported.
+  - Could not find tile 13935. Make sure the tilesets were successfully imported.
+  - Could not find tile 13936. Make sure the tilesets were successfully imported.
+  - Could not find tile 20024. Make sure the tilesets were successfully imported.
+  - Could not find tile 13979. Make sure the tilesets were successfully imported.
+  - Could not find tile 13980. Make sure the tilesets were successfully imported.
+  - Could not find tile 20119. Make sure the tilesets were successfully imported.
+  - Could not find tile 14023. Make sure the tilesets were successfully imported.
+  - Could not find tile 14024. Make sure the tilesets were successfully imported.
+  - Could not find tile 20124. Make sure the tilesets were successfully imported.
+  - Could not find tile 20112. Make sure the tilesets were successfully imported.
+  - Could not find tile 20156. Make sure the tilesets were successfully imported.
+  - Could not find tile 20157. Make sure the tilesets were successfully imported.
+  - Could not find tile 16191. Make sure the tilesets were successfully imported.
+  - Could not find tile 16235. Make sure the tilesets were successfully imported.
+  - Could not find tile 16366. Make sure the tilesets were successfully imported.
+  - Could not find tile 16367. Make sure the tilesets were successfully imported.
+  warnings: []
+  missingSortingLayers: []
+  missingLayers: []
+  missingTags: []
+  importerVersion: 26
+  pixelsPerUnit: 100
+  edgesPerEllipse: 32
+  numberOfObjectsImported: 2
+  tilesAsObjects: 0
+  sortingMode: 0
+  isIsometric: 0
+  customImporterClassName: 
+  internalTilesets: []

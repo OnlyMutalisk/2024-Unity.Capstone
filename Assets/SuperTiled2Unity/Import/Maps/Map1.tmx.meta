@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 02e545e13fac0614c9ab7ce8a7c41097
+guid: a77fae726afb24d49954e4f1b8af8965
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -9,7 +9,22 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 1fa25d03934ea624a82bf2fcee6f0873, type: 3}
   missingFiles: []
-  errors: []
+  errors:
+  - Errors detected in tileset '../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap
+    Editor/Tilesets/Atlas-Props-sheet1.tsx'. Check the tileset inspector for more
+    details. Your map may be broken until these are fixed.
+  - Errors detected in tileset '../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap
+    Editor/Tilesets/test.tsx'. Check the tileset inspector for more details. Your
+    map may be broken until these are fixed.
+  - Errors detected in tileset '../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap
+    Editor/Tilesets/platform - grass(transparency) to water.tsx'. Check the tileset
+    inspector for more details. Your map may be broken until these are fixed.
+  - Errors detected in tileset '../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap
+    Editor/Tilesets/platform - grass(transparency) - coast.tsx'. Check the tileset
+    inspector for more details. Your map may be broken until these are fixed.
+  - Errors detected in tileset '../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap
+    Editor/Tilesets/Atlas-Props-sheet2.tsx'. Check the tileset inspector for more
+    details. Your map may be broken until these are fixed.
   warnings: []
   missingSortingLayers: []
   missingLayers: []
