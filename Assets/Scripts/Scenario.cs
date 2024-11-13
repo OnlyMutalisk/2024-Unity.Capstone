@@ -24,9 +24,6 @@ public class Scenario : MonoBehaviour
     public GameObject rook;
     public GameObject mark;
 
-    private bool map0_pawn;
-
-
     /// <summary>
     /// 시나리오 데몬입니다.
     /// </summary>
@@ -45,6 +42,7 @@ public class Scenario : MonoBehaviour
                 turn.SetActive(false);
                 inventory.SetActive(false);
                 vision.SetActive(false);
+                action.SetActive(false);
                 knight.SetActive(false);
                 bishop.SetActive(false);
                 rook.SetActive(false);
@@ -147,6 +145,37 @@ public class Scenario : MonoBehaviour
                 while (Player.action == Player.maxAction) yield return new WaitForSeconds(0.1f);
                 OnMsg("모든 적을 섬멸하세요.", 3f);
                 OffMark();
+
+                break;
+            case 3:
+                OnMsg("실드를 획득하세요.", 999f);
+                int shortest = 999;
+                GameObject target = null;
+                foreach (var item in Item.Items)
+                {
+                    int distance = A_Star.GetDistance(Grid.GetTile(item.i, item.j).GetComponent<Tile>(), Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), RangeType.Manhattan);
+                    if (shortest > distance)
+                    {
+                        shortest = distance;
+                        target = Grid.GetTile(item.i, item.j);
+                    }
+                }
+                yield return new WaitForSeconds(0.5f);
+                OnMark(target, 999f);
+
+                // 실드를 획득할 때 까지 STOP
+                while (Inventory.InvItems.Count < 1) yield return new WaitForSeconds(0.1f);
+                OnMsg("인벤토리를 열어보세요.", 999f);
+                OnMark(inventory, 999f);
+
+                // 인벤토리 열 때 까지 STOP
+                while (inventory.transform.GetChild(0).gameObject.active == false) yield return new WaitForSeconds(0.1f);
+                OnMsg("더블 클릭하여 실드를 사용하세요.", 999f);
+                OffMark();
+
+                // 인벤토리를 끄거나, 실드 사용할 때 까지 STOP
+                while (Player.shield == 0) yield return new WaitForSeconds(0.1f);
+                OnMsg("모든 적을 물리치세요 !", 3f);
 
                 break;
         }

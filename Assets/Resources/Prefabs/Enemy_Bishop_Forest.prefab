@@ -466,6 +466,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Type
       objectReference: {fileID: 0}
+    - target: {fileID: 1545260756069870433, guid: af74a5216b1f84f46a6b3e00c6e5c27d, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8895148557606001046, guid: af74a5216b1f84f46a6b3e00c6e5c27d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

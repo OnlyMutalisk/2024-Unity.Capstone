@@ -41,7 +41,8 @@ public class Skill : MonoBehaviour
 
             foreach (var coord in coordinates)
             {
-                Tile.AddTileImages(Grid.GetTile(Player.i + coord.Item1, Player.j + coord.Item2), A_Star.CheckMob(Player.i + coord.Item1, Player.j + coord.Item2));
+                if (A_Star.CheckTile(Player.i + coord.Item1, Player.j + coord.Item2) == true)
+                    Tile.AddTileImages(Grid.GetTile(Player.i + coord.Item1, Player.j + coord.Item2), A_Star.CheckMob(Player.i + coord.Item1, Player.j + coord.Item2));
             }
 
             foreach (Image tile in Tile.tiles)

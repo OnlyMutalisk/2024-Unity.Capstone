@@ -73,7 +73,7 @@ public static class GameManager
     public static float HP_Knight = 10;
     public static int damage_Knight = 1;
     public static int action_Knight = 2;
-    public static int range_Knight = 2;
+    public static int range_Knight = 3;
     public static int attackCost_Knight = 1;
     public static int moveCost_Knight = 1;
     public static int visionRange_Knight = 3;
@@ -82,7 +82,7 @@ public static class GameManager
     public static float HP_Bishop = 10;
     public static int damage_Bishop = 1;
     public static int action_Bishop = 4;
-    public static int range_Bishop = 1;
+    public static int range_Bishop = 2;
     public static int attackCost_Bishop = 1;
     public static int moveCost_Bishop = 1;
     public static int visionRange_Bishop = 2;
