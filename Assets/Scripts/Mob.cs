@@ -96,8 +96,8 @@ public class Mob : MonoBehaviour
 
         while (action >= Mathf.Min(moveCost, attackCost) && isSleep == false)
         {
-            // 공격범위 안이면 공격 후 현재 문 탈출, 맨해튼 거리
-            if (A_Star.GetDistance(Grid.GetTile(i, j).GetComponent<Tile>(), Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), RangeType.Manhattan)<= range)
+            // 공격범위 안이면 공격 후 현재 문 탈출
+            if (A_Star.GetDistance(Grid.GetTile(i, j).GetComponent<Tile>(), Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), GameManager.rangeType_enemy)<= range)
             {
                 action -= attackCost;
                 yield return StartCoroutine(CorAttack());

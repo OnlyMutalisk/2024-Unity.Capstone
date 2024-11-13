@@ -26,10 +26,17 @@ public class Attack : MonoBehaviour
 
             for (int n = 1; n <= GameManager.attackDistance_Char; n++)
             {
+                // 동서남북
                 Tile.AddTileImages(Grid.GetTile(Player.i - n, Player.j), A_Star.CheckMob(Player.i - n, Player.j));
                 Tile.AddTileImages(Grid.GetTile(Player.i + n, Player.j), A_Star.CheckMob(Player.i + n, Player.j));
                 Tile.AddTileImages(Grid.GetTile(Player.i, Player.j - n), A_Star.CheckMob(Player.i, Player.j - n));
                 Tile.AddTileImages(Grid.GetTile(Player.i, Player.j + n), A_Star.CheckMob(Player.i, Player.j + n));
+
+                // 대각선
+                Tile.AddTileImages(Grid.GetTile(Player.i - n, Player.j + n), A_Star.CheckMob(Player.i - n, Player.j + n));
+                Tile.AddTileImages(Grid.GetTile(Player.i - n, Player.j - n), A_Star.CheckMob(Player.i - n, Player.j - n));
+                Tile.AddTileImages(Grid.GetTile(Player.i + n, Player.j + n), A_Star.CheckMob(Player.i + n, Player.j + n));
+                Tile.AddTileImages(Grid.GetTile(Player.i + n, Player.j - n), A_Star.CheckMob(Player.i + n, Player.j - n));
             }
 
             foreach (Image tile in Tile.tiles)

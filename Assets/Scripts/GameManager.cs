@@ -51,6 +51,7 @@ public static class GameManager
     public static int skillDistance_Char = 3;
     public static int Life_Char = 10;
     public static int shield_Char = 4;
+    public static int range_Char = 1;
 
     // 캐릭터 행동력 비용입니다.
     public static int cost_Pawn = 1;
@@ -59,6 +60,10 @@ public static class GameManager
     public static int cost_Rook = 2;
     public static int cost_Attack = 3;
     public static int cost_Skill = 4;
+
+    // 플레이어와 Enemy 의 공격 사거리 기준을 변경합니다.
+    public static RangeType rangeType_enemy = RangeType.Chebyshev;
+    public static RangeType rangeType_char = RangeType.Chebyshev;
 
     // Pawn 의 스텟을 조정합니다.
     public static float HP_Pawn = 10;
@@ -82,7 +87,7 @@ public static class GameManager
     public static float HP_Bishop = 10;
     public static int damage_Bishop = 1;
     public static int action_Bishop = 4;
-    public static int range_Bishop = 2;
+    public static int range_Bishop = 1;
     public static int attackCost_Bishop = 1;
     public static int moveCost_Bishop = 1;
     public static int visionRange_Bishop = 2;

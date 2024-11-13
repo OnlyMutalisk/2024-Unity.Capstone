@@ -24,7 +24,7 @@ public class A_Star : MonoBehaviour
     public static List<Tile> PathFind(Tile startTile, RangeType rangeType, int distance = 1)
     {
         // 유저를 공격할 수 있는 공격범위 내 타일을 타겟으로 지정
-        List<Tile> neighbortiles = GetNeighbortiles(Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), distance, RangeType.Manhattan);
+        List<Tile> neighbortiles = GetNeighbortiles(Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), distance, GameManager.rangeType_enemy);
 
         // 각 타겟으로의 최소 경로들을 저장
         List<List<Tile>> pathList = new List<List<Tile>>();
@@ -109,7 +109,7 @@ public class A_Star : MonoBehaviour
     /// <br>일정 거리 이내의 이웃 타일을 반환합니다.</br>
     /// <br>체스 RangeType은 distance 의 영향 없이 이웃 타일이 결정됩니다.</br>
     /// </summary>
-    private static List<Tile> GetNeighbortiles(Tile tile, int distance, RangeType type = RangeType.Manhattan)
+    public static List<Tile> GetNeighbortiles(Tile tile, int distance, RangeType type = RangeType.Manhattan)
     {
         List<Tile> neighbors = new List<Tile>();
 
