@@ -5,6 +5,7 @@ using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
@@ -32,7 +33,6 @@ public class Tile : MonoBehaviour
         Match match = Regex.Match(gameObject.name, @"\d+");
         if (match.Success) { index = int.Parse(match.Value); }
         else { index = 0; }
-
         // index 으로부터 i, j 추출
         (i, j) = Grid.ConvertIndexToArray(index);
 

@@ -215,12 +215,15 @@ public class A_Star : MonoBehaviour
 
     /// <summary>
     /// <br>행렬 좌표 [i][j] 의 타일이 타일 맵 안에 있고, 벽 판정이 아니라면 true 를 반환합니다.</br>
+    /// <br>wallCheck 를 false 로 설정하면 타일 맵 내부인지만 판단하고 벽인지는 체크하지 않습니다.</br>
     /// </summary>
-    public static bool CheckTile(int i, int j)
+    public static bool CheckTile(int i, int j, bool wallCheck = true)
     {
         if ((0 < i && i <= Grid.i) && (0 < j && j <= Grid.j) == true)
-            if (Grid.GetTile(i, j).GetComponent<Tile>().isWall == false)
-                return true;
+            if (wallCheck == true)
+                if (Grid.GetTile(i, j).GetComponent<Tile>().isWall == false) return true;
+                else return false;
+            else return true;
 
         return false;
     }
