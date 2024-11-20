@@ -25,6 +25,12 @@ public static class GameManager
         15, // map5
     };
 
+    // Zoom 설정 입니다.
+    public static float speed_zoom = 150f;
+    public static float min_zoom = 100f;
+    public static float max_zoom = 180f;
+    public static float time_smooth = 0.2f;
+
     // 전장의 안개 (Fog) 를 관리합니다. (밝음 0 ~ 1 어두움)
     public static int visionRange = 2;
     public static float Gamma_unvisited = 1f;

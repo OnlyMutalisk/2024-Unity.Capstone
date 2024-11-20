@@ -205,9 +205,13 @@ public class Scenario : MonoBehaviour
     /// <summary>
     /// 지정한 오브젝트를 seconds 만큼 마킹합니다.
     /// </summary>
+    public static List<Coroutine> CorsMark = new List<Coroutine>();
     public void OnMark(GameObject gameObject, float seconds)
     {
-        StartCoroutine(CorOnMark(gameObject, seconds));
+        foreach (var item in CorsMark) StopCoroutine(item);
+        CorsMark.Clear();
+        CorsMark.Add(StartCoroutine(CorOnMark(gameObject, seconds)));
+        CorsMark.Add(StartCoroutine(CorTraceMark(gameObject, seconds)));
     }
     public void OffMark()
     {
@@ -218,8 +222,18 @@ public class Scenario : MonoBehaviour
         mark.SetActive(false);
         yield return new WaitForSeconds(0.1f);
         mark.SetActive(true);
-        mark.transform.position = gameObject.transform.position;
         yield return new WaitForSeconds(seconds);
         mark.SetActive(false);
+    }
+    public IEnumerator CorTraceMark(GameObject gameObject, float seconds)
+    {
+        float sec = 0;
+
+        while (sec < seconds)
+        {
+            sec += 0.01f;
+            if (gameObject != null) mark.transform.position = gameObject.transform.position;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }
