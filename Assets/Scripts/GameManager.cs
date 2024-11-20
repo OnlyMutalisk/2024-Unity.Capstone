@@ -42,8 +42,8 @@ public static class GameManager
     public static float Gamma_Tile_Empty = 0.031f;
 
     // 딜레이 및 속도를 관리합니다.
-    public static float speed_Char = 2f;
-    public static float speed_Mob = 1.5f;
+    public static float speed_Char = 150f;
+    public static float speed_Mob = 150f;
     public static float delay_loading = 3f;
     public static float delay_mobMove = 0.2f;
     public static float delay_msgTopAction = 2f;

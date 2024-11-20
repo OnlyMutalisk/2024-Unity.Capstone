@@ -24,7 +24,7 @@ public class Item : MonoBehaviour
 
         while (gameObject.transform.position != target)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, GameManager.speed_Mob);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, GameManager.speed_Mob * Time.deltaTime);
             yield return new WaitForSeconds(0.01f);
         }
     }

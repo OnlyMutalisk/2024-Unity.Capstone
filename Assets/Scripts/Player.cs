@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
 
             while (pos.position != target)
             {
-                pos.position = Vector3.MoveTowards(pos.position, target, GameManager.speed_Char);
+                pos.position = Vector3.MoveTowards(pos.position, target, GameManager.speed_Char * Time.deltaTime);
                 yield return new WaitForSeconds(0.01f);
             }
 

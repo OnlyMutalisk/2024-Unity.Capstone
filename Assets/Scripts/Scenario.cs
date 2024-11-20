@@ -186,6 +186,7 @@ public class Scenario : MonoBehaviour
     /// </summary>
     public void OnMsg(string text, float seconds)
     {
+        Audio.instance.PlaySfx(Audio.Sfx.Message);
         StartCoroutine(CorOnMsg(text, seconds));
     }
     public void OffMsg()

@@ -46,6 +46,8 @@ public class Map : MonoBehaviour
 
         if (File.Exists(filePath))
         {
+            Audio.instance.PlayBgm(true);
+
             // 로컬 함수 입니다.
             LoadExcel();
             LoadTiled();

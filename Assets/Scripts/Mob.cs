@@ -133,6 +133,7 @@ public class Mob : MonoBehaviour
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
         // 실드를 우선 감소시키고 체력을 감소시킵니다.
+        Audio.instance.PlaySfx(Audio.Sfx.Attack_Mob);
         Player.anim.SetBool("isHurt", true);
         if (Player.shield >= calcDamage)
         {
@@ -170,7 +171,7 @@ public class Mob : MonoBehaviour
 
         while (gameObject.transform.position != target)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, GameManager.speed_Mob);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, GameManager.speed_Mob * Time.deltaTime);
             yield return new WaitForSeconds(0.01f);
         }
 

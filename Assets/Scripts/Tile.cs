@@ -85,6 +85,7 @@ public class Tile : MonoBehaviour
             {
                 Player.action -= cost;
 
+                Audio.instance.PlaySfx(Audio.Sfx.Move_Player);
                 StartCoroutine(Player.CorMove(i, j));
             }
             else
@@ -125,6 +126,7 @@ public class Tile : MonoBehaviour
 
                     if (Player.action >= GameManager.cost_Attack)
                     {
+                        Audio.instance.PlaySfx(Audio.Sfx.Attack_Player);
                         Player.action -= GameManager.cost_Attack;
                         mob.HP -= CalcDamage(GameManager.attackDamage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
                         
