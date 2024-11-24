@@ -10,6 +10,10 @@ using Image = UnityEngine.UI.Image;
 
 public class Scenario : MonoBehaviour
 {
+    public static Scenario instance;
+    private static Coroutine lastCor;
+
+    public Turn turn_script;
     public GameObject message_top;
     public TextMeshProUGUI text;
     public GameObject turn;
@@ -23,6 +27,9 @@ public class Scenario : MonoBehaviour
     public GameObject bishop;
     public GameObject rook;
     public GameObject mark;
+
+    // 싱글턴
+    private void Awake() { instance = this; }
 
     /// <summary>
     /// 시나리오 데몬입니다.
@@ -42,10 +49,12 @@ public class Scenario : MonoBehaviour
                 turn.SetActive(false);
                 inventory.SetActive(false);
                 vision.SetActive(false);
-                action.SetActive(false);
                 knight.SetActive(false);
                 bishop.SetActive(false);
                 rook.SetActive(false);
+                action.SetActive(false); turn_script.controller.Remove(action);
+                skill.SetActive(false); turn_script.controller.Remove(skill);
+                Player.action = 999;
                 OnMsg("Pawn 을 클릭해 전진하세요!", 999f);
                 OnMark(pawn, 999f);
 
@@ -55,7 +64,7 @@ public class Scenario : MonoBehaviour
                 OnMark(Grid.GetTile(Player.i - 1, Player.j), 999);
 
                 // 전진할 때 까지 STOP
-                while (Player.action == Player.maxAction) yield return new WaitForSeconds(0.5f);
+                while (Player.action == 999) yield return new WaitForSeconds(0.5f);
                 OnMsg("앞으로 계속 나아가\n적을 마주하세요!", 999f);
                 OffMark();
 
@@ -98,6 +107,7 @@ public class Scenario : MonoBehaviour
                 vision.SetActive(false);
                 bishop.SetActive(false);
                 rook.SetActive(false);
+                skill.SetActive(false); turn_script.controller.Remove(skill);
                 OnMsg("적을 찾아 무찌르세요 !", 999f);
                 int start_i = Player.i;
 
@@ -111,21 +121,16 @@ public class Scenario : MonoBehaviour
                 OnMsg("좋습니다! 계속 전진하세요.", 999f);
                 OffMark();
 
-                // 행동력이 1 이 될 때 까지 STOP
-                while (Player.action != 1) yield return new WaitForSeconds(0.5f);
-                OnMsg("행동력이 부족합니다.\n턴을 종료하세요.", 999f);
-                OnMark(action, 999f);
-
                 // 턴 종료할 때 까지 STOP
                 while (Player.action != Player.maxAction) yield return new WaitForSeconds(0.5f);
-                OnMsg("남은 턴 수 내에 클리어하지 못하면 패배합니다. 서두르세요 !", 999f);
+                OnMsg("남은 턴 수 내에 클리어하지 못하면 패배합니다. 서두르세요 !", 5f);
                 Vector2 pos = message_top.transform.position;
                 message_top.transform.position = new Vector2(pos.x, pos.y - 25);
-                OnMark(turn, 10f);
+                OnMark(turn, 5f);
 
                 // 적 조우 시 STOP
                 while (A_Star.GetDistance(Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), Grid.GetTile(Mob.Mobs[0].i, Mob.Mobs[0].j).GetComponent<Tile>(), RangeType.Manhattan) > 4) yield return new WaitForSeconds(0.5f);
-                OnMsg("조심하세요 ! 적이 Knight 처럼 움직이며\n원거리 공격을 사용합니다.", 10f);
+                OnMsg("조심하세요 ! 적이 원거리 공격을 사용합니다.", 10f);
                 OffMark();
                 pos = message_top.transform.position;
                 message_top.transform.position = new Vector2(pos.x, pos.y + 25);
@@ -137,7 +142,7 @@ public class Scenario : MonoBehaviour
                 OnMark(vision, 999f);
 
                 // Vision 킬 때 까지 STOP
-                while (Mob.Mobs[0].gameObject.transform.Find("Vision").gameObject.active == false) yield return new WaitForSeconds(0.1f);
+                while (Mob.Mobs[0].gameObject.transform.Find("Enemy_Vision").gameObject.active == false) yield return new WaitForSeconds(0.1f);
                 OnMsg("비숍으로 이동하는편이\n좋을 것 같습니다.", 999f);
                 OnMark(bishop, 999f);
 
@@ -187,16 +192,16 @@ public class Scenario : MonoBehaviour
     public void OnMsg(string text, float seconds)
     {
         Audio.instance.PlaySfx(Audio.Sfx.Message);
-        StartCoroutine(CorOnMsg(text, seconds));
+        OffMsg();
+        if (lastCor != null) StopCoroutine(lastCor);
+        lastCor = StartCoroutine(CorOnMsg(text, seconds));
     }
     public void OffMsg()
     {
         message_top.SetActive(false);
     }
-    public IEnumerator CorOnMsg(string text, float seconds)
+    private IEnumerator CorOnMsg(string text, float seconds)
     {
-        message_top.SetActive(false);
-        yield return new WaitForSeconds(0.1f);
         message_top.SetActive(true);
         this.text.text = text;
         yield return new WaitForSeconds(seconds);
@@ -218,7 +223,7 @@ public class Scenario : MonoBehaviour
     {
         mark.SetActive(false);
     }
-    public IEnumerator CorOnMark(GameObject gameObject, float seconds)
+    private IEnumerator CorOnMark(GameObject gameObject, float seconds)
     {
         mark.SetActive(false);
         yield return new WaitForSeconds(0.1f);
@@ -226,7 +231,7 @@ public class Scenario : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         mark.SetActive(false);
     }
-    public IEnumerator CorTraceMark(GameObject gameObject, float seconds)
+    private IEnumerator CorTraceMark(GameObject gameObject, float seconds)
     {
         float sec = 0;
 

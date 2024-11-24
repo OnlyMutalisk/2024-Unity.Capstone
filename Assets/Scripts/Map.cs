@@ -16,7 +16,7 @@ public class Map : MonoBehaviour
     public GameObject[] enemy_bishop;
     public GameObject item_shield;
     public GameObject tiled;
-    public static int index = 3;
+    public static int index = 2;
     private Dictionary<string, string> ColorToTile = new Dictionary<string, string>();
     private Dictionary<string, GameObject> TextToUnit = new Dictionary<string, GameObject>();
 

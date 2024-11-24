@@ -34,6 +34,7 @@ public class Mob : MonoBehaviour
     public GameObject Zzz;
     public GameObject WakeUp;
     public Animator anim;
+    public SpriteRenderer sprite;
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
     private List<UnityEngine.UI.Image> shields = new List<UnityEngine.UI.Image>();
     private static List<UnityEngine.UI.Image> s_hearts = new List<UnityEngine.UI.Image>();
@@ -79,6 +80,10 @@ public class Mob : MonoBehaviour
 
         // 몬스터가 깨어나면, Zzz 애니메이션을 비활성화 하고 WakeUp 애니메이션을 활성화합니다.
         if (isSleep == false) { Zzz.SetActive(false); WakeUp.SetActive(true); }
+
+        // 몬스터가 캐릭터를 바라보도록 Sprite 를 Flip 합니다
+        if (j > Player.j) sprite.flipX = true;
+        else sprite.flipX = false;
 
         UpdateAction();
     }
@@ -178,9 +183,9 @@ public class Mob : MonoBehaviour
         if (anim != null) anim.SetBool("isMove", false);
     }
 
+    // 체력을 그립니다.
     public static void DrawLife()
     {
-        // 체력을 그립니다.
         int lifeCopy = Player.life;
 
         foreach (var heart in s_hearts) { heart.sprite = Resources.Load<Sprite>("Images/Heart_Empty"); }

@@ -147,6 +147,7 @@ MonoBehaviour:
   Zzz: {fileID: 8304816129474508103}
   WakeUp: {fileID: 1953236683446661525}
   anim: {fileID: 0}
+  sprite: {fileID: 6254156690698604433}
 --- !u!1 &4633867723161378893
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +602,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9805a62f8fd4fb543bc1d33463d6d858, type: 3}
+--- !u!212 &6254156690698604433 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4478169673446172814, guid: 9805a62f8fd4fb543bc1d33463d6d858, type: 3}
+  m_PrefabInstance: {fileID: 7561154309859485471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6254156690698604438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4478169673446172809, guid: 9805a62f8fd4fb543bc1d33463d6d858, type: 3}

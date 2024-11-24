@@ -147,6 +147,7 @@ MonoBehaviour:
   Zzz: {fileID: 8304816129474508103}
   WakeUp: {fileID: 1953236683446661525}
   anim: {fileID: 0}
+  sprite: {fileID: 4493380787443479195}
 --- !u!1 &4633867723161378893
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +645,10 @@ PrefabInstance:
       value: Sprite
       objectReference: {fileID: 0}
     - target: {fileID: 926649980406013134, guid: 029c29c9206855448b6d52d3e6daf94d, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 926649980406013134, guid: 029c29c9206855448b6d52d3e6daf94d, type: 3}
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
@@ -715,6 +720,11 @@ PrefabInstance:
 --- !u!4 &4493380787443479194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 926649980406013135, guid: 029c29c9206855448b6d52d3e6daf94d, type: 3}
+  m_PrefabInstance: {fileID: 3641069295034379861}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &4493380787443479195 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 926649980406013134, guid: 029c29c9206855448b6d52d3e6daf94d, type: 3}
   m_PrefabInstance: {fileID: 3641069295034379861}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8028709979950984840

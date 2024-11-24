@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class Turn : MonoBehaviour
 {
-    public GameObject msg_top;
-    public TextMeshProUGUI tmp;
     public TextMeshProUGUI turn;
     public GameObject lose;
     public GameObject win;
-    public GameObject[] controller;
+    public List<GameObject> controller;
     public static bool isMyTurn = true;
     private bool isStart = true;
     private int turns = 10;
@@ -19,33 +17,40 @@ public class Turn : MonoBehaviour
     {
         isMyTurn = true;
         turns = GameManager.turns[Map.index];
+        StartCoroutine(TurnScanner());
     }
 
-    private void Update()
+    private IEnumerator TurnScanner()
     {
-        if (isStart == true) { isStart = false; StartCoroutine(UnitLoad()); }
-        if (Player.action <= 0) { Player.action = Player.maxAction; StartCoroutine(EnemyTurn()); }
-        if (Player.life <= 0 || turns == 0) { Lose(); }
-        if (Mob.Mobs.Count == 0 && Mob.mobCounting == true) { Win(); }
-        turn.text = turns.ToString();
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            if (isStart == true) { isStart = false; StartCoroutine(UnitLoad()); }
+            if (Player.action <= 0) { Player.action = Player.maxAction; StartCoroutine(EnemyTurn()); }
+            if (Player.life <= 0 || turns == 0) { StartCoroutine(Lose()); break; }
+            if (Mob.Mobs.Count == 0 && Mob.mobCounting == true) { StartCoroutine(Win()); break; }
+            turn.text = turns.ToString();
+        }
     }
 
-    private void Win()
+    private IEnumerator Win()
     {
         Stages.isOn[Map.index + 1] = true;
+        yield return new WaitForSeconds(0.5f);
         win.SetActive(true);
     }
 
-    private void Lose()
+    private IEnumerator Lose()
     {
         Player.anim.SetBool("isDeath", true);
+        yield return new WaitForSeconds(3f);
         lose.SetActive(true);
     }
 
     public IEnumerator UnitLoad()
     {
         ControlOnOff(false);
-        tmp.text = GameManager.msg_loading;
+        Scenario.instance.OnMsg(GameManager.msg_loading, GameManager.delay_loading);
         yield return new WaitForSeconds(GameManager.delay_loading);
         ControlOnOff(true);
     }
@@ -67,7 +72,7 @@ public class Turn : MonoBehaviour
             Tile.origins.Clear();
         }
 
-        tmp.text = GameManager.msg_turn;
+        Scenario.instance.OnMsg(GameManager.msg_turn, 999f);
         isMyTurn = false;
         turns--;
 
@@ -80,12 +85,11 @@ public class Turn : MonoBehaviour
 
         isMyTurn = true;
         ControlOnOff(true);
+        Scenario.instance.OffMsg();
     }
 
     public void ControlOnOff(bool OnOff)
     {
-        msg_top.SetActive(!OnOff);
-
         foreach (var item in controller)
         {
             item.SetActive(OnOff);

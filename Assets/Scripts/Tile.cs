@@ -90,7 +90,10 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+                // StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+
+                Scenario.instance.OnMsg(GameManager.msg_action, GameManager.delay_msgTopAction);
+                Scenario.instance.OnMark(Scenario.instance.action, GameManager.delay_msgTopAction);
             }
         }
     }
@@ -136,7 +139,10 @@ public class Tile : MonoBehaviour
                     }
                     else
                     {
-                        StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+                        //StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+
+                        Scenario.instance.OnMsg(GameManager.msg_action, GameManager.delay_msgTopAction);
+                        Scenario.instance.OnMark(Scenario.instance.action, GameManager.delay_msgTopAction);
                     }
                 }
             }
@@ -171,7 +177,10 @@ public class Tile : MonoBehaviour
                     }
                     else
                     {
-                        StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+                        //StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
+
+                        Scenario.instance.OnMsg(GameManager.msg_action, GameManager.delay_msgTopAction);
+                        Scenario.instance.OnMark(Scenario.instance.action, GameManager.delay_msgTopAction);
                     }
                 }
             }
