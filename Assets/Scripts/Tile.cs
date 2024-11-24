@@ -67,6 +67,10 @@ public class Tile : MonoBehaviour
     {
         Debug.Log(Grid.GetTile(i, j).name + " = [" + i + "][" + j + "]");
 
+        // 캐릭터 스프라이트를 flip 시킵니다.
+        if (Player.j > j) Player.instance.sprite.flipX = true;
+        else Player.instance.sprite.flipX = false;
+
         if (gameObject.GetComponent<Image>().sprite.name == "Tile_Select")
         {
             // 비숍 이동 비용 계산
@@ -98,22 +102,15 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private IEnumerator OnMsgTop(string msg, float seconds)
-    {
-        if (msg_top.active == false)
-        {
-            msg_top.SetActive(true);
-            tmp.text = msg;
-            yield return new WaitForSeconds(seconds);
-            msg_top.SetActive(false);
-        }
-    }
-
     /// <summary>
     /// Tile_Select_Attack 타일 터치 시, 공격 범위 내 적 유닛에게 데미지를 입힙니다.
     /// </summary>
     public void Attack()
     {
+        // 캐릭터 스프라이트를 flip 시킵니다.
+        if (Player.j > j) Player.instance.sprite.flipX = true;
+        else Player.instance.sprite.flipX = false;
+
         if (gameObject.GetComponent<Image>().sprite.name == "Tile_Select_Attack")
         {
             foreach (var mob in Mob.Mobs)
@@ -121,7 +118,6 @@ public class Tile : MonoBehaviour
                 // 터치한 타일에 적이 존재한다면 공격
                 if (mob.i == this.i && mob.j == this.j)
                 {
-                    Player.anim.SetBool("isSwing1", true);
                     for (int n = 0; n < Tile.tiles.Count; n++) { Tile.tiles[n].sprite = Tile.origins[n]; }
                     Tile.tiles.Clear();
                     Tile.origins.Clear();
@@ -129,6 +125,8 @@ public class Tile : MonoBehaviour
 
                     if (Player.action >= GameManager.cost_Attack)
                     {
+                        Player.anim.SetBool("isSwing1", true);
+
                         Audio.instance.PlaySfx(Audio.Sfx.Attack_Player);
                         Player.action -= GameManager.cost_Attack;
                         mob.HP -= CalcDamage(GameManager.attackDamage_Char, Grid.GetTile(Player.i, Player.j), Grid.GetTile(this.i, this.j));
@@ -139,7 +137,6 @@ public class Tile : MonoBehaviour
                     }
                     else
                     {
-                        //StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
 
                         Scenario.instance.OnMsg(GameManager.msg_action, GameManager.delay_msgTopAction);
                         Scenario.instance.OnMark(Scenario.instance.action, GameManager.delay_msgTopAction);
@@ -177,8 +174,6 @@ public class Tile : MonoBehaviour
                     }
                     else
                     {
-                        //StartCoroutine(OnMsgTop(GameManager.msg_action, GameManager.delay_msgTopAction));
-
                         Scenario.instance.OnMsg(GameManager.msg_action, GameManager.delay_msgTopAction);
                         Scenario.instance.OnMark(Scenario.instance.action, GameManager.delay_msgTopAction);
                     }

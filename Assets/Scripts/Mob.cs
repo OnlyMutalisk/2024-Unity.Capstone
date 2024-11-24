@@ -104,8 +104,8 @@ public class Mob : MonoBehaviour
             // 공격범위 안이면 공격 후 현재 문 탈출
             if (A_Star.GetDistance(Grid.GetTile(i, j).GetComponent<Tile>(), Grid.GetTile(Player.i, Player.j).GetComponent<Tile>(), GameManager.rangeType_enemy)<= range)
             {
-                action -= attackCost;
                 yield return StartCoroutine(CorAttack());
+                action -= attackCost;
                 continue;
             }
 
@@ -140,6 +140,7 @@ public class Mob : MonoBehaviour
         // 실드를 우선 감소시키고 체력을 감소시킵니다.
         Audio.instance.PlaySfx(Audio.Sfx.Attack_Mob);
         Player.anim.SetBool("isHurt", true);
+        CameraShake.instance.StartShake();
         if (Player.shield >= calcDamage)
         {
             Player.shield -= calcDamage;

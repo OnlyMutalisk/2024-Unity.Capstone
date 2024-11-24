@@ -64,7 +64,7 @@ public class Message_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                         strB.Append($"시야 : {mob.visionRange}" + "\n");
                         strB.Append("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ" + "\n");
 
-                        visionTemp = FindChildObject(mob.gameObject, "Vision");
+                        visionTemp = FindChildObject(mob.gameObject, "Enemy_Vision");
                         visionTemp.SetActive(true);
                     }
                 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="55" height="37" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="14">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="55" height="37" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="14">
  <tileset firstgid="1" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Atlas-Props-sheet1.tsx"/>
  <tileset firstgid="3521" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Tileset-Terrain-new grass.tsx"/>
  <tileset firstgid="7481" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Tileset-Terrain-new grass - transparency.tsx"/>
@@ -31,30 +31,25 @@
   </layer>
   <layer id="7" name="Ground" width="55" height="37">
    <data encoding="base64" compression="zlib">
-   eJztV8Ftq0AQ3RbSQhoZwe2fcnINkZzccQ/B5O4iwAW4B8z/97QQyUkB2RXztI8JSSzFwLe0I41YLyTM2zfzZnAuWbJkyZIlS5YsWbL/z57EuQfvL1l/xfpZlo7sdxZwld477433rfda15Xi3F0pztbHvMqdOyou4Pvrvch7v/X+7wqxrX3Mm6znjnG9f4PlSbncmRx+nBA/3snvC7836mF9yPr9jV5LzcFOPaxv8nH8B/VS8Qe+36R3NzG3rb4HeVRQroW498pNoxh4v6Z7lQzPoqTn4ZXE+1Py9ZWtJcbVkF7s1TvC2WnMwA8MnKcrPS+nZ4a9JWrxpByulMcjxdqRW15royWFxs+9olTukOMHzfOl9LTVuoAu1sTpnvBxzu2oPkviljmtde8nDbqUrak3cYzoyfdZzE3OyYZixxX3sLbaEzBN3SfWEnWR69/GU8nwPtcg68rWrLkem5kwQfuhzS6PunwkDOEeaq4mHIyLtWVMT5ln6Cl6zqX1EjMTat+eYat4mC9gQI0xr6hBfqaRYS0CM/ZxbpfmL9QN4t590WvwTCfD899SfNwDavncG/B3eBY5MBWuYOjX0D5gZC1uKQ5bT8wH1x/j4n1w+5rFHjNHf2sl9jGeG3he5PmjGcHKvYD7g+394f/P2cuCTr4QjjE+OC/HdJ91xs4xlrtKpp+RYSeJM8htHmckzkfEyzywlliOeIZknWS9tLP1nHaS4bzFGsi8cZ4yXjtTb836Ox2bw4JW2phqGearxWDrcKwecZ1KK88x5o7zkGcP/v6xOsK1ih7gzCy9pEFH8Y13pLNnHvlbjfEytiVr7BxrJX6P4Vt2pb+BvyBNKkinlubpHPsjvd9dQazXah+8Kwhy
-  </data>
-  </layer>
-  <layer id="18" name="Ground+" width="55" height="37">
-   <data encoding="base64" compression="zlib">
-   eJztk8ENwjAMRb1A01FoGQHEKk3KCOwCgRmYBTELcMFRbWH1RoWoXP0nWal68tP/JgIAAAAAAAAAAAAA/+JREVU10ZPfVzX3Nr+hOAV2agJRz5N51mH459lxFQanxNPKW/yizKGee8PpbOpPVln8WvHqJT+v2XXGR53UUfPbOsyu3FkjLtF0Mhm31ml2nbkrO9l0UvvqLbsb73wyGaXRdzSO+zD3tt9zFD/roV7qGp26Fcb52W7qDXrrpMX6ZfOqo9fcFO1nGvXyzHNx7lZQv16cdtzF+wK8lOJ3XZgTAFN4A8sUPmU=
+   eJztlj9Ow1AMxt8VuAIXiV62DtCJMyAVdrhC1T/sXAHxCHvv0KbsXAGpcAD8KbZiZUAMkVJb/knfkiz+ZPvzSykIgiAIgiDwyqpK6TF3uq+mrmY84GtNakgb0leeuqJxWLCvNxa8XdRTVzUOL7nzVNhXS9qSngzPJfr1mfueFfZVWPC3yzY9nqjmb9JBzSI8HUk3df99yxljySPy407tWqPmccf9bPk7/H6cuTfM4XPuZ7FV9cuuSf/knwVfAHP4gAxkYfYu6+7bQXnT2WI9M/UdQJ8S+8U+/hjo2V8scz+D78a9DLnlG9c6epOsOFvWKv8t5MZ/wJukUTtmfbc0J77duGme3v5A3v/FQdYPkb5tHOaj9O3o4I4JC/WWLM56hntWVD5azv051X6t6l/yrfbQL3jT/l4rn95mpL2DWRRm7OlqMJseEG9zZ77OiV9zsIuh
   </data>
   </layer>
   <layer id="17" name="Deco" width="55" height="37">
    <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSgYBaNgFIyCUTAKhjdQShhoF5APQhOJUxcdT1t30BooYfHnywS6O4Nm4HzCQLuAfqAoYKBdQH1QCfVTNRa/hSTQ1SlkgdcJhNX0DbN4q0fzTx2OMlKWyDJ2sIP2YRB/TUh+qAOya5H43cPAf8igA+qfTiDdHAChkQFbAt2dhBVYJuCWK0bLOzU44qh/mMRdzxD1hwwRZVwdDr8h50H/IeD/6QnEqWtGUucK9Jc71G+Kw6Q+gAE3oL/sgdh5CMQdKcAD6B8HIBYZ4n2fUTAKSAEAwfIhsw==
+   eJztzwENACAMwLCbwweIQwTuUEH+nFbBFgEAAAD/GSu7AKCuM7MLgA72zC54o+sXAPVcuPYDyg==
   </data>
   </layer>
  </group>
  <group id="6" name="ForeGround">
   <layer id="10" name="Deco" width="55" height="37">
    <data encoding="base64" compression="zlib">
-   eJzt1LENwCAMBEC2i9KxQmagzQrsDD01sjB3E7zkf5cCAAAAAJBPq9EJ9ni+6ASwemcve9LN3eJPfD9/EzjVAL1UBGc=
+   eJzt0kENACAMBMEKQRA/NODfRBXwa0LSzijYSy4CAACACuf+LoC31fifu/E2AAAA5kpdtwHX
   </data>
   </layer>
  </group>
  <layer id="13" name="Excel" width="55" height="37" visible="0">
   <data encoding="base64" compression="zlib">
-   eJztz7ENwCAAA0F2Yobsv1IqGqoUWFbQWbreP58xJgAAAAAcsNb+kWja1/6V6rq97e99t7Z9Xftnsq/9MdnX/pfsa39L9rV/pfrafxJ97Q9AzguNX5Z2
+   eJzt0cEJACAMBEF7sgb7b8mXH0FRMBw5N7D/G1JbKZWIiIiIKGHj1DuiXG62+dR7Im1OvpXJwbizZfWdnHpjpFW96aVNvSHyZ+od2O5t6g2Y6IffudpcXa42RxM2IspeB+3yoi4=
   </data>
  </layer>
 </map>

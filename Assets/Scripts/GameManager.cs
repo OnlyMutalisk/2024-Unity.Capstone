@@ -18,10 +18,10 @@ public static class GameManager
     public static int[] turns = new int[]
     {
         9999, // map0
-        10, // map1
+        9999, // map1
         12, // map2
         13, // map3
-        14, // map4
+        20, // map4
         15, // map5
     };
 
@@ -90,7 +90,7 @@ public static class GameManager
     public static int visionRange_Knight = 3;
 
     // Bishop 의 스텟을 조정합니다.
-    public static float HP_Bishop = 10;
+    public static float HP_Bishop = 15;
     public static int damage_Bishop = 1;
     public static int action_Bishop = 4;
     public static int range_Bishop = 1;

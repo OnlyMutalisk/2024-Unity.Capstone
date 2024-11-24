@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
+
     // 플레이어 초기 위치는 Transform 0, 0 기준으로 고정입니다.
     public static int i;
     public static int j;
 
     public Transform transform;
+    public SpriteRenderer sprite;
     public static Transform pos;
     public static bool isMove;
     public static int maxAction;
@@ -15,6 +18,8 @@ public class Player : MonoBehaviour
     public static int life;
     public static int shield = 0;
     public static Animator anim;
+
+    private void Awake() { instance = this; }
 
     private void Start()
     {

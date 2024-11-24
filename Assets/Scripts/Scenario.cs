@@ -103,6 +103,43 @@ public class Scenario : MonoBehaviour
 
                 break;
             case 1:
+                turn.SetActive(false);
+                inventory.SetActive(false);
+                vision.SetActive(false);
+                knight.SetActive(false);
+                bishop.SetActive(false);
+                rook.SetActive(false);
+                skill.SetActive(false); turn_script.controller.Remove(skill);
+                Player.action = 2;
+                OnMsg("폰을 눌러 이동하세요 !", 999f);
+                OnMark(pawn, 999f);
+
+                // 폰을 누를 때 까지 Stop
+                while (Grid.GetTile(Player.i - 1, Player.j).GetComponent<Image>().sprite.name != "Tile_Select") yield return new WaitForSeconds(0.1f);
+                OnMsg("남은 행동력이 2 이므로\n2칸 이내로 이동할 수 있습니다.", 999f);
+                OnMark(action, 999f);
+                // 액션 버튼 뽑아버리기
+
+                // 다시 내 턴 될 때 까지 Stop
+                while (Player.action != Player.maxAction) yield return new WaitForSeconds(0.1f);
+                OnMsg("아직 깨어난 몬스터가 없으므로\n다시 당신의 턴 입니다.", 5f);
+                OffMark();
+
+                // 적이 깨어날 때 까지 Stop
+                while (Mob.Mobs[0].isSleep == true) yield return new WaitForSeconds(0.1f);
+                OnMsg("적이 깨어나 턴을 부여받습니다.", 2f);
+
+                // 다시 나의 턴이 될 때 까지 Stop
+                while (Player.action != Player.maxAction) yield return new WaitForSeconds(0.1f);
+                pawn.SetActive(false);
+                OnMsg("적을 꾸욱 눌러보세요.", 999f);
+
+                // 적을 꾸욱 누를 때 까지 Stop
+                while (Mob.Mobs[0].transform.Find("Enemy_Vision").gameObject.active == false) yield return new WaitForSeconds(0.1f);
+                OnMsg("영역 이내로 들어가면 적이 깨어납니다.", 2f);
+
+                break;
+            case 2:
                 inventory.SetActive(false);
                 vision.SetActive(false);
                 bishop.SetActive(false);
@@ -136,23 +173,38 @@ public class Scenario : MonoBehaviour
                 message_top.transform.position = new Vector2(pos.x, pos.y + 25);
 
                 break;
-            case 2:
+            case 3:
                 inventory.SetActive(false);
+                pawn.SetActive(false);
+                knight.SetActive(false);
+                bishop.SetActive(false);
+                rook.SetActive(false);
+                skill.SetActive(false); turn_script.controller.Remove(skill);
                 OnMsg("적들이 깨지않게 조심히 움직여야 합니다.\nVision 을 켜 적의 시야를 확인하세요.", 999f);
                 OnMark(vision, 999f);
 
                 // Vision 킬 때 까지 STOP
                 while (Mob.Mobs[0].gameObject.transform.Find("Enemy_Vision").gameObject.active == false) yield return new WaitForSeconds(0.1f);
-                OnMsg("비숍으로 이동하는편이\n좋을 것 같습니다.", 999f);
+                OnMsg("비숍으로 움직이는게 좋을 것 같습니다.", 999f);
+                bishop.SetActive(true);
                 OnMark(bishop, 999f);
+
+                // 비숍 누를 때 까지 STOP
+                while (Grid.GetTile(Player.i - 1, Player.j - 1).GetComponent<Image>().sprite.name != "Tile_Select") yield return new WaitForSeconds(0.1f);
+                OnMsg("적의 시야를 넘어 걸리지 않고 이동하세요.", 999f);
+                OnMark(Grid.GetTile(Player.i - 3, Player.j - 3), 999f);
 
                 // 다음 아무 행동까지 STOP
                 while (Player.action == Player.maxAction) yield return new WaitForSeconds(0.1f);
                 OnMsg("모든 적을 섬멸하세요.", 3f);
+                pawn.SetActive(true);
+                knight.SetActive(true);
+                rook.SetActive(true);
                 OffMark();
 
                 break;
-            case 3:
+            case 4:
+                skill.SetActive(false); turn_script.controller.Remove(skill);
                 OnMsg("실드를 획득하세요.", 999f);
                 int shortest = 999;
                 GameObject target = null;

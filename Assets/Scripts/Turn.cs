@@ -8,6 +8,7 @@ public class Turn : MonoBehaviour
     public TextMeshProUGUI turn;
     public GameObject lose;
     public GameObject win;
+    public GameObject life;
     public List<GameObject> controller;
     public static bool isMyTurn = true;
     private bool isStart = true;
@@ -43,7 +44,8 @@ public class Turn : MonoBehaviour
     private IEnumerator Lose()
     {
         Player.anim.SetBool("isDeath", true);
-        yield return new WaitForSeconds(3f);
+        life.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1.5f);
         lose.SetActive(true);
     }
 
@@ -71,6 +73,7 @@ public class Turn : MonoBehaviour
             Tile.tiles.Clear();
             Tile.origins.Clear();
         }
+        Vision.instance.VisionOnOff(false);
 
         Scenario.instance.OnMsg(GameManager.msg_turn, 999f);
         isMyTurn = false;
