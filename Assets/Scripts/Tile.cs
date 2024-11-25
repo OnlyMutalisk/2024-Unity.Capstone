@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ public class Tile : MonoBehaviour
     public int parentsCount; // 모든 부모 경로 타일 수
     public Tile parentsTile; // 부모 경로 타일
     public GameObject meteor;
+    public GameObject explosion;
     public Vector3 pos;
     public bool isWall = false;
     public static int cost;
@@ -53,7 +55,7 @@ public class Tile : MonoBehaviour
     {
         if (GameManager.playerAction == GameManager.PlayerAction.Move) { Move(); }
         if (GameManager.playerAction == GameManager.PlayerAction.Attack) { Attack(); }
-        if (GameManager.playerAction == GameManager.PlayerAction.Skill) { Skill(); }
+        if (GameManager.playerAction == GameManager.PlayerAction.Skill) { StartCoroutine(Skill()); }
         if (GameManager.playerAction == GameManager.PlayerAction.Skill)
         {
             // Player.Skill();
@@ -149,7 +151,7 @@ public class Tile : MonoBehaviour
     /// <summary>
     /// Tile_Select_Skill 타일 터치 시, 스킬 범위 내 적 유닛에게 데미지를 입힙니다.
     /// </summary>
-    public void Skill()
+    public IEnumerator Skill()
     {
         if (gameObject.GetComponent<Image>().sprite.name == "Tile_Select_Skill")
         {
@@ -165,10 +167,11 @@ public class Tile : MonoBehaviour
 
                     if (Player.action >= GameManager.cost_Skill)
                     {
-                        StartCoroutine(CorMeteor());
+                        yield return StartCoroutine(CorMeteor());
                         Player.action -= GameManager.cost_Skill;
                         mob.HP -= GameManager.skillDamage_Char;
                         mob.isSleep = false;
+                        mob.anim.SetBool("isHurt", true);
                         if (mob.HP <= 0) { KillMob(mob); }
                         break;
                     }
@@ -191,11 +194,13 @@ public class Tile : MonoBehaviour
 
         while (Vector3.Distance(meteor.transform.position, transform.position) > 0.1f)
         {
-            meteor.transform.position = Vector3.MoveTowards(meteor.transform.position, transform.position, 300 * Time.deltaTime);
+            meteor.transform.position = Vector3.MoveTowards(meteor.transform.position, transform.position, 150 * Time.deltaTime);
             yield return null;
         }
 
         Destroy(meteor);
+        Animation_CameraShake.instance.StartShake();
+        Effect.instance.Play(Effects.explosion_6, meteor.transform.position, 90, 3);
     }
 
     /// <summary>

@@ -155,6 +155,7 @@ MonoBehaviour:
   parentsCount: 0
   parentsTile: {fileID: 0}
   meteor: {fileID: 2960573888821080661, guid: ce9d8a50c270f8447ac89a0fc9342e44, type: 3}
+  explosion: {fileID: 4426936777902826616, guid: 5e24ff1649632904dbe372d37b306a08, type: 3}
   pos: {x: 0, y: 0, z: 0}
   isWall: 0
 --- !u!114 &407689297612083140
