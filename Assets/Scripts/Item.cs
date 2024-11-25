@@ -5,7 +5,8 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public static List<Item> Items = new List<Item>();
-    public Sprite sprite; // 인스턴스화 시 할당됨
+    public Sprite sprite;
+    public MonoBehaviour animation_wave;
     public int i;
     public int j;
 
@@ -27,6 +28,8 @@ public class Item : MonoBehaviour
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, GameManager.speed_Mob * Time.deltaTime);
             yield return new WaitForSeconds(0.01f);
         }
+
+        animation_wave.enabled = true;
     }
 
     /// <summary>

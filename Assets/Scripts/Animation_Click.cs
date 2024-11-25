@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClickEffect : MonoBehaviour
+public class Animation_Click : MonoBehaviour
 {
     public float scaleFactor = 1.2f;
     public float animationDuration = 0.2f;

@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4401397097901367149}
   - component: {fileID: 1416280764422073276}
+  - component: {fileID: 7827385997112741775}
   m_Layer: 0
   m_Name: Item_Shield
   m_TagString: Untagged
@@ -143,5 +144,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
+  animation_wave: {fileID: 7827385997112741775}
   i: 0
   j: 0
+--- !u!114 &7827385997112741775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3677388844902905831}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576de602f5f70d542abe10a0540793b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  size: 3

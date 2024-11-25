@@ -140,7 +140,7 @@ public class Mob : MonoBehaviour
         // 실드를 우선 감소시키고 체력을 감소시킵니다.
         Audio.instance.PlaySfx(Audio.Sfx.Attack_Mob);
         Player.anim.SetBool("isHurt", true);
-        CameraShake.instance.StartShake();
+        Animation_CameraShake.instance.StartShake();
         if (Player.shield >= calcDamage)
         {
             Player.shield -= calcDamage;

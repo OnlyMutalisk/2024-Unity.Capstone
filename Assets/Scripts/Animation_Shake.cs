@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class CameraShake : MonoBehaviour
+public class Animation_CameraShake : MonoBehaviour
 {
-    public static CameraShake instance;
+    public static Animation_CameraShake instance;
     public void Awake() { instance = this; }
 
     public float duration = 0.2f;
