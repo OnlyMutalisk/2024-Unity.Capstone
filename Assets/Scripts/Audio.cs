@@ -7,12 +7,12 @@ public class Audio : MonoBehaviour
 {
     public static Audio instance;
 
-    [Header("#BGM")]
+    [Header("# BGM")]
     public AudioClip bgmClip;
     public float bgmVolume;
     AudioSource bgmPlayer;
 
-    [Header("#SFX")]
+    [Header("# SFX")]
     public AudioClip[] sfxClips;
     public float sfxVolume;
     public int channels;
@@ -33,7 +33,6 @@ public class Audio : MonoBehaviour
         instance = this;
         Init();
     }
-
     public void Update()
     {
         // PC 클릭
@@ -52,7 +51,6 @@ public class Audio : MonoBehaviour
             }
         }
     }
-
     public void Init()
     {
         // 배경음 플레이어 초기화
@@ -88,7 +86,6 @@ public class Audio : MonoBehaviour
             bgmPlayer.Stop();
         }
     }
-
     public void PlaySfx(Sfx sfx)
     {
         for (int index = 0; index < sfxPlayers.Length; index++)
@@ -99,6 +96,20 @@ public class Audio : MonoBehaviour
 
             channelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+            sfxPlayers[loopIndex].Play();
+            break;
+        }
+    }
+    public void PlaySfx(AudioClip sfx)
+    {
+        for (int index = 0; index < sfxPlayers.Length; index++)
+        {
+            int loopIndex = (index + channelIndex) % sfxPlayers.Length;
+            if (sfxPlayers[loopIndex].isPlaying)
+                continue;
+
+            channelIndex = loopIndex;
+            sfxPlayers[loopIndex].clip = sfx;
             sfxPlayers[loopIndex].Play();
             break;
         }

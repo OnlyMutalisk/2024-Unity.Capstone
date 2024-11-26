@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 using Image = UnityEngine.UI.Image;
 
 public class Mob : MonoBehaviour
@@ -35,6 +36,16 @@ public class Mob : MonoBehaviour
     public GameObject WakeUp;
     public Animator anim;
     public SpriteRenderer sprite;
+    [Header("원거리 유닛을 위한 투사체와 피격 이펙트 입니다.\n할당하지 않아도 작동합니다.")]
+    public GameObject projectile;
+    public float speed = 130f;
+    public float size_projectiole = 1f;
+    public AudioClip projectileSound;
+    public GameObject hitEffect;
+    public float size_effect = 30f;
+    public int playCount = 1;
+    public AudioClip hitEffectSound;
+
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
     private List<UnityEngine.UI.Image> shields = new List<UnityEngine.UI.Image>();
     private static List<UnityEngine.UI.Image> s_hearts = new List<UnityEngine.UI.Image>();
@@ -139,6 +150,33 @@ public class Mob : MonoBehaviour
         float delay = anim.GetCurrentAnimatorStateInfo(0).length - 0.1f;
         if (delay < 0) delay = 0;
         yield return new WaitForSeconds(delay);
+
+        // 투사체 존재 시 발사합니다.
+        IEnumerator CorShoot()
+        {
+            if (projectileSound != null) Audio.instance.PlaySfx(projectileSound);
+            GameObject proj = Instantiate(projectile, transform.position, Quaternion.identity);
+            proj.GetComponent<SpriteRenderer>().sortingLayerName = "Entity";
+            proj.GetComponent<SpriteRenderer>().sortingOrder = 999;
+            proj.transform.localScale *= size_projectiole;
+            Vector3 target = Player.pos.position;
+
+            while (proj.transform.position != target)
+            {
+                proj.transform.position = Vector3.MoveTowards(proj.transform.position, target, speed * Time.deltaTime);
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            Destroy(proj);
+            if (hitEffect != null) Effect.instance.Play(hitEffect, target, size_effect, playCount);
+            if (hitEffectSound != null) Audio.instance.PlaySfx(hitEffectSound);
+        }
+        if (projectile != null)
+        {
+            if (anim != null) anim.SetBool("isAttack", false);
+            yield return StartCoroutine(CorShoot());
+            if (anim != null) anim.SetBool("isAttack", true);
+        }
 
         // 실드를 우선 감소시키고 체력을 감소시킵니다.
         Audio.instance.PlaySfx(Audio.Sfx.Attack_Mob);

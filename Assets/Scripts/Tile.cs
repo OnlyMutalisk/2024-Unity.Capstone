@@ -167,8 +167,8 @@ public class Tile : MonoBehaviour
 
                     if (Player.action >= GameManager.cost_Skill)
                     {
-                        yield return StartCoroutine(CorMeteor());
                         Player.action -= GameManager.cost_Skill;
+                        yield return StartCoroutine(CorMeteor());
                         mob.HP -= GameManager.skillDamage_Char;
                         mob.isSleep = false;
                         mob.anim.SetBool("isHurt", true);

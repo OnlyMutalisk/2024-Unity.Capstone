@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using UnityEngine.UIElements;
 using static UnityEditor.Progress;
+using TMPro.Examples;
 
 public class Effect : MonoBehaviour
 {
@@ -18,6 +21,10 @@ public class Effect : MonoBehaviour
     {
         StartCoroutine(CorPlay(effect, pos, scale, time));
     }
+    public void Play(GameObject effect, Vector2 pos, float scale, int time)
+    {
+        StartCoroutine(CorPlay(effect, pos, scale, time));
+    }
     private IEnumerator CorPlay(Effects effect, Vector2 pos, float scale, int time)
     {
         // Enum 과 이펙트 프리팹 바인딩
@@ -25,6 +32,10 @@ public class Effect : MonoBehaviour
         {
             if (item.name == effect.ToString())
             {
+                // 레이어 조정
+                item.GetComponent<SpriteRenderer>().sortingLayerName = "Entity";
+                item.GetComponent<SpriteRenderer>().sortingOrder = 999;
+
                 // 크기 조정
                 Vector2 originScale = item.transform.localScale;
                 GameObject prefab = Instantiate(item, pos, Quaternion.identity);
@@ -41,6 +52,26 @@ public class Effect : MonoBehaviour
                 break;
             }
         }
+    }
+    private IEnumerator CorPlay(GameObject effect, Vector2 pos, float scale, int time)
+    {
+        // 레이어 조정
+        effect.GetComponent<SpriteRenderer>().sortingLayerName = "Entity";
+        effect.GetComponent<SpriteRenderer>().sortingOrder = 999;
+
+        // 크기 조정
+        Vector2 originScale = effect.transform.localScale;
+        GameObject prefab = Instantiate(effect, pos, Quaternion.identity);
+        prefab.transform.localScale = new Vector2(originScale.x * scale, originScale.y * scale);
+
+        // 시간 조정
+        Animator anim = prefab.GetComponent<Animator>();
+        AnimatorClipInfo[] clipInfo = anim.GetCurrentAnimatorClipInfo(0);
+        AnimationClip clip = clipInfo[0].clip;
+        yield return new WaitForSeconds(clip.length * time);
+
+        // 프리팹 제거
+        Destroy(prefab);
     }
 }
 
