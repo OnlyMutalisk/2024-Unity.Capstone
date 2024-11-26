@@ -274,6 +274,7 @@ public class Tile : MonoBehaviour
         Grid.GetTile(mob.i, mob.j).GetComponent<Tile>().isWall = false;
         Mob.Mobs.Remove(mob);
         mob.anim.SetBool("isDeath", true);
+        if (mob is Chest) ((Chest)mob).DropItem();
         StartCoroutine(CorMobDestroy(mob));
     }
 

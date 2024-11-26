@@ -135,7 +135,10 @@ public class Mob : MonoBehaviour
         int calcDamage = (int)Tile.CalcDamage(damage, Grid.GetTile(i, j), Grid.GetTile(Player.i, Player.j));
 
         // 공격 애니메이션 길이 만큼 지연시킵니다.
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(0.1f);
+        float delay = anim.GetCurrentAnimatorStateInfo(0).length - 0.1f;
+        if (delay < 0) delay = 0;
+        yield return new WaitForSeconds(delay);
 
         // 실드를 우선 감소시키고 체력을 감소시킵니다.
         Audio.instance.PlaySfx(Audio.Sfx.Attack_Mob);

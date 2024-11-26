@@ -5,6 +5,7 @@ using UnityEngine;
 // 몬스터의 이동 타입입니다.
 public enum RangeType
 {
+    Chest,
     Manhattan,
     Chebyshev,
     Pawn,

@@ -29,7 +29,11 @@ public class Turn : MonoBehaviour
             if (isStart == true) { isStart = false; StartCoroutine(UnitLoad()); }
             if (Player.action <= 0) { Player.action = Player.maxAction; StartCoroutine(EnemyTurn()); }
             if (Player.life <= 0 || turns == 0) { StartCoroutine(Lose()); break; }
-            if (Mob.Mobs.Count == 0 && Mob.mobCounting == true) { StartCoroutine(Win()); break; }
+
+            // 상자를 제외한 몬스터의 수가 0 이면 승리
+            int chestsCount = 0;
+            foreach (var item in Mob.Mobs) if (item is Chest) chestsCount++;
+            if (Mob.Mobs.Count - chestsCount == 0 && Mob.mobCounting == true) { StartCoroutine(Win()); break; }
             turn.text = turns.ToString();
         }
     }

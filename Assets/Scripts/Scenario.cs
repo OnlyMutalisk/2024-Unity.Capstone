@@ -235,6 +235,20 @@ public class Scenario : MonoBehaviour
                 OnMsg("모든 적을 물리치세요 !", 3f);
 
                 break;
+            case 5:
+                OnMsg("다른 방법이 없습니다.\n스킬을 사용해 적을 제거하세요 !", 999f);
+                OnMark(skill, 999f);
+
+                // Skill 버튼을 누를 때 까지 Stop
+                while (Grid.GetTile(Player.i - 2, Player.j + 1).GetComponent<Image>().sprite.name != "Tile_Select_Skill") yield return new WaitForSeconds(0.1f);
+                OnMark(Grid.GetTile(Player.i - 2, Player.j + 1), 999f);
+
+                // Skill 을 사용할 때 까지 Stop
+                while (Player.action == Player.maxAction) yield return new WaitForSeconds(0.1f);
+                OffMsg();
+                OffMark();
+
+                break;
         }
     }
 

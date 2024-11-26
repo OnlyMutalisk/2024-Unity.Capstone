@@ -71,6 +71,11 @@ public static class GameManager
     public static RangeType rangeType_enemy = RangeType.Chebyshev;
     public static RangeType rangeType_char = RangeType.Chebyshev;
 
+    // Chest 스텟을 조정합니다.
+    public static float HP_Chest = 10;
+    public static float height_ItemBounce = 20f;
+    public static float duration_ItemBounce = 0.5f;
+
     // Pawn 의 스텟을 조정합니다.
     public static float HP_Pawn = 10;
     public static int damage_Pawn = 2;

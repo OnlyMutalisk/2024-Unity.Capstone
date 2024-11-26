@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="55" height="37" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="14">
+ <tileset firstgid="1" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Atlas-Props-sheet1.tsx"/>
+ <tileset firstgid="3521" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Tileset-Terrain-new grass.tsx"/>
+ <tileset firstgid="7481" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Tileset-Terrain-new grass - transparency.tsx"/>
+ <tileset firstgid="11441" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Tileset - wall1.tsx"/>
+ <tileset firstgid="11681" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Tileset - wall1 - transparency.tsx"/>
+ <tileset firstgid="11921" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/test.tsx"/>
+ <tileset firstgid="11940" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/platform - water to grass(transparency) - river orientation.tsx"/>
+ <tileset firstgid="12810" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/platform - water to grass - river orientation.tsx"/>
+ <tileset firstgid="13680" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/platform - grass(transparency) to water.tsx"/>
+ <tileset firstgid="14512" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/platform - grass(transparency) - coast.tsx"/>
+ <tileset firstgid="15329" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/platform - grass to water.tsx"/>
+ <tileset firstgid="16199" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/platform - grass - coast.tsx"/>
+ <tileset firstgid="17185" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/hole3.tsx"/>
+ <tileset firstgid="17425" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/hole2.tsx"/>
+ <tileset firstgid="17665" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/hole1.tsx"/>
+ <tileset firstgid="17905" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Beach-transition tiles between coast platform and beach.tsx"/>
+ <tileset firstgid="18165" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/beach - with thick foam.tsx"/>
+ <tileset firstgid="18675" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/beach - no thick foam.tsx"/>
+ <tileset firstgid="19185" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Atlas-props-sheet3-sprites.tsx"/>
+ <tileset firstgid="19379" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Atlas-Props-sheet3.tsx"/>
+ <tileset firstgid="20523" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Atlas-Props-sheet2-sprites.tsx"/>
+ <tileset firstgid="20820" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Atlas-Props-sheet2.tsx"/>
+ <tileset firstgid="24340" source="../../../RafaelMatos/ERW-Grassland 2.0 V1.7.1/TiledMap Editor/Tilesets/Atlas-Props-sheet1-sprites.tsx"/>
+ <group id="5" name="BackGround">
+  <layer id="8" name="Sea" width="55" height="37">
+   <data encoding="base64" compression="zlib">
+   eJxt2FturDAQBNDsjF8MBva/m5tIlO6h5I/RBMbud1dX59l+fs7fz/V+j9/P/X7+/n7e9/v77u/c8b7/+57vb3k+3++8y/2JnueVfbzPkTnQle/5fi7siYzJ2QOZ9/t+Lx0D/3LO95GfOzu6E5OJ3Ngw3u/7tUX/ou9BXuzN2fg6OOdvd8lexSI2x3dzsG/fPMSmyfvBucQivp8Lfff2jUvXTeIfHTvy5yI2xj9+PuhMfOKXMY0tuZt4Wldj+18H2pQzsSl5jQ/JkzVnzVvbydXgTGotvpnTxORCR2I2OJfcarf5OtFp/RzoSP0o++B8bLQfY4s9FRmJf2J2Itf31lrsTd2Y78i/tm9fr+oh58UrZURfYmIO42NkiRknd/OsP8lF/jaO9sK+fe2ZfMRS6/Kos42TxiI22J/m5KqP9yJTfz0TOdrY2Bk9iW3Xa2LRtXNsXxtPdHac4ps9ePC50NkY3f0sDkR/cho/zvpbueZmR4+z5OGc+dnrb2vTmGqDNTnrt/bHnFm7YrW1nrjHRms1uO7sEEOCOys8nTyfnInu2BXfckescO6bn8ZGZ4F9IQ/ovgwWxCbrWtyxbpw32qCPuecMFUfMb3Lac1L8b7zXx8Tx4p29Kr5Fhr0mFxKbWr/3R91J/Gb9bv0412K/NSeXaOzs2PW8bxse3utjz5n4Ze9Zj2P7xlG8bGxoHhAfZ713/tvj8enit+ZwXVviQNeW8ym+yWF7Rsdf51zz4cYRa1e+sfMsv2gubg82/xWPndnOWOfh5G85cftxIDtn5djqzh13hdht/cmXjtLfWNc11PWnPmfbLFnaGOxTjn65H4hJzQe6Hif6UjfGW65oXYh9vf8dpU/eZl+Z4xUXsS7lYc5icVfu7syyf+TW3jfH1lpz6baz8+we66xwFsjDos98xO7ed7RntX87Q+Uy9obx7bkjdthbHceeoc3xjJ07YO/mzn2x1NlrnuSb8mzn7yi9F3obf8RL82qf5px17w5t/0WWuVD3jkw5efOOnpHNe3NfntD7S/eBdawP9nvvHfKfnNc/+Yq9JN+9t2893SVDLm28mv81RxEnxSr7w5na2Cm+moPm2O6evX/ZT7FZfO29tmvM3bz5V/euXCW1aU1bP2KR881dTUwx7rPu9KyUA531rudO490sfS3LvFpLzg3tlIfIE93htMn9RtzTT3clZ5a95Yw3hnJLe6dxxjj0Tign104xMO/lJs4PbZb3tC3Ns50fxklMd55dJde6c4Zpl9zY/l7xIuNp3bhHxu6OmbF1Trtz9L4hXohP8qzmg43p4oh5Xc0u7ZJfuyvrj33e+4w7l/F1j0icn+1rW/Na95bmzXKvtstait4LGfIUZ3fzt/bJuu9Z4v4hB0kMtNn90LltPOT1Yr31YazV0VxRO8ydnEX99+J881/9cb8ynlfJ81mMFaM7d8bKWeeu1ztR16V1JKeT7zXfcS7K02Jr8KL3qfZTDJjIc4bc/C6W2Sv2mPPRfk9s5CxH3Wtuai1b/8bWWr3r2Tmb+/KE+Nl96F35uxhhnZjDngfyMvG0MVvcS7xXnExOfKIvOT62b87dfyKrZ5P15v+utN19pXm4tog9zdnu0u3MWO1k1q2xMB/2wWpeiEPipjXpPJVDuav6Xm7jTLp4ll83V40v1vXD7+mHfAb6tNd+MG7N05yrxtoea77Ws8w+iG5ngnhuPMUw42WMx+Kce5M6xWDjseqRyPt79w9YCE0i
+  </data>
+  </layer>
+  <layer id="7" name="Ground" width="55" height="37">
+   <data encoding="base64" compression="zlib">
+   eJztV9tNw0AQvFpo5JT0kBqQDHyHFiJC+KcFlBj+3QKyL/zTAtJBAdzKO8pyMnYiInuRdqRVHrqLdjL7GDtnMBgMBoPBYDAYDIYuFN6521kbFb8++KmzOg9Wicuzb2OfYjl37uufcpM6PaZYp8875vY6O/433hXqG1M+TYqSdWqYV0ixSXE9kC/xWvMdOk//z9CdMfE0a7XacJ7E855fX3ryvOPzQdwJA3fGRs191QhOpKFL3739kif0onMX8zbo/KLnzpSg+lwcmV/N9Utaa+uzcyCytjfcZ1o5YtZVHKfkSXsjnDBXxwbmSeAeQk0WrMmVP0TOOyqvT+S3y3K8ZM4yujjg3IdS7Si/MtNtxd8FMUNDBz+6K+9pAe2pSngSuZ+gJ3zYTuwy2V+1Ql5yT9Hs//Q//SP2cym4Yadp95mkS84HAG/0GbhteKbk3qo4wqNNCZnflvVCj+F9l5eGvpr8Vo4oNIT3AB/4RTz/4Jysa2091wfUbCN4ldmshx/V2n+FP3iSrp7Bbkd9aq69HLXQJ39ukzW3VOz1hxB5vsvct163X/wLIus1hVbfrVPc/Q==
+  </data>
+  </layer>
+  <layer id="18" name="Ground2" width="55" height="37">
+   <data encoding="base64" compression="zlib">
+   eJzt0VEJgEAQBNAtIeiHRtIsYgW7KNrAMGZxSxwH53sw/zNMBAAAAH90jBH3WLtFGc8UsU+1W5Tx5mdXZmvsuzX3nJk+f1sa+67LPXNmaGwXAAAAZX1FUAgl
+  </data>
+  </layer>
+  <layer id="17" name="Deco" width="55" height="37">
+   <data encoding="base64" compression="zlib">
+   eJzt1s0JwkAQBeDXQoIV7HoSPHnQHiwgAYVELEcl2IlErMiDeLAEwZVdIUT3Etg/eR8MgTnNZDJDACIiIrfaZegKiIjixjtJRC6dMmCX62iz0NUMY7uTe9XTwUSZ+62JKEVyE7oCt241cK0DF+FII4GVinlvhutKP1P/n7wL4CK+82dL/kOY97GI+Nsu1NyO8nf+2ckXlb+afJlGPJchyt6MJn/U33sHH51ds+3eKMGeZ2N9P7dmfo1lJ4mIYvUC+n4fug==
+  </data>
+  </layer>
+ </group>
+ <group id="6" name="ForeGround">
+  <layer id="10" name="Deco" width="55" height="37">
+   <data encoding="base64" compression="zlib">
+   eJzt0zERADAMxLCH1msIhD+aQuiYIRICL04AAAAAAAD4qU5uT1fAHsdvLPcANrMBtg==
+  </data>
+  </layer>
+ </group>
+ <layer id="13" name="Map0" width="55" height="37" visible="0" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJACEMRUF7sobtv6W9irA3Q9bPCEOuecT5jDEBAAAAALjK/rr3qWxL60u+X2LT2tW9R+W9Ev9katdXY/cuFW3r5P/c6rwXnAmpNg==
+  </data>
+ </layer>
+</map>
