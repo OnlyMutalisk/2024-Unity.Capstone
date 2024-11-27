@@ -5,19 +5,21 @@ using UnityEngine;
 
 public class Turn : MonoBehaviour
 {
+    public static Turn instance;
     public TextMeshProUGUI turn;
     public GameObject lose;
     public GameObject win;
     public GameObject life;
     public List<GameObject> controller;
     public static bool isMyTurn = true;
+    public int turns = 10;
     private bool isStart = true;
-    private int turns = 10;
 
     private void Awake()
     {
         isMyTurn = true;
         turns = GameManager.turns[Map.index];
+        instance = this;
         StartCoroutine(TurnScanner());
     }
 
@@ -27,7 +29,7 @@ public class Turn : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             if (isStart == true) { isStart = false; StartCoroutine(UnitLoad()); }
-            if (Player.action <= 0) { Player.action = Player.maxAction; StartCoroutine(EnemyTurn()); }
+            if (Player.action <= 0 && Tile.isNowSkill == false) { Player.action = Player.maxAction; StartCoroutine(EnemyTurn()); }
             if (Player.life <= 0 || turns == 0) { StartCoroutine(Lose()); break; }
 
             // 상자를 제외한 몬스터의 수가 0 이면 승리

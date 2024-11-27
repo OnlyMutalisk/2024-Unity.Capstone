@@ -59,6 +59,10 @@ public class Item : MonoBehaviour
             case "Item_Shield":
                 Shield();
                 break;
+
+            case "Item_Turn":
+                AddTurn();
+                break;
         }
     }
 
@@ -80,5 +84,13 @@ public class Item : MonoBehaviour
         }
 
         Mob.DrawLife();
+    }
+
+    /// <summary>
+    /// Turn 을 증가시킵니다.
+    /// </summary>
+    private void AddTurn()
+    {
+        Turn.instance.turns += 3;
     }
 }

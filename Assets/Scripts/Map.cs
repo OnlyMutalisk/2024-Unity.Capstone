@@ -16,8 +16,9 @@ public class Map : MonoBehaviour
     public GameObject[] enemy_bishop;
     public GameObject enemy_chest;
     public GameObject item_shield;
+    public GameObject item_turn;
     public GameObject tiled;
-    public static int index = 5;
+    public static int index = 7;
     private Dictionary<string, string> ColorToTile = new Dictionary<string, string>();
     private Dictionary<string, GameObject> TextToUnit = new Dictionary<string, GameObject>();
 
@@ -35,6 +36,7 @@ public class Map : MonoBehaviour
         TextToUnit.Add("E_B", enemy_bishop[index]);
         TextToUnit.Add("E_C", enemy_chest);
         TextToUnit.Add("I_S", item_shield);
+        TextToUnit.Add("I_T", item_turn);
 
         LoadMap("Map.xlsx", index);
     }

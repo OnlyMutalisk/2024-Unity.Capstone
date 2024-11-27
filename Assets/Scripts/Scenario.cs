@@ -249,6 +249,12 @@ public class Scenario : MonoBehaviour
                 OffMark();
 
                 break;
+            case 6:
+                OnMsg("한 가지 팁을 주자면,\n상대 턴에도 아이템을 사용할 수 있습니다.", 6f);
+                break;
+            case 7:
+                OnMsg("이번 맵은 Turn 이 부족합니다.\nTurn 아이템을 파밍하세요. ", 6f);
+                break;
         }
     }
 

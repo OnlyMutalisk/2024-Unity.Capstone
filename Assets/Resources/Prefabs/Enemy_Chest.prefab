@@ -147,8 +147,17 @@ MonoBehaviour:
   WakeUp: {fileID: 1953236683446661525}
   anim: {fileID: 6695908068467678122}
   sprite: {fileID: 8536658735662822100}
+  projectile: {fileID: 0}
+  speed: 130
+  size_projectiole: 1
+  projectileSound: {fileID: 0}
+  hitEffect: {fileID: 0}
+  size_effect: 30
+  playCount: 1
+  hitEffectSound: {fileID: 0}
   items:
   - {fileID: 3677388844902905831, guid: 2480e198bc0baa04aaacd6244d5922c8, type: 3}
+  - {fileID: 3677388844902905831, guid: 73f9182911bcea24a8311331752f0c5f, type: 3}
 --- !u!1 &4633867723161378893
 GameObject:
   m_ObjectHideFlags: 0

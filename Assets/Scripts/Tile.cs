@@ -28,6 +28,7 @@ public class Tile : MonoBehaviour
     public static List<Image> tiles = new List<Image>();
     public static List<Sprite> origins = new List<Sprite>();
     public static bool isTileOn = false;
+    public static bool isNowSkill = false;
 
     public void Start()
     {
@@ -167,8 +168,10 @@ public class Tile : MonoBehaviour
 
                     if (Player.action >= GameManager.cost_Skill)
                     {
+                        isNowSkill = true;
                         Player.action -= GameManager.cost_Skill;
                         yield return StartCoroutine(CorMeteor());
+                        isNowSkill = false;
                         mob.HP -= GameManager.skillDamage_Char;
                         mob.isSleep = false;
                         mob.anim.SetBool("isHurt", true);

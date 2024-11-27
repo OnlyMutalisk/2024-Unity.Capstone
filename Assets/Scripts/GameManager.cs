@@ -23,6 +23,13 @@ public static class GameManager
         13, // map3
         20, // map4
         15, // map5
+        16, // map6
+        5, // map7
+        15, // map8
+        15, // map9
+        15, // map10
+        15, // map11
+        15, // map12
     };
 
     // Zoom 설정 입니다.
