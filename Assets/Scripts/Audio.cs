@@ -23,33 +23,22 @@ public class Audio : MonoBehaviour
     {
         Attack_Mob,
         Attack_Player,
-        Click,
         Message,
-        Move_Player
+        Move_Player,
+        Item_Shield_Use,
+        Item_Turn_Use,
+        Item_Get,
+        Enemy_Chest_Hit,
+        Enemy_Chest_Pop,
+        Inventory,
+        Skill_Falling,
+        Skill_Explosion
     }
 
     public void Awake()
     {
         instance = this;
         Init();
-    }
-    public void Update()
-    {
-        // PC 클릭
-        if (Input.GetMouseButtonDown(0))
-        {
-            Audio.instance.PlaySfx(Audio.Sfx.Click);
-        }
-
-        // 모바일 터치
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                Audio.instance.PlaySfx(Audio.Sfx.Click);
-            }
-        }
     }
     public void Init()
     {
@@ -75,8 +64,10 @@ public class Audio : MonoBehaviour
         }
     }
 
-    public void PlayBgm(bool isPlay)
+    public void PlayBgm(bool isPlay, float volume = 0.2f)
     {
+        bgmVolume = volume;
+
         if (isPlay)
         {
             bgmPlayer.Play();
@@ -86,8 +77,10 @@ public class Audio : MonoBehaviour
             bgmPlayer.Stop();
         }
     }
-    public void PlaySfx(Sfx sfx)
+    public void PlaySfx(Sfx sfx, float volume = 0.5f, float speed = 1f)
     {
+        sfxVolume = volume;
+
         for (int index = 0; index < sfxPlayers.Length; index++)
         {
             int loopIndex = (index + channelIndex) % sfxPlayers.Length;
@@ -96,12 +89,15 @@ public class Audio : MonoBehaviour
 
             channelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+            sfxPlayers[loopIndex].pitch = speed;
             sfxPlayers[loopIndex].Play();
             break;
         }
     }
-    public void PlaySfx(AudioClip sfx)
+    public void PlaySfx(AudioClip sfx, float volume = 0.5f, float speed = 1f)
     {
+        sfxVolume = volume;
+
         for (int index = 0; index < sfxPlayers.Length; index++)
         {
             int loopIndex = (index + channelIndex) % sfxPlayers.Length;
@@ -110,6 +106,7 @@ public class Audio : MonoBehaviour
 
             channelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfx;
+            sfxPlayers[loopIndex].pitch = speed;
             sfxPlayers[loopIndex].Play();
             break;
         }

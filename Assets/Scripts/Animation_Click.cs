@@ -7,6 +7,7 @@ public class Animation_Click : MonoBehaviour
 {
     public float scaleFactor = 1.2f;
     public float animationDuration = 0.2f;
+    public AudioClip sound;
 
     private Coroutine corLast;
     private Vector3 originalScale;
@@ -30,6 +31,7 @@ public class Animation_Click : MonoBehaviour
 
     public void OnClick()
     {
+        if (sound != null) Audio.instance.PlaySfx(sound);
         if (corLast != null) StopCoroutine(corLast);
         ref_realScale = originalScale;
         corLast = StartCoroutine(CorClick());

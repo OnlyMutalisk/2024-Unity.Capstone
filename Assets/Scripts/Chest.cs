@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Chest : Mob
 {
@@ -27,6 +24,7 @@ public class Chest : Mob
     public void DropItem() { StartCoroutine(CorDrop()); }
     private IEnumerator CorDrop()
     {
+        Audio.instance.PlaySfx(Audio.Sfx.Enemy_Chest_Pop);
         GameObject obj = Instantiate(items[Random.Range(0, items.Length)], transform.position, Quaternion.identity);
         Item item = obj.GetComponent<Item>();
         Item.Items.Add(item);

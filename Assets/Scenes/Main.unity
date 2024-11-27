@@ -926,7 +926,6 @@ GameObject:
   - component: {fileID: 162823944}
   - component: {fileID: 162823947}
   - component: {fileID: 162823946}
-  - component: {fileID: 162823948}
   - component: {fileID: 162823945}
   m_Layer: 5
   m_Name: Down
@@ -1010,7 +1009,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 162823948}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Animation_Click, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
@@ -1060,20 +1059,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162823943}
   m_CullTransparentMesh: 1
---- !u!114 &162823948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162823943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172ec3c0d2f66024c97101cda3d13c01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleFactor: 1.2
-  animationDuration: 0.2
 --- !u!1 &164464289
 GameObject:
   m_ObjectHideFlags: 0
@@ -8102,7 +8087,6 @@ GameObject:
   - component: {fileID: 1830336870}
   - component: {fileID: 1830336873}
   - component: {fileID: 1830336872}
-  - component: {fileID: 1830336874}
   - component: {fileID: 1830336871}
   m_Layer: 5
   m_Name: Up
@@ -8186,7 +8170,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1830336874}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Animation_Click, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
@@ -8236,20 +8220,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830336869}
   m_CullTransparentMesh: 1
---- !u!114 &1830336874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830336869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172ec3c0d2f66024c97101cda3d13c01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleFactor: 1.2
-  animationDuration: 0.2
 --- !u!1 &1839175063
 GameObject:
   m_ObjectHideFlags: 0

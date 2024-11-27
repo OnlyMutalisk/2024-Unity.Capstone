@@ -190,6 +190,7 @@ public class Tile : MonoBehaviour
 
     public IEnumerator CorMeteor()
     {
+        Audio.instance.PlaySfx(Audio.Sfx.Skill_Falling, 0.5f, 3f);
         Vector3 meteorPos = transform.position;
         meteorPos.x += 3 * Grid.cellSize;
         meteorPos.y += 3 * Grid.cellSize;
@@ -203,6 +204,7 @@ public class Tile : MonoBehaviour
 
         Destroy(meteor);
         Animation_CameraShake.instance.StartShake();
+        Audio.instance.PlaySfx(Audio.Sfx.Skill_Explosion);
         Effect.instance.Play(Effects.explosion_6, meteor.transform.position, 90, 3);
     }
 

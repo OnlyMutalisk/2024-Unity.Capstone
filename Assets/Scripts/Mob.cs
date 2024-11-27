@@ -40,10 +40,11 @@ public class Mob : MonoBehaviour
     public GameObject projectile;
     public float speed = 130f;
     public float size_projectiole = 1f;
-    public AudioClip projectileSound;
     public GameObject hitEffect;
     public float size_effect = 30f;
     public int playCount = 1;
+    [Header("몬스터의 공격 음향 입니다.\n할당하지 않아도 작동합니다.")]
+    public AudioClip attackSound;
     public AudioClip hitEffectSound;
 
     private List<UnityEngine.UI.Image> hearts = new List<UnityEngine.UI.Image>();
@@ -144,6 +145,7 @@ public class Mob : MonoBehaviour
         int origin_j = j;
 
         int calcDamage = (int)Tile.CalcDamage(damage, Grid.GetTile(i, j), Grid.GetTile(Player.i, Player.j));
+        if (attackSound != null) Audio.instance.PlaySfx(attackSound);
 
         // 공격 애니메이션 길이 만큼 지연시킵니다.
         yield return new WaitForSeconds(0.1f);
@@ -154,7 +156,6 @@ public class Mob : MonoBehaviour
         // 투사체 존재 시 발사합니다.
         IEnumerator CorShoot()
         {
-            if (projectileSound != null) Audio.instance.PlaySfx(projectileSound);
             GameObject proj = Instantiate(projectile, transform.position, Quaternion.identity);
             proj.GetComponent<SpriteRenderer>().sortingLayerName = "Entity";
             proj.GetComponent<SpriteRenderer>().sortingOrder = 999;

@@ -151,11 +151,11 @@ MonoBehaviour:
   projectile: {fileID: 4101471364751944396, guid: fd43810fe32fdb841a625c6ee90ec2f6, type: 3}
   speed: 250
   size_projectiole: 30
-  projectileSound: {fileID: 0}
   hitEffect: {fileID: 5514470240158617273, guid: 2e62296139c6e4646ab4102988a0c034, type: 3}
   size_effect: 30
   playCount: 3
-  hitEffectSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 1ccc6eb58fdce7940a1b48f415fe141b, type: 3}
+  hitEffectSound: {fileID: 8300000, guid: ff50a389c3221fa4283af66a13571aec, type: 3}
 --- !u!1 &4633867723161378893
 GameObject:
   m_ObjectHideFlags: 0

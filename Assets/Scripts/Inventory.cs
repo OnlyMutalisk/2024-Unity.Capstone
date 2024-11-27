@@ -71,6 +71,7 @@ public class Inventory : MonoBehaviour
 
     public void InvOnOff()
     {
+        Audio.instance.PlaySfx(Audio.Sfx.Inventory);
         inv.SetActive(!inv.active);
         lastSelectedSlot = -1;
     }

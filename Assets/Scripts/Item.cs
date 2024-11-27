@@ -41,6 +41,7 @@ public class Item : MonoBehaviour
         {
             if (Player.i == item.i && Player.j == item.j)
             {
+                Audio.instance.PlaySfx(Audio.Sfx.Item_Get);
                 Inventory.GetItem(item);
                 Items.Remove(item);
                 Destroy(item.gameObject);
@@ -71,6 +72,8 @@ public class Item : MonoBehaviour
     /// </summary>
     private void Shield()
     {
+        Audio.instance.PlaySfx(Audio.Sfx.Item_Shield_Use);
+
         for (int i = 0; i < GameManager.recovery_shield; i++)
         {
             if (Player.shield < GameManager.shield_Char)
@@ -91,6 +94,7 @@ public class Item : MonoBehaviour
     /// </summary>
     private void AddTurn()
     {
+        Audio.instance.PlaySfx(Audio.Sfx.Item_Turn_Use);
         Turn.instance.turns += 3;
     }
 }
