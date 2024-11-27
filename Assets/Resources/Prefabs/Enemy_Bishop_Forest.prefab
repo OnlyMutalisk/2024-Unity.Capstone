@@ -148,6 +148,14 @@ MonoBehaviour:
   WakeUp: {fileID: 1953236683446661525}
   anim: {fileID: 0}
   sprite: {fileID: 6254156690698604433}
+  projectile: {fileID: 0}
+  speed: 130
+  size_projectiole: 1
+  projectileSound: {fileID: 0}
+  hitEffect: {fileID: 0}
+  size_effect: 30
+  playCount: 1
+  hitEffectSound: {fileID: 0}
 --- !u!1 &4633867723161378893
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,6 +711,30 @@ PrefabInstance:
     - target: {fileID: 1022004858303675366, guid: b3ee818b40c4a594d86c124324219ec5, type: 3}
       propertyPath: m_Name
       value: Enemy_Vision
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305599753799571591, guid: b3ee818b40c4a594d86c124324219ec5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9237078
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305599753799571591, guid: b3ee818b40c4a594d86c124324219ec5, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5251572
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305599753799571591, guid: b3ee818b40c4a594d86c124324219ec5, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052741863301763237, guid: b3ee818b40c4a594d86c124324219ec5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6108768
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052741863301763237, guid: b3ee818b40c4a594d86c124324219ec5, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052741863301763237, guid: b3ee818b40c4a594d86c124324219ec5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8113208
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

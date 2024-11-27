@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using UnityEngine;
 
 public class Animation_Click : MonoBehaviour
@@ -9,35 +10,50 @@ public class Animation_Click : MonoBehaviour
 
     private Coroutine corLast;
     private Vector3 originalScale;
-    void Start() { originalScale = transform.localScale; }
+    private Vector3 ref_realScale
+    {
+        get
+        {
+            RectTransform rect = GetComponent<RectTransform>();
+            if (rect == null) return transform.localScale;
+            else return rect.localScale;
+        }
+
+        set
+        {
+            RectTransform rect = GetComponent<RectTransform>();
+            if (rect == null) transform.localScale = value;
+            else rect.localScale = value;
+        }
+    }
+    void Start() { originalScale = ref_realScale; }
 
     public void OnClick()
     {
         if (corLast != null) StopCoroutine(corLast);
-        transform.localScale = originalScale;
+        ref_realScale = originalScale;
         corLast = StartCoroutine(CorClick());
     }
-
     private IEnumerator CorClick()
     {
         // 크기 증가
         float elapsed = 0f;
         while (elapsed < animationDuration / 2)
         {
-            transform.localScale = Vector3.Lerp(originalScale, originalScale * scaleFactor, elapsed / (animationDuration / 2));
+            ref_realScale = Vector3.Lerp(originalScale, originalScale * scaleFactor, elapsed / (animationDuration / 2));
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.localScale = originalScale * scaleFactor;
+        ref_realScale = originalScale * scaleFactor;
 
         // 크기 복구
         elapsed = 0f;
         while (elapsed < animationDuration / 2)
         {
-            transform.localScale = Vector3.Lerp(originalScale * scaleFactor, originalScale, elapsed / (animationDuration / 2));
+            ref_realScale = Vector3.Lerp(originalScale * scaleFactor, originalScale, elapsed / (animationDuration / 2));
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.localScale = originalScale;
+        ref_realScale = originalScale;
     }
 }
