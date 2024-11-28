@@ -21,6 +21,13 @@ public class UI : MonoBehaviour
     private void Update()
     {
         UpdateAction();
+
+        // 치트 활성화 : S
+        if (Input.GetKeyDown(KeyCode.S) && Player.life < GameManager.Life_Char)
+        {
+            Player.life++;
+            Mob.DrawLife();
+        }
     }
 
     /// <summary>

@@ -14,21 +14,31 @@ public class Chapter : MonoBehaviour
         On();
     }
 
+    // 치트 활성화 : S
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            foreach (GameObject chapter in chapters)
+            foreach (Transform map in chapters[activeChapter].transform)
             {
-                foreach (Transform map in chapter.transform)
+                if (map.gameObject.active == false)
                 {
-                    if (map.gameObject.active == false)
-                    {
-                        map.gameObject.SetActive(true);
-                        Map.index++;
-                        On();
-                        return;
-                    }
+                    map.gameObject.SetActive(true);
+                    Map.index++;
+                    Stages.isOn[Map.index] = true;
+                    On();
+                    return;
+                }
+            }
+
+            if (chapters[activeChapter].transform.GetChild(chapters[activeChapter].transform.childCount - 1).gameObject.active == true)
+            {
+                if (activeChapter < chapters.Length - 1)
+                {
+                    chapters[activeChapter + 1].transform.GetChild(0).gameObject.SetActive(true);
+                    Map.index++;
+                    Stages.isOn[Map.index] = true;
+                    On();
                 }
             }
         }
