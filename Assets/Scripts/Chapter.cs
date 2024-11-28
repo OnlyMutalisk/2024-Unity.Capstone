@@ -14,7 +14,27 @@ public class Chapter : MonoBehaviour
         On();
     }
 
-    private void On()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            foreach (GameObject chapter in chapters)
+            {
+                foreach (Transform map in chapter.transform)
+                {
+                    if (map.gameObject.active == false)
+                    {
+                        map.gameObject.SetActive(true);
+                        Map.index++;
+                        On();
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public void On()
     {
         foreach (var item in chapters) item.SetActive(false);
         chapters[activeChapter].SetActive(true);
