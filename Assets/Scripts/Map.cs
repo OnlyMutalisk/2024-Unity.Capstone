@@ -18,7 +18,7 @@ public class Map : MonoBehaviour
     public GameObject item_shield;
     public GameObject item_turn;
     public GameObject tiled;
-    public static int index = 7;
+    public static int index = 0;
     private Dictionary<string, string> ColorToTile = new Dictionary<string, string>();
     private Dictionary<string, GameObject> TextToUnit = new Dictionary<string, GameObject>();
 
